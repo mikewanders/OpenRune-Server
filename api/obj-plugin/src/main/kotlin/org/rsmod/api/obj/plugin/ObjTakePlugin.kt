@@ -5,6 +5,7 @@ import jakarta.inject.Inject
 import org.rsmod.api.config.Constants
 import org.rsmod.api.invtx.invAdd
 import org.rsmod.api.player.hook.PlayerObjTakeValidator
+import org.rsmod.api.player.hook.PlayerObjTakenNotifier
 import org.rsmod.api.player.output.mes
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.repo.obj.ObjRepository
@@ -21,6 +22,7 @@ public class ObjTakePlugin
 constructor(
     private val repo: ObjRepository,
     private val takeValidator: PlayerObjTakeValidator,
+    private val takenNotifier: PlayerObjTakenNotifier,
 ) : PluginScript() {
     override fun ScriptContext.startup() {
         onDefaultOpObj3 { triggerTake(it.obj) }
@@ -64,6 +66,7 @@ constructor(
             mes(Constants.dm_take_invspace)
         } else {
             take.commitAll()
+            takenNotifier.notify(this, obj, telegrab = false)
         }
     }
 

@@ -10,6 +10,7 @@ import org.rsmod.api.death.PvPSpecialAttackHook
 import org.rsmod.api.player.hook.PlayerGroundItemDropHook
 import org.rsmod.api.player.hook.PlayerInvUpdateHook
 import org.rsmod.api.player.hook.PlayerObjTakeValidateHook
+import org.rsmod.api.player.hook.PlayerObjTakenHook
 import org.rsmod.api.player.hook.PlayerTeleportValidateHook
 import org.rsmod.plugin.module.PluginModule
 
@@ -26,5 +27,6 @@ public class WildernessModule : PluginModule() {
         addSetBinding<PlayerTeleportValidateHook>(WildernessTeleportHook::class.java)
         addSetBinding<PlayerGroundItemDropHook>(WildernessGroundItemHook::class.java)
         addSetBinding<PlayerObjTakeValidateHook>(WildernessGroundItemHook::class.java)
+        addSetBinding<PlayerObjTakenHook>(ChaosTempleWineHook::class.java)
     }
 }

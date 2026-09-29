@@ -75,3 +75,21 @@ constructor(private val hooks: Set<@JvmSuppressWildcards PlayerObjTakeValidateHo
         return null
     }
 }
+
+public fun interface PlayerObjTakenHook {
+    /**
+     * Called once a player has claimed [obj], either by taking it or with Telekinetic Grab. For a
+     * grab this runs when the spell is cast, before the obj reaches the inventory.
+     */
+    public fun onTaken(player: Player, obj: Obj, telegrab: Boolean)
+}
+
+public class PlayerObjTakenNotifier
+@Inject
+constructor(private val hooks: Set<@JvmSuppressWildcards PlayerObjTakenHook>) {
+    public fun notify(player: Player, obj: Obj, telegrab: Boolean) {
+        for (hook in hooks) {
+            hook.onTaken(player, obj, telegrab)
+        }
+    }
+}

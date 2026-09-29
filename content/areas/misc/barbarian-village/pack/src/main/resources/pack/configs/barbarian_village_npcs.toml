@@ -1,0 +1,119 @@
+[[npc]]
+id = "npc.sos_barb"
+inherit = "npc.sos_barb"
+wanderRange = 2
+respawnDir = "West"
+
+[[npc]]
+id = "npc.bim_checkal_barb"
+inherit = "npc.bim_checkal_barb"
+moveRestrict = "NoMove"
+wanderRange = 0
+respawnDir = "West"
+
+[[npc]]
+id = "npc.favour_tassie_slipcast"
+inherit = "npc.favour_tassie_slipcast"
+wanderRange = 2
+
+[[npc]]
+id = "npc.bim_atlas"
+inherit = "npc.bim_atlas"
+wanderRange = 2
+respawnDir = "North"
+
+[[npc]]
+id = "npc.gunthor_the_brave"
+inherit = "npc.gunthor_the_brave"
+respawnDir = "North"
+
+[[npc]]
+id = "npc.fai_barbarian_9"
+inherit = "npc.fai_barbarian_9"
+wanderRange = 2
+
+[[npc]]
+id = "npc.peksa"
+inherit = "npc.peksa"
+wanderRange = 3
+respawnDir = "East"
+
+[[npc]]
+id = "npc.fai_barbarian_1"
+inherit = "npc.fai_barbarian_1"
+wanderRange = 12
+
+[[npc]]
+id = "npc.fai_barbarian_2"
+inherit = "npc.fai_barbarian_2"
+wanderRange = 11
+
+[[npc]]
+id = "npc.fai_barbarian_3"
+inherit = "npc.fai_barbarian_3"
+wanderRange = 6
+
+[[npc]]
+id = "npc.fai_barbarian_4"
+inherit = "npc.fai_barbarian_4"
+wanderRange = 8
+
+[[npc]]
+id = "npc.fai_barbarian_5"
+inherit = "npc.fai_barbarian_5"
+wanderRange = 10
+
+[[npc]]
+id = "npc.fai_barbarian_6"
+inherit = "npc.fai_barbarian_6"
+wanderRange = 10
+
+[[npc]]
+id = "npc.fai_barbarian_7"
+inherit = "npc.fai_barbarian_7"
+wanderRange = 12
+
+[[npc]]
+id = "npc.fai_barbarian_8"
+inherit = "npc.fai_barbarian_8"
+wanderRange = 7
+
+[[npc]]
+id = "npc.fai_barbarian_10"
+inherit = "npc.fai_barbarian_10"
+wanderRange = 9
+
+[[npc]]
+id = "npc.fai_barbarian_12"
+inherit = "npc.fai_barbarian_12"
+wanderRange = 10
+
+[[npc]]
+id = "npc.fai_barbarian_13"
+inherit = "npc.fai_barbarian_13"
+wanderRange = 12
+
+[[npc]]
+id = "npc.fai_barbarian_14"
+inherit = "npc.fai_barbarian_14"
+wanderRange = 6
+
+[[npc]]
+id = "npc.fai_barbarian_female_1"
+inherit = "npc.fai_barbarian_female_1"
+wanderRange = 8
+
+[[npc]]
+id = "npc.fai_barbarian_female_2"
+inherit = "npc.fai_barbarian_female_2"
+wanderRange = 9
+
+[[npc]]
+id = "npc.fai_barbarian_female_3"
+inherit = "npc.fai_barbarian_female_3"
+wanderRange = 12
+
+[[npc]]
+id = "npc.fai_barbarian_female_4"
+inherit = "npc.fai_barbarian_female_4"
+wanderRange = 11

@@ -7,6 +7,8 @@ import org.rsmod.api.player.hook.GroundItemDropResolver
 import org.rsmod.api.player.hook.PlayerGroundItemDropHook
 import org.rsmod.api.player.hook.PlayerObjTakeValidateHook
 import org.rsmod.api.player.hook.PlayerObjTakeValidator
+import org.rsmod.api.player.hook.PlayerObjTakenHook
+import org.rsmod.api.player.hook.PlayerObjTakenNotifier
 import org.rsmod.api.player.hook.PlayerTeleportValidateHook
 import org.rsmod.api.player.hook.PlayerTeleportValidator
 import org.rsmod.api.player.protect.ProtectedAccessContextFactory
@@ -20,12 +22,14 @@ public object PlayerModule : ExtendedModule() {
         newSetBinding<PlayerTeleportValidateHook>()
         newSetBinding<PlayerGroundItemDropHook>()
         newSetBinding<PlayerObjTakeValidateHook>()
+        newSetBinding<PlayerObjTakenHook>()
         bindInstance<MusicPlayer>()
         bindInstance<ProtectedAccessContextFactory>()
         bindInstance<ProtectedAccessLauncher>()
         bindInstance<PlayerTeleportValidator>()
         bindInstance<GroundItemDropResolver>()
         bindInstance<PlayerObjTakeValidator>()
+        bindInstance<PlayerObjTakenNotifier>()
         bindProvider(ShuffledPlayerListProvider::class.java)
     }
 

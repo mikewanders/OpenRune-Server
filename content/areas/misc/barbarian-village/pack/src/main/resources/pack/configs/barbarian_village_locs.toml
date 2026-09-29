@@ -1,0 +1,31 @@
+[[object]]
+id = "loc.fai_barbarian_poordoor"
+inherit = "loc.fai_barbarian_poordoor"
+contentGroup = "content.closed_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_barbarian_poordooropen"
+
+[[object]]
+id = "loc.fai_barbarian_poordooropen"
+inherit = "loc.fai_barbarian_poordooropen"
+contentGroup = "content.opened_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_barbarian_poordoor"
+
+[[object]]
+id = "loc.ladder_directional"
+inherit = "loc.ladder_directional"
+contentGroup = "content.ladder_up"
+
+[object.params]
+"param.climb_anim" = "seq.human_reachforladder"
+
+[[object]]
+id = "loc.laddertop_directional"
+inherit = "loc.laddertop_directional"
+contentGroup = "content.ladder_down"
+
+[object.params]
+"param.climb_anim" = "seq.human_pickupfloor"

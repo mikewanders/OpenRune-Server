@@ -103,7 +103,7 @@ public class InteractionNpcT(
     startApRange: Int = PathingEntity.DEFAULT_AP_RANGE,
 ) : InteractionNpc(target, hasOpTrigger, hasApTrigger, startApRange)
 
-public class InteractionObj(
+public open class InteractionObj(
     public val target: Obj,
     public val op: InteractionOp,
     hasOpTrigger: Boolean,
@@ -120,6 +120,16 @@ public class InteractionObj(
             "interacted=$interacted" +
             ")"
 }
+
+public class InteractionObjT(
+    public val objType: ItemServerType?,
+    public val component: ComponentType,
+    public val comsub: Int,
+    target: Obj,
+    hasOpTrigger: Boolean,
+    hasApTrigger: Boolean,
+    startApRange: Int = PathingEntity.DEFAULT_AP_RANGE,
+) : InteractionObj(target, InteractionOp.Op1, hasOpTrigger, hasApTrigger, startApRange)
 
 public sealed class InteractionPlayer(
     public val target: Player,
