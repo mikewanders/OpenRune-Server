@@ -1288,7 +1288,7 @@ class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
         const val KEY_CRAFTING_XP = 2.0
         const val TOLL = 10
         const val DOOR_OPEN_TICKS = 2
-        const val GATE_OPEN_TICKS = 2
+        const val GATE_OPEN_TICKS = 3
         const val CELL_OUTSIDE_Z = 3244
 
         val OPEN_CELL_DOOR = CoordGrid(3123, 3244, 0)
