@@ -1,0 +1,15 @@
+[[varp]]
+id = "varp.agility_rooftop_laps_1"
+scope = "Perm"
+transmit = "Never"
+
+[[varbit]]
+id = "varbit.agility_laps_falador"
+varp = "varp.agility_rooftop_laps_1"
+startBit = 0
+endBit = 15
+
+[[varp]]
+id = "varp.agility_mark_of_grace_clock"
+scope = "Temp"
+transmit = "Never"

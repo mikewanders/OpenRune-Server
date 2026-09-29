@@ -1,0 +1,6 @@
+[gamevals.varp]
+agility_rooftop_laps_1 = 65350
+agility_mark_of_grace_clock = 65351
+
+[gamevals.varbit]
+agility_laps_falador = 65300
