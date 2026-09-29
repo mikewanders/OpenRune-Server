@@ -31,7 +31,6 @@ import org.rsmod.api.script.onArea
 import org.rsmod.api.script.onAreaExit
 import org.rsmod.api.script.onIfClose
 import org.rsmod.api.script.onIfModalButton
-import org.rsmod.api.script.onOpHeld1
 import org.rsmod.api.script.onOpHeld4
 import org.rsmod.api.script.onOpLoc1
 import org.rsmod.api.script.onOpLoc2
@@ -39,6 +38,7 @@ import org.rsmod.api.script.onPlayerLogout
 import org.rsmod.api.script.onPlayerQueueWithArgs
 import org.rsmod.api.script.onPlayerTimer
 import org.rsmod.content.interfaces.collectionlog.CollectionLog
+import org.rsmod.content.quest.manager.DigSpots
 import org.rsmod.content.quest.manager.QuestRequirements
 import org.rsmod.events.EventBus
 import org.rsmod.game.entity.Player
@@ -73,7 +73,7 @@ constructor(
         }
         onIfClose(REWARD_INTERFACE) { deliverRewards(player) }
 
-        onOpHeld1("obj.spade") { dig() }
+        DigSpots.register { dig() }
         onOpHeld4(LOCKPICK) { inspectLockpick(it.slot) }
         onOpHeld4(LOCKPICK_FULL) { inspectLockpick(it.slot) }
         onPlayerQueueWithArgs<BarrowsBrother?>(DIG_QUEUE) { finishDig(it.args) }
@@ -136,9 +136,9 @@ constructor(
         }
     }
 
-    private suspend fun ProtectedAccess.dig() {
-        val mound = BarrowsBrother.entries.firstOrNull { inMound(it) }
-        if (mound != null && hfsInterruptsDig()) {
+    private suspend fun ProtectedAccess.dig(): Boolean {
+        val mound = BarrowsBrother.entries.firstOrNull { inMound(it) } ?: return false
+        if (hfsInterruptsDig()) {
             startDialogue {
                 chatNpcSpecific(
                     "Strange Old Man",
@@ -147,11 +147,10 @@ constructor(
                     "You want to dig? Good, good! But we talk first. Talk then dig!",
                 )
             }
-            return
+            return true
         }
-        anim("seq.human_dig")
-        soundSynth("synth.digspade")
         strongQueue(DIG_QUEUE, DIG_TICKS, args = mound)
+        return true
     }
 
     private fun ProtectedAccess.hfsInterruptsDig(): Boolean =
