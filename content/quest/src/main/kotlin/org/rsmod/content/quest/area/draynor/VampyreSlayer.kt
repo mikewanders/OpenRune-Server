@@ -73,6 +73,13 @@ constructor(
         onOpLoc1("loc.garliccupboardopen") { searchCupboard() }
         onOpLoc2("loc.garliccupboardopen") { closeCupboard(it.loc) }
         onOpLoc1("loc.vampcoffin") { openCoffin(it.loc) }
+        onOpNpcU(COUNT) {
+            if (it.objType.internalName == STAKE) {
+                mes("The vampyre isn't weak enough yet.")
+            } else {
+                mes("Nothing interesting happens.")
+            }
+        }
         onNpcQueue(npcType(COUNT), "queue.death") { countDefeated() }
         onPlayerQueue(STAKE_QUEUE) { stakeCount() }
     }
@@ -561,6 +568,7 @@ constructor(
     }
 
     private suspend fun ProtectedAccess.stakeCount() {
+        stopAction()
         mes("<col=e00a19>You hammer the stake into the vampyre's chest!")
         anim("seq.human_stake")
         quest.advanceQuestStageTo(this, COMPLETE)

@@ -1,7 +1,14 @@
 package org.rsmod.content.quest.area.wizardstower
 
+import dev.openrune.ServerCacheManager
+import dev.openrune.rscm.RSCM.asRSCM
+import dev.openrune.rscm.RSCMType
+import dev.openrune.types.varp.VarpServerType
+import jakarta.inject.Inject
 import org.rsmod.api.player.dialogue.Dialogue
+import org.rsmod.api.player.output.VarpSync
 import org.rsmod.api.player.protect.ProtectedAccess
+import org.rsmod.api.repo.world.WorldRepository
 import org.rsmod.api.script.onOpNpc1
 import org.rsmod.api.script.onOpNpc3
 import org.rsmod.content.quest.manager.ItemRewardDisplay
@@ -13,10 +20,10 @@ import org.rsmod.game.entity.Player
 import org.rsmod.map.CoordGrid
 import org.rsmod.plugin.scripts.ScriptContext
 
-class ImpCatcher :
+class ImpCatcher @Inject constructor(private val worldRepo: WorldRepository) :
     QuestScript(
         "quest_impcatcher",
-        "varp.imp",
+        QUEST_VARP,
         rewards {
             xp("stat.magic", 875.0)
             extra("An Amulet of Accuracy")
@@ -192,15 +199,52 @@ class ImpCatcher :
         for (bead in BEADS) {
             access.invDel(access.inv, bead)
         }
-        mesbox("You give four coloured beads to Wizard Mizgog.")
+        access.fadeToBlack()
+        mesboxNp("You give four coloured beads to Wizard Mizgog.")
+        access.delay(1)
         access.camLookAt(CAMERA_LOOK, height = 350, rate = 232, rate2 = 100)
         access.camMoveTo(CAMERA_POSITION, height = 775, rate = 232, rate2 = 100)
-        access.delay(16)
+        access.delay(1)
+        access.fadeFromBlack()
+        access.delay(3)
+        npc?.anim(WIZARD_SEQ)
+        access.delay(2)
+        VarpSync.writeVarp(player, questVarpType(), COMPLETE)
+        access.delay(1)
+        access.spotanimMap(worldRepo, TABLE_SPOTANIM, TABLE_COORDS, height = 100)
+        access.delay(8)
+        access.fadeToBlack()
+        access.delay(1)
         access.invAdd(access.inv, AMULET)
         access.mes("The wizard hands you an amulet.")
         access.camReset()
+        access.fadeFromBlack()
+        access.closeFadeOverlay(cycles = 2)
+        access.delay(2)
         quest.advanceQuestStageTo(access, COMPLETE)
     }
+
+    private fun questVarpType(): VarpServerType =
+        ServerCacheManager.getVarp(QUEST_VARP.asRSCM(RSCMType.VARP))
+            ?: error("Missing varp: $QUEST_VARP")
+
+    private fun ProtectedAccess.fadeToBlack() =
+        fadeOverlay(
+            startColour = 0,
+            startTransparency = 255,
+            endColour = 0,
+            endTransparency = 0,
+            clientDuration = 15,
+        )
+
+    private fun ProtectedAccess.fadeFromBlack() =
+        fadeOverlay(
+            startColour = 0,
+            startTransparency = 0,
+            endColour = 0,
+            endTransparency = 255,
+            clientDuration = 50,
+        )
 
     private suspend fun Dialogue.afterQuest() {
         when (
@@ -285,6 +329,10 @@ class ImpCatcher :
         const val STARTED = 1
         const val COMPLETE = 2
         const val AMULET = "obj.amulet_of_accuracy"
+        const val QUEST_VARP = "varp.imp"
+        const val WIZARD_SEQ = "seq.qip_imp_catcher_wizard"
+        const val TABLE_SPOTANIM = "spotanim.qip_imp_catcher_spotanim"
+        val TABLE_COORDS = CoordGrid(3102, 3163, 2)
         val BEADS = listOf("obj.red_bead", "obj.yellow_bead", "obj.black_bead", "obj.white_bead")
         val CAMERA_LOOK = CoordGrid(3103, 3162, 2)
         val CAMERA_POSITION = CoordGrid(3103, 3161, 2)

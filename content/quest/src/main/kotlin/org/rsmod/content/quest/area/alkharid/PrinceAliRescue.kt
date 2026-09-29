@@ -8,6 +8,7 @@ import dev.openrune.types.ObjectServerType
 import jakarta.inject.Inject
 import org.rsmod.api.player.dialogue.Dialogue
 import org.rsmod.api.player.protect.ProtectedAccess
+import org.rsmod.api.player.protect.forcedWalk
 import org.rsmod.api.player.vars.intVarBit
 import org.rsmod.api.repo.loc.LocRepository
 import org.rsmod.api.script.onOpHeldU
@@ -19,6 +20,7 @@ import org.rsmod.api.script.onOpNpc1
 import org.rsmod.api.script.onOpNpcU
 import org.rsmod.content.quest.manager.ItemRewardDisplay
 import org.rsmod.content.quest.manager.Quest
+import org.rsmod.content.quest.manager.QuestRequirements
 import org.rsmod.content.quest.manager.QuestScript
 import org.rsmod.content.quest.manager.menu
 import org.rsmod.content.quest.manager.rewards
@@ -36,7 +38,7 @@ private var Player.metLeela by intVarBit("varbit.prince_ali_met_leela")
 
 class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
     QuestScript(
-        "quest_princealirescue",
+        QUEST,
         "varp.princequest",
         rewards {
             item("obj.coins", 700)
@@ -71,15 +73,15 @@ class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
         for (gate in GATES) {
             onOpLoc1(gate) {
                 arriveDelay()
-                tollGate(payNow = false)
+                tollGate(payNow = false, viaGuard = false)
             }
             onOpLoc4(gate) {
                 arriveDelay()
-                tollGate(payNow = true)
+                tollGate(payNow = true, viaGuard = false)
             }
         }
         for (guard in listOf("npc.borderguard1", "npc.borderguard2")) {
-            onOpNpc1(guard) { tollGate(payNow = false) }
+            onOpNpc1(guard) { tollGate(payNow = false, viaGuard = true) }
         }
     }
 
@@ -1156,11 +1158,13 @@ class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
         mes("You dye the wig blonde.")
     }
 
-    private suspend fun ProtectedAccess.tollGate(payNow: Boolean) {
-        if (quest.isQuestCompleted(player)) {
-            startDialogue {
-                chatPlayer(neutral, "Can I come through this gate?")
-                chatGuard(neutral, "You may pass for free! You are a friend of Al Kharid.")
+    private suspend fun ProtectedAccess.tollGate(payNow: Boolean, viaGuard: Boolean) {
+        if (QuestRequirements.hasCompleted(player, QUEST)) {
+            if (viaGuard) {
+                startDialogue {
+                    chatPlayer(neutral, "Can I come through this gate?")
+                    chatGuard(neutral, "You may pass for free! You are a friend of Al Kharid.")
+                }
             }
             passGate()
             return
@@ -1208,14 +1212,26 @@ class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
     }
 
     private suspend fun ProtectedAccess.passGate() {
-        locRepo.findExact(GATE_LEFT_COORDS, locType(GATES[0]))?.let { locRepo.del(it, GATE_OPEN_TICKS) }
-        locRepo.findExact(GATE_RIGHT_COORDS, locType(GATES[1]))?.let { locRepo.del(it, GATE_OPEN_TICKS) }
+        val z = player.coords.z.coerceIn(GATE_LEFT_COORDS.z, GATE_RIGHT_COORDS.z)
+        val east = player.coords.x >= GATE_LEFT_COORDS.x
+        val approach = CoordGrid(if (east) GATE_LEFT_COORDS.x else GATE_OPEN_LEFT.x, z, 0)
+        val across = CoordGrid(if (east) GATE_OPEN_LEFT.x else GATE_LEFT_COORDS.x, z, 0)
+        if (player.coords != approach) {
+            playerWalkWithMinDelay(approach)
+            if (player.coords != approach) {
+                return
+            }
+        }
+        val closedGates = listOf(GATE_LEFT_COORDS to GATES[0], GATE_RIGHT_COORDS to GATES[1])
+        for ((coords, gate) in closedGates) {
+            val closed = locRepo.findExact(coords, locType(gate)) ?: continue
+            locRepo.del(closed, GATE_OPEN_TICKS)
+            locRepo.add(coords, "loc.inviswall", GATE_OPEN_TICKS, closed.angle, closed.shape)
+        }
         locRepo.add(GATE_OPEN_LEFT, "loc.inacmetalgateopenl", GATE_OPEN_TICKS, LocAngle.South, LocShape.WallStraight)
         locRepo.add(GATE_OPEN_RIGHT, "loc.inacmetalgateopenr", GATE_OPEN_TICKS, LocAngle.North, LocShape.WallStraight)
         soundSynth("synth.iron_door_open")
-        val z = player.coords.z.coerceIn(GATE_LEFT_COORDS.z, GATE_RIGHT_COORDS.z)
-        val destX = if (player.coords.x >= GATE_LEFT_COORDS.x) GATE_LEFT_COORDS.x - 1 else GATE_LEFT_COORDS.x
-        playerWalkWithMinDelay(CoordGrid(destX, z, 0))
+        forcedWalk(across, crossTiles = 1)
     }
 
     private fun locType(internal: String): ObjectServerType =
@@ -1225,6 +1241,7 @@ class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
         chatNpcSpecific("Border Guard", "npc.borderguard1", mesanim, text)
 
     companion object {
+        const val QUEST = "quest_princealirescue"
         const val STARTED = 10
         const val OSMAN_BRIEFED = 20
         const val GUARD_NEXT = 30
@@ -1282,7 +1299,7 @@ class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
         val GATES = listOf("loc.kharidmetalgateclosedl", "loc.kharidmetalgateclosedr")
 
         private val registered: Quest
-            get() = Quest.get("quest_princealirescue") ?: error("Prince Ali Rescue is not registered")
+            get() = Quest.get(QUEST) ?: error("Prince Ali Rescue is not registered")
 
         fun inProgress(player: Player): Boolean =
             registered.getQuestStage(player) in STARTED until RESCUED
