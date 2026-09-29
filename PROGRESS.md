@@ -195,11 +195,11 @@ Found the same way `settings.gradle.kts` finds them: any dir with a `build.gradl
 | Module | Files | Lines | Tests | TODO | Last touched |
 |---|---:|---:|---:|---:|---|
 | `areas/city/ardougne` | 1 | 139 | 0 | 0 | 2026-09-25 |
-| `areas/city/draynor` | 16 | 3,706 | 4 | 0 | 2026-09-23 |
+| `areas/city/draynor` | 17 | 3,777 | 4 | 0 | 2026-09-26 |
 | `areas/city/draynor/pack` | 1 | 6 | 0 | 0 | 2026-09-23 |
 | `areas/city/falador` | 7 | 1,354 | 0 | 0 | 2026-09-24 |
 | `areas/city/falador/pack` | 1 | 6 | 0 | 0 | 2026-09-22 |
-| `areas/city/lumbridge` | 25 | 6,164 | 0 | 3 | 2026-09-23 |
+| `areas/city/lumbridge` | 26 | 6,229 | 0 | 3 | 2026-09-26 |
 | `areas/city/lumbridge/pack` | 1 | 6 | 0 | 0 | 2026-09-23 |
 | `areas/city/port-sarim` | 13 | 1,971 | 0 | 0 | 2026-09-22 |
 | `areas/city/port-sarim/pack` | 1 | 6 | 0 | 0 | 2026-09-22 |
@@ -232,7 +232,7 @@ Found the same way `settings.gradle.kts` finds them: any dir with a `build.gradl
 | `bosses/spindel` | 2 | 510 | 0 | 0 | 2026-09-15 |
 | `bosses/tormented-demon` | 2 | 556 | 0 | 0 | 2026-09-05 |
 | `bosses/zilyana` | 2 | 165 | 0 | 0 | 2026-08-03 |
-| `drops` | 257 | 14,430 | 0 | 0 | 2026-09-25 |
+| `drops` | 258 | 14,372 | 0 | 0 | 2026-09-26 |
 | `events/shooting-stars` | 9 | 1,261 | 0 | 0 | 2026-08-30 |
 | `events/shooting-stars/pack` | 2 | 440 | 0 | 0 | 2026-08-21 |
 | `generic/generic-locs` | 25 | 1,382 | 0 | 1 | 2026-09-23 |
