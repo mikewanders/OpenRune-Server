@@ -14,13 +14,15 @@ class KaramjaFerryScript : PluginScript() {
             onOpNpc1(sailor) { startDialogue(it.npc) { offerTrip() } }
             onOpNpc3(sailor) { payAndSail(MUSA_POINT, MUSA_POINT_NAME) }
         }
-        onOpNpc1(CUSTOMS_OFFICER) { startDialogue(it.npc) { customsOfficer() } }
-        onOpNpc3(CUSTOMS_OFFICER) {
-            if (inv.count(KARAMJA_RUM) > 0) {
-                startDialogue(it.npc) { confiscateRum() }
-                return@onOpNpc3
+        for (officer in CUSTOMS_OFFICERS) {
+            onOpNpc1(officer) { startDialogue(it.npc) { customsOfficer() } }
+            onOpNpc3(officer) {
+                if (inv.count(KARAMJA_RUM) > 0) {
+                    startDialogue(it.npc) { confiscateRum() }
+                    return@onOpNpc3
+                }
+                payAndSail(PORT_SARIM, PORT_SARIM_NAME)
             }
-            payAndSail(PORT_SARIM, PORT_SARIM_NAME)
         }
     }
 
@@ -143,12 +145,17 @@ class KaramjaFerryScript : PluginScript() {
 
     private companion object {
         const val FARE = 30
-        const val CUSTOMS_OFFICER = "npc.customs_officer"
         const val KARAMJA_RUM = "obj.karamja_rum"
         const val MUSA_POINT_NAME = "Musa Point"
         const val PORT_SARIM_NAME = "Port Sarim"
 
-        val SARIM_CREW = listOf("npc.seaman_lorris", "npc.seaman_thresnor", "npc.captain_tobias")
+        val SARIM_CREW =
+            listOf("npc.seaman_lorris", "npc.seaman_thresnor", "npc.captain_tobias").withVariants()
+        val CUSTOMS_OFFICERS = listOf("npc.customs_officer").withVariants()
+
+        private fun List<String>.withVariants(): List<String> = flatMap {
+            listOf(it, "${it}_1op", "${it}_2op")
+        }
         val MUSA_POINT = CoordGrid(2956, 3146, 0)
         val PORT_SARIM = CoordGrid(3029, 3217, 0)
     }

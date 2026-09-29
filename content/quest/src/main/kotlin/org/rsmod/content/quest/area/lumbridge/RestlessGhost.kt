@@ -1,13 +1,17 @@
 package org.rsmod.content.quest.area.lumbridge
 
+import dev.openrune.rscm.RSCM.asRSCM
+import dev.openrune.rscm.RSCMType
 import jakarta.inject.Inject
 import org.rsmod.api.npc.interact.AiPlayerInteractions
 import org.rsmod.api.npc.opPlayer2
 import org.rsmod.api.player.dialogue.Dialogue
+import org.rsmod.api.player.dialogue.mesanims
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.vars.intVarBit
 import org.rsmod.api.repo.loc.LocRepository
 import org.rsmod.api.repo.npc.NpcRepository
+import org.rsmod.api.repo.world.WorldRepository
 import org.rsmod.api.script.onOpHeld1
 import org.rsmod.api.script.onOpHeld5
 import org.rsmod.api.script.onOpLoc1
@@ -15,6 +19,8 @@ import org.rsmod.api.script.onOpLoc2
 import org.rsmod.api.script.onOpLocU
 import org.rsmod.api.script.onOpNpc1
 import org.rsmod.api.script.onOpNpcU
+import org.rsmod.content.quest.area.misthalin.SceneCamera
+import org.rsmod.content.quest.area.misthalin.lockedScene
 import org.rsmod.content.quest.manager.ItemRewardDisplay
 import org.rsmod.content.quest.manager.QuestScript
 import org.rsmod.content.quest.manager.menu
@@ -23,6 +29,7 @@ import org.rsmod.content.quest.manager.startQuestPrompt
 import org.rsmod.game.entity.Npc
 import org.rsmod.game.entity.Player
 import org.rsmod.game.loc.BoundLocInfo
+import org.rsmod.game.proj.ProjAnim
 import org.rsmod.map.CoordGrid
 import org.rsmod.plugin.scripts.ScriptContext
 
@@ -35,6 +42,7 @@ class RestlessGhost
 constructor(
     private val npcRepo: NpcRepository,
     private val locRepo: LocRepository,
+    private val worldRepo: WorldRepository,
     private val aiPlayerInteractions: AiPlayerInteractions,
 ) :
     QuestScript(
@@ -726,17 +734,59 @@ constructor(
         anim("seq.human_pickuptable")
         invDel(inv, SKULL)
         player.coffinHasSkull = 1
-        val restless = spawnGhost(CUTSCENE_GHOST, CUTSCENE_TICKS)
-        camMoveTo(CUTSCENE_CAMERA, height = 350, rate = 100, rate2 = 100)
-        camLookAt(CUTSCENE_LOOK, height = 200, rate = 100, rate2 = 100)
-        restless.say("Release! Thank you")
-        delay(2)
-        startDialogue(restless) { chatNpcNoAnim("Release! Thank you stranger..") }
-        restless.say("stranger..")
-        delay(4)
-        removeGhost()
-        camReset()
+        delay(1)
+        var restless: Npc? = null
+        lockedScene(
+            vantage = CUTSCENE_PLAYER,
+            faceAt = CUTSCENE_GHOST,
+            camera = SceneCamera(CUTSCENE_CAMERA, 350, CUTSCENE_LOOK, 200),
+            returnTo = player.coords,
+            underFade = {
+                val spawned = spawnGhost(CUTSCENE_GHOST, CUTSCENE_TICKS)
+                spawned.say("Release! Thank you")
+                restless = spawned
+            },
+            teardown = { removeGhost() },
+        ) {
+            chatNpcSpecificNp(
+                "Restless ghost",
+                "npc.ghostx",
+                mesanims.silent,
+                "Release! Thank you stranger..",
+            )
+            delay(3)
+            restless?.say("stranger..")
+            delay(4)
+            restless?.anim("seq.restless_ghost_vanish")
+            ghostTrail(CUTSCENE_GHOST, GHOST_TRAIL[0], 60)
+            delay(2)
+            ghostTrail(GHOST_TRAIL[0], GHOST_TRAIL[1], 60)
+            camMoveTo(TRAIL_CAMERA, height = 900, rate = 100, rate2 = 100)
+            camLookAt(TRAIL_LOOK, height = 25, rate = 100, rate2 = 100)
+            delay(2)
+            ghostTrail(GHOST_TRAIL[1], GHOST_TRAIL[2], 95)
+            camLookAt(GHOST_TRAIL[2], height = 25, rate = 5, rate2 = 5)
+            delay(5)
+        }
         quest.advanceQuestStageTo(this, COMPLETE)
+    }
+
+    private fun ghostTrail(from: CoordGrid, to: CoordGrid, endTime: Int) {
+        worldRepo.projAnim(
+            ProjAnim(
+                spotanim = "spotanim.restless_ghost_travel_spotanim".asRSCM(RSCMType.SPOTANIM),
+                startHeight = 50,
+                endHeight = 50,
+                startTime = 0,
+                endTime = endTime,
+                angle = 30,
+                progress = 0,
+                sourceIndex = 0,
+                targetIndex = 0,
+                startCoord = from,
+                endCoord = to,
+            )
+        )
     }
 
     private suspend fun ProtectedAccess.searchAltar() {
@@ -781,10 +831,6 @@ constructor(
         }
     }
 
-    private suspend fun Dialogue.chatNpcNoAnim(text: String) {
-        chatNpc(silent, text)
-    }
-
     private companion object {
         const val STARTED = 1
         const val GOT_AMULET = 2
@@ -798,12 +844,17 @@ constructor(
         const val COFFIN_OPEN_TICKS = 100
         const val GHOST_DURATION = 100
         const val SKELETON_DURATION = 300
-        const val CUTSCENE_TICKS = 20
+        const val CUTSCENE_TICKS = 30
 
         val GHOST_COORDS = CoordGrid(3250, 3195)
         val CUTSCENE_CAMERA = CoordGrid(3252, 3193)
         val CUTSCENE_LOOK = CoordGrid(3246, 3193)
         val CUTSCENE_GHOST = CoordGrid(3248, 3193)
+        val CUTSCENE_PLAYER = CoordGrid(3248, 3192)
+        val TRAIL_CAMERA = CoordGrid(3240, 3193)
+        val TRAIL_LOOK = CoordGrid(3243, 3191)
+        val GHOST_TRAIL =
+            listOf(CoordGrid(3244, 3193), CoordGrid(3244, 3190), CoordGrid(3253, 3181))
         val SKELETON_COORDS = CoordGrid(3120, 9569)
     }
 }

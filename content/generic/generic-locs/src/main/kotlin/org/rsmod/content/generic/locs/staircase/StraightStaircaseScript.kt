@@ -10,15 +10,24 @@ import org.rsmod.plugin.scripts.ScriptContext
 
 /**
  * Landing offsets for straight house staircases, measured on an unrotated instance of each model and
- * rotated with the loc. The narrow wooden flight is modelled facing the opposite way.
+ * rotated with the loc. The narrow wooden flight is modelled facing the opposite way. Flights that
+ * [keepLane] land the player level with the side of the flight they climbed from.
  */
-private enum class StraightStairs(val loc: String, val dx: Int, val dz: Int, val dLevel: Int) {
+private enum class StraightStairs(
+    val loc: String,
+    val dx: Int,
+    val dz: Int,
+    val dLevel: Int,
+    val keepLane: Boolean = false,
+) {
     PoorUp("loc.poor_stairs", 1, 3, 1),
     PoorDown("loc.poor_stairstop", 1, -2, -1),
     Up("loc.stairs", 1, 3, 1),
     Down("loc.stairstop", 1, -2, -1),
     NarrowWoodenUp("loc.narrowstairs_wooden_bottom", 0, -1, 1),
     NarrowWoodenDown("loc.narrowstairs_wooden_top", 0, 3, -1),
+    VarrockUp("loc.fai_varrock_stairs_taller", 0, 3, 1, keepLane = true),
+    VarrockDown("loc.fai_varrock_stairs_top", 0, -2, -1, keepLane = true),
 }
 
 class StraightStaircaseScript : PluginScript() {
@@ -30,7 +39,9 @@ class StraightStaircaseScript : PluginScript() {
 
     private suspend fun ProtectedAccess.climb(loc: BoundLocInfo, stairs: StraightStairs) {
         arriveDelay()
-        telejump(loc.rotate(stairs.dx, stairs.dz).translateLevel(stairs.dLevel))
+        val landing = loc.rotate(stairs.dx, stairs.dz)
+        val dest = if (stairs.keepLane) loc.inLane(landing, player.coords) else landing
+        telejump(dest.translateLevel(stairs.dLevel))
     }
 
     private fun BoundLocInfo.rotate(dx: Int, dz: Int): CoordGrid =
@@ -39,5 +50,19 @@ class StraightStaircaseScript : PluginScript() {
             LocAngle.North -> coords.translate(dz, width - 1 - dx)
             LocAngle.East -> coords.translate(width - 1 - dx, length - 1 - dz)
             LocAngle.South -> coords.translate(length - 1 - dz, dx)
+        }
+
+    private fun BoundLocInfo.inLane(landing: CoordGrid, from: CoordGrid): CoordGrid =
+        when (angle) {
+            LocAngle.West,
+            LocAngle.East -> {
+                val x = from.x.coerceIn(coords.x, coords.x + width - 1)
+                CoordGrid(x, landing.z, landing.level)
+            }
+            LocAngle.North,
+            LocAngle.South -> {
+                val z = from.z.coerceIn(coords.z, coords.z + width - 1)
+                CoordGrid(landing.x, z, landing.level)
+            }
         }
 }

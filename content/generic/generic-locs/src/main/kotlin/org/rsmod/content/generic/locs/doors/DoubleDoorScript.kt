@@ -26,24 +26,36 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
         val sound = type.param(params.opensound)
         soundSynth(sound)
 
-        left.let {
-            val openedLoc = type.param(params.next_loc_stage)
-            val openedAngle = it.turnAngle(rotations = 3)
-            val openedCoords = it.openCoords()
-            locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
-        }
-
         val right =
             locRepo.findExact(
                 coords = left.closeCoords(),
                 content = "content.closed_right_door",
                 shape = left.shape,
             )
-        right?.let {
+        val mirroredRight =
+            if (right != null) {
+                null
+            } else {
+                locRepo.findExact(
+                    coords = left.closeCoordsOpposite(),
+                    content = "content.closed_right_door",
+                    shape = left.shape,
+                )
+            }
+        val mirrored = mirroredRight != null
+
+        left.let {
+            val openedLoc = type.param(params.next_loc_stage)
+            val openedAngle = it.turnAngle(rotations = 3)
+            val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
+            locRepo.del(it, DoorConstants.DURATION)
+            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+        }
+
+        (right ?: mirroredRight)?.let {
             val openedLoc = locParamOrNull(it, params.next_loc_stage) ?: return
             val openedAngle = it.turnAngle(rotations = 1)
-            val openedCoords = it.openCoords()
+            val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
             locRepo.del(it, DoorConstants.DURATION)
             locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
         }
@@ -53,24 +65,36 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
         val sound = type.param(params.opensound)
         soundSynth(sound)
 
-        right.let {
-            val openedLoc = type.param(params.next_loc_stage)
-            val openedAngle = it.turnAngle(rotations = 1)
-            val openedCoords = it.openCoords()
-            locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
-        }
-
         val left =
             locRepo.findExact(
                 coords = right.closeCoordsOpposite(),
                 content = "content.closed_left_door",
                 shape = right.shape,
             )
-        left?.let {
+        val mirroredLeft =
+            if (left != null) {
+                null
+            } else {
+                locRepo.findExact(
+                    coords = right.closeCoords(),
+                    content = "content.closed_left_door",
+                    shape = right.shape,
+                )
+            }
+        val mirrored = mirroredLeft != null
+
+        right.let {
+            val openedLoc = type.param(params.next_loc_stage)
+            val openedAngle = it.turnAngle(rotations = 1)
+            val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
+            locRepo.del(it, DoorConstants.DURATION)
+            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+        }
+
+        (left ?: mirroredLeft)?.let {
             val openedLoc = locParamOrNull(it, params.next_loc_stage) ?: return
             val openedAngle = it.turnAngle(rotations = 3)
-            val openedCoords = it.openCoords()
+            val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
             locRepo.del(it, DoorConstants.DURATION)
             locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
         }
