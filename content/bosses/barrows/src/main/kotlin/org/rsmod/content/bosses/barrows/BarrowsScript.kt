@@ -10,7 +10,6 @@ import dtx.core.ArgMap
 import dtx.core.RollResult
 import dtx.core.flatten
 import jakarta.inject.Inject
-import kotlin.math.abs
 import kotlin.random.Random
 import org.rsmod.api.droptable.DropTableRegistry
 import org.rsmod.api.droptable.rollCount
@@ -35,11 +34,8 @@ import org.rsmod.api.script.onOpHeld4
 import org.rsmod.api.script.onOpLoc1
 import org.rsmod.api.script.onOpLoc2
 import org.rsmod.api.script.onPlayerLogout
-import org.rsmod.api.script.onPlayerQueueWithArgs
 import org.rsmod.api.script.onPlayerTimer
 import org.rsmod.content.interfaces.collectionlog.CollectionLog
-import org.rsmod.content.quest.manager.DigSpots
-import org.rsmod.content.quest.manager.QuestRequirements
 import org.rsmod.events.EventBus
 import org.rsmod.game.entity.Player
 import org.rsmod.game.hit.HitType
@@ -73,10 +69,8 @@ constructor(
         }
         onIfClose(REWARD_INTERFACE) { deliverRewards(player) }
 
-        DigSpots.register { dig() }
         onOpHeld4(LOCKPICK) { inspectLockpick(it.slot) }
         onOpHeld4(LOCKPICK_FULL) { inspectLockpick(it.slot) }
-        onPlayerQueueWithArgs<BarrowsBrother?>(DIG_QUEUE) { finishDig(it.args) }
 
         for (brother in BarrowsBrother.entries) {
             onOpLoc1(brother.sarcophagus) { searchSarcophagus(brother) }
@@ -134,44 +128,6 @@ constructor(
         if (!player.inBarrowsSurface()) {
             player.ifCloseOverlay(OVERLAY, eventBus)
         }
-    }
-
-    private suspend fun ProtectedAccess.dig(): Boolean {
-        val mound = BarrowsBrother.entries.firstOrNull { inMound(it) } ?: return false
-        if (hfsInterruptsDig()) {
-            startDialogue {
-                chatNpcSpecific(
-                    "Strange Old Man",
-                    "npc.barrows_oldman",
-                    happy,
-                    "You want to dig? Good, good! But we talk first. Talk then dig!",
-                )
-            }
-            return true
-        }
-        strongQueue(DIG_QUEUE, DIG_TICKS, args = mound)
-        return true
-    }
-
-    private fun ProtectedAccess.hfsInterruptsDig(): Boolean =
-        player.hfsStage == HFS_NOT_STARTED &&
-            QuestRequirements.hasCompleted(player, PRIEST_IN_PERIL)
-
-    private fun ProtectedAccess.finishDig(mound: BarrowsBrother?) {
-        resetAnim()
-        if (mound == null) {
-            mes("You dig a hole in the ground... but find nothing.")
-            return
-        }
-        spam("You've broken into a crypt!")
-        telejump(mound.chamber)
-    }
-
-    private fun ProtectedAccess.inMound(brother: BarrowsBrother): Boolean {
-        val centre = brother.moundCenter
-        return player.coords.level == 0 &&
-            abs(player.coords.x - centre.x) <= MOUND_RADIUS &&
-            abs(player.coords.z - centre.z) <= MOUND_RADIUS
     }
 
     private suspend fun ProtectedAccess.searchSarcophagus(brother: BarrowsBrother) {
@@ -392,12 +348,8 @@ constructor(
         const val NOD_SCRIPT = 894
         const val PRAYER_DRAIN = 8
         const val ROCKFALL_MAX_HIT = 6
-        const val MOUND_RADIUS = 3
-        const val DIG_QUEUE = "queue.barrows_dig"
-        const val DIG_TICKS = 2
         const val LANDING_RADIUS = 3
         const val CHEST_JINGLE = 77
-        const val PRIEST_IN_PERIL = "quest_priestinperil"
         const val MAX_ROOM_ENEMIES = 11
         const val DOOR_ROLL = 128
         const val DOOR_BROTHER_WEIGHT = 12

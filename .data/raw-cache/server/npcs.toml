@@ -16,6 +16,9 @@ id = "npc.imp"
 inherit = "npc.imp"
 giveChase = false
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=10
 "param.shop_sell_percentage" = 1000
 "param.shop_buy_percentage" = 600
 "param.shop_change_percentage" = 20
@@ -784,6 +787,8 @@ id = "npc.ramunsheered"
 inherit = "npc.ramunsheered"
 respawnRate = 45
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=20
 "param.attack_sound"=757
 "param.defend_sound"=759
 "param.death_sound"=758
@@ -801,6 +806,8 @@ id = "npc.ramunsheered2"
 inherit = "npc.ramunsheered2"
 respawnRate = 45
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=20
 "param.attack_sound"=757
 "param.defend_sound"=759
 "param.death_sound"=758
@@ -818,6 +825,8 @@ id = "npc.ramunsheered3"
 inherit = "npc.ramunsheered3"
 respawnRate = 45
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=20
 "param.attack_sound"=757
 "param.defend_sound"=759
 "param.death_sound"=758
@@ -1233,6 +1242,8 @@ id = "npc.giant_frog_nodrops"
 inherit = "npc.giant_frog_nodrops"
 respawnRate = 50
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=25
 "param.attack_sound"=838
 "param.defend_sound"=840
 "param.death_sound"=839
@@ -1246,6 +1257,8 @@ id = "npc.medium_frog_nodrops"
 inherit = "npc.medium_frog_nodrops"
 respawnRate = 50
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=25
 "param.attack_sound"=842
 "param.defend_sound"=844
 "param.death_sound"=843
@@ -1259,6 +1272,8 @@ id = "npc.little_frog_nodrops"
 inherit = "npc.little_frog_nodrops"
 respawnRate = 50
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.attack_sound"=842
 "param.defend_sound"=844
 "param.death_sound"=843
@@ -1366,6 +1381,8 @@ defaultMode = "None"
 maxRange = 40
 respawnRate = 30
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.total_vardorvis_kills"
 "param.killcount_varp_awakened"="varp.total_vardorvis_awakened_kills"
 "param.boss_hp_bar_mode"=2
@@ -1404,6 +1421,8 @@ wanderRange = 4
 respawnRate = 16
 
 [npc.params]
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_kbd_kills"
 "param.boss_hp_bar_mode"=1
 
@@ -1495,6 +1514,8 @@ huntRange = 30
 maxRange = 30
 defaultMode = "Wander"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.attack_anim"="seq.godwars_bandos_attack"
 "param.defend_anim"="seq.godwars_bandos_defend"
 "param.death_anim"="seq.godwars_bandos_death"
@@ -1613,6 +1634,9 @@ huntRange = 30
 maxRange = 30
 defaultMode = "Wander"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=30
 "param.death_anim"="seq.godwars_zamorak_death"
 
 [[npc]]
@@ -1625,6 +1649,9 @@ maxRange = 30
 attackRange = 7
 defaultMode = "Wander"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=25
 "param.attack_anim"="seq.demon_update_fireball_cast"
 "param.defend_anim"="seq.demon_block"
 "param.death_anim"="seq.demon_death"
@@ -1641,6 +1668,9 @@ huntRange = 30
 maxRange = 30
 defaultMode = "Wander"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=40
 "param.attack_anim"="seq.demon_attack_greater"
 "param.defend_anim"="seq.demon_block"
 "param.death_anim"="seq.demon_death_greater"
@@ -1656,6 +1686,9 @@ maxRange = 30
 attackRange = 7
 defaultMode = "Wander"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=40
 "param.attack_anim"="seq.godwars_zamorak_bdygrd_ranged"
 "param.defend_anim"="seq.demon_block"
 "param.death_anim"="seq.demon_death"
@@ -1667,50 +1700,61 @@ defaultMode = "Wander"
 id = "npc.abyssalsire_sire_apocalypse"
 inherit = "npc.abyssalsire_sire_apocalypse"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.total_abyssalsire_kills"
 
 [[npc]]
 id = "npc.abyssalsire_sire_panicking"
 inherit = "npc.abyssalsire_sire_panicking"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.total_abyssalsire_kills"
 
 [[npc]]
 id = "npc.abyssalsire_sire_puppet"
 inherit = "npc.abyssalsire_sire_puppet"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.total_abyssalsire_kills"
 
 [[npc]]
 id = "npc.abyssalsire_sire_stasis_awake"
 inherit = "npc.abyssalsire_sire_stasis_awake"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.total_abyssalsire_kills"
 
 [[npc]]
 id = "npc.abyssalsire_sire_stasis_sleeping"
 inherit = "npc.abyssalsire_sire_stasis_sleeping"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.total_abyssalsire_kills"
 
 [[npc]]
 id = "npc.abyssalsire_sire_stasis_stunned"
 inherit = "npc.abyssalsire_sire_stasis_stunned"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.total_abyssalsire_kills"
 
 [[npc]]
 id = "npc.abyssalsire_sire_wandering"
 inherit = "npc.abyssalsire_sire_wandering"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.total_abyssalsire_kills"
 
 [[npc]]
 id = "npc.amoxliatl"
 inherit = "npc.amoxliatl"
 huntMode = 8
-huntRange = 8
+huntRange = 20
+wanderRange = 5
+maxRange = 20
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_amoxliatl"
 "param.death_anim"="seq.amoxliatl_death"
 "param.boss_hp_bar_mode"=2
@@ -1723,6 +1767,8 @@ huntRange = 8
 id = "npc.ancient_wyvern"
 inherit = "npc.ancient_wyvern"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_ancient_wyvern"
 "param.killcount_notify"=false
 
@@ -1730,12 +1776,16 @@ inherit = "npc.ancient_wyvern"
 id = "npc.araxxor"
 inherit = "npc.araxxor"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_araxxor_kills"
 
 [[npc]]
 id = "npc.araxyte_large"
 inherit = "npc.araxyte_large"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_araxyte"
 "param.killcount_notify"=false
 
@@ -1743,6 +1793,8 @@ inherit = "npc.araxyte_large"
 id = "npc.araxyte_large_bigwander"
 inherit = "npc.araxyte_large_bigwander"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_araxyte"
 "param.killcount_notify"=false
 
@@ -1750,6 +1802,8 @@ inherit = "npc.araxyte_large_bigwander"
 id = "npc.araxyte_normal"
 inherit = "npc.araxyte_normal"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_araxyte"
 "param.killcount_notify"=false
 
@@ -1757,6 +1811,8 @@ inherit = "npc.araxyte_normal"
 id = "npc.araxyte_normal_bigwander"
 inherit = "npc.araxyte_normal_bigwander"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_araxyte"
 "param.killcount_notify"=false
 
@@ -1764,6 +1820,7 @@ inherit = "npc.araxyte_normal_bigwander"
 id = "npc.arceuus_reanimated_bloodveld"
 inherit = "npc.arceuus_reanimated_bloodveld"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_bloodveld"
 "param.killcount_notify"=false
 
@@ -1771,6 +1828,8 @@ inherit = "npc.arceuus_reanimated_bloodveld"
 id = "npc.basilisk_knight"
 inherit = "npc.basilisk_knight"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_basilisk_knight"
 "param.killcount_notify"=false
 
@@ -1778,6 +1837,8 @@ inherit = "npc.basilisk_knight"
 id = "npc.cave_crawler_ice_1"
 inherit = "npc.cave_crawler_ice_1"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_crawler"
 "param.killcount_notify"=false
 
@@ -1785,6 +1846,8 @@ inherit = "npc.cave_crawler_ice_1"
 id = "npc.cave_crawler_ice_2"
 inherit = "npc.cave_crawler_ice_2"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_crawler"
 "param.killcount_notify"=false
 
@@ -1792,18 +1855,27 @@ inherit = "npc.cave_crawler_ice_2"
 id = "npc.cerberus_attacking"
 inherit = "npc.cerberus_attacking"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.total_cerberus_kills"
 
 [[npc]]
 id = "npc.cerberus_resetting"
 inherit = "npc.cerberus_resetting"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.total_cerberus_kills"
 
 [[npc]]
 id = "npc.cerberus_sitting"
 inherit = "npc.cerberus_sitting"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.total_cerberus_kills"
 
 [[npc]]
@@ -1817,6 +1889,8 @@ inherit = "npc.crypt_of_tonali_grimy_lizard"
 id = "npc.deal_fever_spiders1"
 inherit = "npc.deal_fever_spiders1"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_fever_spider"
 "param.killcount_notify"=false
 
@@ -1824,6 +1898,8 @@ inherit = "npc.deal_fever_spiders1"
 id = "npc.drake"
 inherit = "npc.drake"
 [npc.params]
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_drake"
 "param.killcount_notify"=false
 
@@ -1831,6 +1907,8 @@ inherit = "npc.drake"
 id = "npc.drake_death"
 inherit = "npc.drake_death"
 [npc.params]
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_drake"
 "param.killcount_notify"=false
 
@@ -1838,6 +1916,8 @@ inherit = "npc.drake_death"
 id = "npc.ds2_brut_black_dragon"
 inherit = "npc.ds2_brut_black_dragon"
 [npc.params]
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_brutal_black_dragon"
 "param.killcount_notify"=false
 
@@ -1845,6 +1925,8 @@ inherit = "npc.ds2_brut_black_dragon"
 id = "npc.earth_nagua"
 inherit = "npc.earth_nagua"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=15
 "param.killcount_varp"="varp.kc_earthen_nagua"
 "param.killcount_notify"=false
 
@@ -1852,6 +1934,8 @@ inherit = "npc.earth_nagua"
 id = "npc.earth_nagua_reinforced"
 inherit = "npc.earth_nagua_reinforced"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=15
 "param.killcount_varp"="varp.kc_earthen_nagua"
 "param.killcount_notify"=false
 
@@ -1859,6 +1943,8 @@ inherit = "npc.earth_nagua_reinforced"
 id = "npc.elder_custodian_stalker"
 inherit = "npc.elder_custodian_stalker"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_elder_custodian_stalker"
 "param.killcount_notify"=false
 
@@ -1866,6 +1952,8 @@ inherit = "npc.elder_custodian_stalker"
 id = "npc.fossil_zygomite"
 inherit = "npc.fossil_zygomite"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_ancient_zygomite"
 "param.killcount_notify"=false
 
@@ -1873,6 +1961,8 @@ inherit = "npc.fossil_zygomite"
 id = "npc.frost_nagua"
 inherit = "npc.frost_nagua"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_frost_nagua"
 "param.killcount_notify"=false
 
@@ -1880,6 +1970,8 @@ inherit = "npc.frost_nagua"
 id = "npc.frost_nagua_cutscene"
 inherit = "npc.frost_nagua_cutscene"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_frost_nagua"
 "param.killcount_notify"=false
 
@@ -1887,12 +1979,16 @@ inherit = "npc.frost_nagua_cutscene"
 id = "npc.gargboss_dawn_death"
 inherit = "npc.gargboss_dawn_death"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=70
 "param.killcount_varp"="varp.total_gargboss_kills"
 
 [[npc]]
 id = "npc.gargboss_dusk_death"
 inherit = "npc.gargboss_dusk_death"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.total_gargboss_kills"
 
 [[npc]]
@@ -1905,6 +2001,8 @@ maxRange = 30
 attackRange = 7
 defaultMode = "Wander"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.death_anim"="seq.godwars_armadyl_avatar_death"
 
 [[npc]]
@@ -1917,6 +2015,8 @@ maxRange = 30
 attackRange = 7
 defaultMode = "Wander"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.attack_anim"="seq.godwars_armadyl_spear_attack"
 "param.defend_anim"="seq.godwars_armadyl_defend"
 "param.death_anim"="seq.godwars_armadyl_death"
@@ -1933,6 +2033,8 @@ huntRange = 30
 maxRange = 30
 defaultMode = "Wander"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.attack_anim"="seq.godwars_armadyl_sword_attack"
 "param.defend_anim"="seq.godwars_armadyl_defend"
 "param.death_anim"="seq.godwars_armadyl_death"
@@ -1948,6 +2050,8 @@ maxRange = 30
 attackRange = 7
 defaultMode = "Wander"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.attack_anim"="seq.godwars_armadyl_spear_attack"
 "param.defend_anim"="seq.godwars_armadyl_defend"
 "param.death_anim"="seq.godwars_armadyl_death"
@@ -1959,36 +2063,57 @@ defaultMode = "Wander"
 id = "npc.godwars_spiritual_bandos_mage"
 inherit = "npc.godwars_spiritual_bandos_mage"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_spiritual_bandos_ranger"
 inherit = "npc.godwars_spiritual_bandos_ranger"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_spiritual_bandos_warrior"
 inherit = "npc.godwars_spiritual_bandos_warrior"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_ancient_ork1"
 inherit = "npc.godwars_ancient_ork1"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=15
 
 [[npc]]
 id = "npc.godwars_ancient_ork2"
 inherit = "npc.godwars_ancient_ork2"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=15
 
 [[npc]]
 id = "npc.godwars_ancient_ork3"
 inherit = "npc.godwars_ancient_ork3"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=15
 
 [[npc]]
 id = "npc.godwars_ancient_ork4"
 inherit = "npc.godwars_ancient_ork4"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=15
 
 [[npc]]
 id = "npc.godwars_ancient_cyclops"
@@ -2004,11 +2129,17 @@ category = 65517
 id = "npc.godwars_ancient_jogre"
 inherit = "npc.godwars_ancient_jogre"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=25
 
 [[npc]]
 id = "npc.godwars_ancient_ogre"
 inherit = "npc.godwars_ancient_ogre"
 category = 65517
+[npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 
 [[npc]]
 id = "npc.godwars_ancient_hobgoblin"
@@ -2049,101 +2180,161 @@ category = 65518
 id = "npc.godwars_spiritual_armadyl_ranger"
 inherit = "npc.godwars_spiritual_armadyl_ranger"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_spiritual_armadyl_warrior"
 inherit = "npc.godwars_spiritual_armadyl_warrior"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_armadyl_female_armor01_blue"
 inherit = "npc.godwars_armadyl_female_armor01_blue"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_female_armor01_green"
 inherit = "npc.godwars_armadyl_female_armor01_green"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_female_armor01_red"
 inherit = "npc.godwars_armadyl_female_armor01_red"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_female_armor02_blue"
 inherit = "npc.godwars_armadyl_female_armor02_blue"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_female_armor02_green"
 inherit = "npc.godwars_armadyl_female_armor02_green"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_female_armor02_red"
 inherit = "npc.godwars_armadyl_female_armor02_red"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_female_armor03_blue"
 inherit = "npc.godwars_armadyl_female_armor03_blue"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor01_blue"
 inherit = "npc.godwars_armadyl_male_armor01_blue"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor01_green"
 inherit = "npc.godwars_armadyl_male_armor01_green"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor01_red"
 inherit = "npc.godwars_armadyl_male_armor01_red"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor02_blue"
 inherit = "npc.godwars_armadyl_male_armor02_blue"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor02_green"
 inherit = "npc.godwars_armadyl_male_armor02_green"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor02_red"
 inherit = "npc.godwars_armadyl_male_armor02_red"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor03_green"
 inherit = "npc.godwars_armadyl_male_armor03_green"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_armadyl_male_armor03_red"
 inherit = "npc.godwars_armadyl_male_armor03_red"
 category = 65518
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=45
 
 [[npc]]
 id = "npc.godwars_spiritual_saradomin_mage"
 inherit = "npc.godwars_spiritual_saradomin_mage"
 category = 65519
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_spiritual_saradomin_ranger"
 inherit = "npc.godwars_spiritual_saradomin_ranger"
 category = 65519
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_spiritual_saradomin_warrior"
 inherit = "npc.godwars_spiritual_saradomin_warrior"
 category = 65519
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_saradomin_knight_1"
@@ -2164,29 +2355,41 @@ category = 65519
 id = "npc.godwars_spiritual_zamorak_mage"
 inherit = "npc.godwars_spiritual_zamorak_mage"
 category = 65520
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_spiritual_zamorak_ranger"
 inherit = "npc.godwars_spiritual_zamorak_ranger"
 category = 65520
+[npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 
 [[npc]]
 id = "npc.godwars_spiritual_zamorak_warrior"
 inherit = "npc.godwars_spiritual_zamorak_warrior"
 category = 65520
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.total_armadyl_kills"
 
 [[npc]]
 id = "npc.godwars_bandos_avatar"
 inherit = "npc.godwars_bandos_avatar"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.total_bandos_kills"
 
 [[npc]]
 id = "npc.godwars_bloodveld"
 inherit = "npc.godwars_bloodveld"
 category = 65520
+[npc.params]
+"param.demon"=1
 
 [[npc]]
 id = "npc.godwars_gorak"
@@ -2198,6 +2401,9 @@ id = "npc.godwars_icefiend_1"
 inherit = "npc.godwars_icefiend_1"
 category = 65520
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_bloodveld"
 "param.killcount_notify"=false
 
@@ -2205,16 +2411,28 @@ category = 65520
 id = "npc.godwars_pyrefiend_1"
 inherit = "npc.godwars_pyrefiend_1"
 category = 65520
+[npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 
 [[npc]]
 id = "npc.godwars_ancient_hellhound"
 inherit = "npc.godwars_ancient_hellhound"
 category = 65520
+[npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 
 [[npc]]
 id = "npc.godwars_ancient_imp"
 inherit = "npc.godwars_ancient_imp"
 category = 65520
+[npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=10
 
 [[npc]]
 id = "npc.godwars_ancient_vampire"
@@ -2248,6 +2466,8 @@ inherit = "npc.godwars_spiritual_armadyl_mage"
 id = "npc.godwars_spiritual_armadyl_ranger"
 inherit = "npc.godwars_spiritual_armadyl_ranger"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_ranger"
 "param.killcount_notify"=false
 
@@ -2255,6 +2475,8 @@ inherit = "npc.godwars_spiritual_armadyl_ranger"
 id = "npc.godwars_spiritual_armadyl_warrior"
 inherit = "npc.godwars_spiritual_armadyl_warrior"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_warrior"
 "param.killcount_notify"=false
 
@@ -2262,6 +2484,8 @@ inherit = "npc.godwars_spiritual_armadyl_warrior"
 id = "npc.godwars_spiritual_bandos_mage"
 inherit = "npc.godwars_spiritual_bandos_mage"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_mage"
 "param.killcount_notify"=false
 
@@ -2269,6 +2493,8 @@ inherit = "npc.godwars_spiritual_bandos_mage"
 id = "npc.godwars_spiritual_bandos_ranger"
 inherit = "npc.godwars_spiritual_bandos_ranger"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_ranger"
 "param.killcount_notify"=false
 
@@ -2276,6 +2502,8 @@ inherit = "npc.godwars_spiritual_bandos_ranger"
 id = "npc.godwars_spiritual_bandos_warrior"
 inherit = "npc.godwars_spiritual_bandos_warrior"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_warrior"
 "param.killcount_notify"=false
 
@@ -2283,6 +2511,8 @@ inherit = "npc.godwars_spiritual_bandos_warrior"
 id = "npc.godwars_spiritual_saradomin_mage"
 inherit = "npc.godwars_spiritual_saradomin_mage"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_mage"
 "param.killcount_notify"=false
 
@@ -2290,6 +2520,8 @@ inherit = "npc.godwars_spiritual_saradomin_mage"
 id = "npc.godwars_spiritual_saradomin_ranger"
 inherit = "npc.godwars_spiritual_saradomin_ranger"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_ranger"
 "param.killcount_notify"=false
 
@@ -2297,6 +2529,8 @@ inherit = "npc.godwars_spiritual_saradomin_ranger"
 id = "npc.godwars_spiritual_saradomin_warrior"
 inherit = "npc.godwars_spiritual_saradomin_warrior"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_warrior"
 "param.killcount_notify"=false
 
@@ -2304,6 +2538,8 @@ inherit = "npc.godwars_spiritual_saradomin_warrior"
 id = "npc.godwars_spiritual_zamorak_mage"
 inherit = "npc.godwars_spiritual_zamorak_mage"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_mage"
 "param.killcount_notify"=false
 
@@ -2311,6 +2547,8 @@ inherit = "npc.godwars_spiritual_zamorak_mage"
 id = "npc.godwars_spiritual_zamorak_ranger"
 inherit = "npc.godwars_spiritual_zamorak_ranger"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_ranger"
 "param.killcount_notify"=false
 
@@ -2318,6 +2556,8 @@ inherit = "npc.godwars_spiritual_zamorak_ranger"
 id = "npc.godwars_spiritual_zamorak_warrior"
 inherit = "npc.godwars_spiritual_zamorak_warrior"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_spiritual_warrior"
 "param.killcount_notify"=false
 
@@ -2325,6 +2565,9 @@ inherit = "npc.godwars_spiritual_zamorak_warrior"
 id = "npc.godwars_zamorak_avatar"
 inherit = "npc.godwars_zamorak_avatar"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.total_zamorak_kills"
 
 [[npc]]
@@ -2338,12 +2581,16 @@ inherit = "npc.grimy_lizard"
 id = "npc.gryphon_boss"
 inherit = "npc.gryphon_boss"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_gryphon_boss_kills"
 
 [[npc]]
 id = "npc.harmless_island_cave_horror_alpha"
 inherit = "npc.harmless_island_cave_horror_alpha"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_cave_horror"
 "param.killcount_notify"=false
 
@@ -2351,6 +2598,8 @@ inherit = "npc.harmless_island_cave_horror_alpha"
 id = "npc.harmless_island_cave_horror_guard"
 inherit = "npc.harmless_island_cave_horror_guard"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_cave_horror"
 "param.killcount_notify"=false
 
@@ -2358,6 +2607,8 @@ inherit = "npc.harmless_island_cave_horror_guard"
 id = "npc.harmless_island_cave_horror_small_guard"
 inherit = "npc.harmless_island_cave_horror_small_guard"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_cave_horror"
 "param.killcount_notify"=false
 
@@ -2365,6 +2616,8 @@ inherit = "npc.harmless_island_cave_horror_small_guard"
 id = "npc.harmless_island_cave_horror_worker"
 inherit = "npc.harmless_island_cave_horror_worker"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_cave_horror"
 "param.killcount_notify"=false
 
@@ -2372,6 +2625,8 @@ inherit = "npc.harmless_island_cave_horror_worker"
 id = "npc.harmless_island_cave_horror_young_worker"
 inherit = "npc.harmless_island_cave_horror_young_worker"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_cave_horror"
 "param.killcount_notify"=false
 
@@ -2379,6 +2634,8 @@ inherit = "npc.harmless_island_cave_horror_young_worker"
 id = "npc.hydra"
 inherit = "npc.hydra"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_hydra"
 "param.killcount_notify"=false
 
@@ -2386,54 +2643,72 @@ inherit = "npc.hydra"
 id = "npc.hydraboss"
 inherit = "npc.hydraboss"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.hydraboss_2"
 inherit = "npc.hydraboss_2"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.hydraboss_3"
 inherit = "npc.hydraboss_3"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.hydraboss_4"
 inherit = "npc.hydraboss_4"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.hydraboss_finaldeath"
 inherit = "npc.hydraboss_finaldeath"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.hydraboss_p1_transition"
 inherit = "npc.hydraboss_p1_transition"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.hydraboss_p2_transition"
 inherit = "npc.hydraboss_p2_transition"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.hydraboss_p3_transition"
 inherit = "npc.hydraboss_p3_transition"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_hydraboss_kills"
 
 [[npc]]
 id = "npc.jelly_tapoyauik"
 inherit = "npc.jelly_tapoyauik"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -2441,6 +2716,8 @@ inherit = "npc.jelly_tapoyauik"
 id = "npc.juvenile_custodian_stalker"
 inherit = "npc.juvenile_custodian_stalker"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_juvenile_custodian_stalker"
 "param.killcount_notify"=false
 
@@ -2448,6 +2725,7 @@ inherit = "npc.juvenile_custodian_stalker"
 id = "npc.kourend_abyssal"
 inherit = "npc.kourend_abyssal"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_abyssal_demon"
 "param.killcount_notify"=false
 
@@ -2455,6 +2733,8 @@ inherit = "npc.kourend_abyssal"
 id = "npc.kourend_banshee"
 inherit = "npc.kourend_banshee"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_banshee"
 "param.killcount_notify"=false
 
@@ -2462,6 +2742,7 @@ inherit = "npc.kourend_banshee"
 id = "npc.kourend_bloodveld"
 inherit = "npc.kourend_bloodveld"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_bloodveld"
 "param.killcount_notify"=false
 
@@ -2469,6 +2750,8 @@ inherit = "npc.kourend_bloodveld"
 id = "npc.kourend_dark_beast"
 inherit = "npc.kourend_dark_beast"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=60
 "param.killcount_varp"="varp.kc_dark_beast"
 "param.killcount_notify"=false
 
@@ -2476,6 +2759,8 @@ inherit = "npc.kourend_dark_beast"
 id = "npc.kourend_dustdevil"
 inherit = "npc.kourend_dustdevil"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_dust_devil"
 "param.killcount_notify"=false
 
@@ -2483,6 +2768,8 @@ inherit = "npc.kourend_dustdevil"
 id = "npc.kourend_jelly"
 inherit = "npc.kourend_jelly"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -2490,6 +2777,7 @@ inherit = "npc.kourend_jelly"
 id = "npc.kourend_nechryael"
 inherit = "npc.kourend_nechryael"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_nechryael"
 "param.killcount_notify"=false
 
@@ -2497,6 +2785,8 @@ inherit = "npc.kourend_nechryael"
 id = "npc.kourend_spectre"
 inherit = "npc.kourend_spectre"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_aberrant_spectre"
 "param.killcount_notify"=false
 
@@ -2518,6 +2808,8 @@ inherit = "npc.lotr_terror_dog_small"
 id = "npc.mature_custodian_stalker"
 inherit = "npc.mature_custodian_stalker"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_mature_custodian_stalker"
 "param.killcount_notify"=false
 
@@ -2525,6 +2817,8 @@ inherit = "npc.mature_custodian_stalker"
 id = "npc.molanisk"
 inherit = "npc.molanisk"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=60
 "param.killcount_varp"="varp.kc_molanisk"
 "param.killcount_notify"=false
 
@@ -2532,6 +2826,8 @@ inherit = "npc.molanisk"
 id = "npc.molanisk_giant_cave_bug"
 inherit = "npc.molanisk_giant_cave_bug"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_bug"
 "param.killcount_notify"=false
 
@@ -2539,6 +2835,8 @@ inherit = "npc.molanisk_giant_cave_bug"
 id = "npc.mourning_dark_beast"
 inherit = "npc.mourning_dark_beast"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=60
 "param.killcount_varp"="varp.kc_dark_beast"
 "param.killcount_notify"=false
 
@@ -2546,6 +2844,8 @@ inherit = "npc.mourning_dark_beast"
 id = "npc.nex_prison_mage"
 inherit = "npc.nex_prison_mage"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=200
 "param.killcount_varp"="varp.kc_spiritual_mage"
 "param.killcount_notify"=false
 
@@ -2553,6 +2853,8 @@ inherit = "npc.nex_prison_mage"
 id = "npc.nex_prison_ranger"
 inherit = "npc.nex_prison_ranger"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=200
 "param.killcount_varp"="varp.kc_spiritual_ranger"
 "param.killcount_notify"=false
 
@@ -2560,6 +2862,8 @@ inherit = "npc.nex_prison_ranger"
 id = "npc.nex_prison_warrior"
 inherit = "npc.nex_prison_warrior"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=200
 "param.killcount_varp"="varp.kc_spiritual_warrior"
 "param.killcount_notify"=false
 
@@ -2574,6 +2878,8 @@ inherit = "npc.olaf2_brine_rats"
 id = "npc.pmoon_sulphur_nagua"
 inherit = "npc.pmoon_sulphur_nagua"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=15
 "param.killcount_varp"="varp.kc_sulphur_nagua"
 "param.killcount_notify"=false
 
@@ -2637,6 +2943,8 @@ inherit = "npc.pog_mutated_terrorbird_8"
 id = "npc.pog_mutated_tortoise"
 inherit = "npc.pog_mutated_tortoise"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_warped_tortoise"
 "param.killcount_notify"=false
 
@@ -2644,6 +2952,8 @@ inherit = "npc.pog_mutated_tortoise"
 id = "npc.royal_sea_snake_baby"
 inherit = "npc.royal_sea_snake_baby"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_sea_snake_hatchling"
 "param.killcount_notify"=false
 
@@ -2651,6 +2961,8 @@ inherit = "npc.royal_sea_snake_baby"
 id = "npc.royal_sea_snake_medium"
 inherit = "npc.royal_sea_snake_medium"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_sea_snake_hatchling"
 "param.killcount_notify"=false
 
@@ -2658,6 +2970,8 @@ inherit = "npc.royal_sea_snake_medium"
 id = "npc.royal_sea_snake_mother_smaller"
 inherit = "npc.royal_sea_snake_mother_smaller"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_sea_snake_hatchling"
 "param.killcount_notify"=false
 
@@ -2665,6 +2979,8 @@ inherit = "npc.royal_sea_snake_mother_smaller"
 id = "npc.sailing_sea_mogre"
 inherit = "npc.sailing_sea_mogre"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_mogre"
 "param.killcount_notify"=false
 
@@ -2672,6 +2988,8 @@ inherit = "npc.sailing_sea_mogre"
 id = "npc.sailing_sea_mogre_f"
 inherit = "npc.sailing_sea_mogre_f"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_mogre"
 "param.killcount_notify"=false
 
@@ -2679,6 +2997,8 @@ inherit = "npc.sailing_sea_mogre_f"
 id = "npc.skeletal_wyvern1"
 inherit = "npc.skeletal_wyvern1"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_skeletal_wyvern"
 "param.killcount_notify"=false
 
@@ -2686,6 +3006,8 @@ inherit = "npc.skeletal_wyvern1"
 id = "npc.skeletal_wyvern2"
 inherit = "npc.skeletal_wyvern2"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_skeletal_wyvern"
 "param.killcount_notify"=false
 
@@ -2693,6 +3015,8 @@ inherit = "npc.skeletal_wyvern2"
 id = "npc.skeletal_wyvern3"
 inherit = "npc.skeletal_wyvern3"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_skeletal_wyvern"
 "param.killcount_notify"=false
 
@@ -2700,6 +3024,8 @@ inherit = "npc.skeletal_wyvern3"
 id = "npc.skeletal_wyvern4"
 inherit = "npc.skeletal_wyvern4"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_skeletal_wyvern"
 "param.killcount_notify"=false
 
@@ -2707,6 +3033,8 @@ inherit = "npc.skeletal_wyvern4"
 id = "npc.slayer_abberant_spectre_1"
 inherit = "npc.slayer_abberant_spectre_1"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_aberrant_spectre"
 "param.killcount_notify"=false
 
@@ -2714,6 +3042,8 @@ inherit = "npc.slayer_abberant_spectre_1"
 id = "npc.slayer_abberant_spectre_2"
 inherit = "npc.slayer_abberant_spectre_2"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_aberrant_spectre"
 "param.killcount_notify"=false
 
@@ -2721,6 +3051,8 @@ inherit = "npc.slayer_abberant_spectre_2"
 id = "npc.slayer_abberant_spectre_3"
 inherit = "npc.slayer_abberant_spectre_3"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_aberrant_spectre"
 "param.killcount_notify"=false
 
@@ -2728,6 +3060,8 @@ inherit = "npc.slayer_abberant_spectre_3"
 id = "npc.slayer_abberant_spectre_4"
 inherit = "npc.slayer_abberant_spectre_4"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_aberrant_spectre"
 "param.killcount_notify"=false
 
@@ -2735,6 +3069,8 @@ inherit = "npc.slayer_abberant_spectre_4"
 id = "npc.slayer_aberrantspectre_1_strongholdcave"
 inherit = "npc.slayer_aberrantspectre_1_strongholdcave"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_aberrant_spectre"
 "param.killcount_notify"=false
 
@@ -2742,6 +3078,8 @@ inherit = "npc.slayer_aberrantspectre_1_strongholdcave"
 id = "npc.slayer_aberrantspectre_2_strongholdcave"
 inherit = "npc.slayer_aberrantspectre_2_strongholdcave"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_aberrant_spectre"
 "param.killcount_notify"=false
 
@@ -2749,6 +3087,7 @@ inherit = "npc.slayer_aberrantspectre_2_strongholdcave"
 id = "npc.slayer_abyssal"
 inherit = "npc.slayer_abyssal"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_abyssal_demon"
 "param.killcount_notify"=false
 
@@ -2756,6 +3095,7 @@ inherit = "npc.slayer_abyssal"
 id = "npc.slayer_abyssal_strongholdcave"
 inherit = "npc.slayer_abyssal_strongholdcave"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_abyssal_demon"
 "param.killcount_notify"=false
 
@@ -2777,6 +3117,8 @@ inherit = "npc.slayer_aquanite_nolure"
 id = "npc.slayer_banshee_1"
 inherit = "npc.slayer_banshee_1"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_banshee"
 "param.killcount_notify"=false
 
@@ -2784,6 +3126,8 @@ inherit = "npc.slayer_banshee_1"
 id = "npc.slayer_basilisk"
 inherit = "npc.slayer_basilisk"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_basilisk"
 "param.killcount_notify"=false
 
@@ -2791,6 +3135,7 @@ inherit = "npc.slayer_basilisk"
 id = "npc.slayer_bloodveld"
 inherit = "npc.slayer_bloodveld"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_bloodveld"
 "param.killcount_notify"=false
 
@@ -2798,6 +3143,7 @@ inherit = "npc.slayer_bloodveld"
 id = "npc.slayer_bloodveld_baby"
 inherit = "npc.slayer_bloodveld_baby"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_bloodveld"
 "param.killcount_notify"=false
 
@@ -2805,6 +3151,7 @@ inherit = "npc.slayer_bloodveld_baby"
 id = "npc.slayer_bloodveld_baby_strongholdcave"
 inherit = "npc.slayer_bloodveld_baby_strongholdcave"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_bloodveld"
 "param.killcount_notify"=false
 
@@ -2812,6 +3159,7 @@ inherit = "npc.slayer_bloodveld_baby_strongholdcave"
 id = "npc.slayer_bloodveld_strongholdcave"
 inherit = "npc.slayer_bloodveld_strongholdcave"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_bloodveld"
 "param.killcount_notify"=false
 
@@ -2819,6 +3167,8 @@ inherit = "npc.slayer_bloodveld_strongholdcave"
 id = "npc.slayer_cave_crawler_1"
 inherit = "npc.slayer_cave_crawler_1"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_crawler"
 "param.killcount_notify"=false
 
@@ -2826,6 +3176,8 @@ inherit = "npc.slayer_cave_crawler_1"
 id = "npc.slayer_cave_crawler_2"
 inherit = "npc.slayer_cave_crawler_2"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_crawler"
 "param.killcount_notify"=false
 
@@ -2833,6 +3185,8 @@ inherit = "npc.slayer_cave_crawler_2"
 id = "npc.slayer_cave_crawler_3"
 inherit = "npc.slayer_cave_crawler_3"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_crawler"
 "param.killcount_notify"=false
 
@@ -2840,6 +3194,8 @@ inherit = "npc.slayer_cave_crawler_3"
 id = "npc.slayer_cave_crawler_4"
 inherit = "npc.slayer_cave_crawler_4"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_crawler"
 "param.killcount_notify"=false
 
@@ -2847,6 +3203,8 @@ inherit = "npc.slayer_cave_crawler_4"
 id = "npc.slayer_cave_gargoyle"
 inherit = "npc.slayer_cave_gargoyle"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_gargoyle"
 "param.killcount_notify"=false
 
@@ -2931,6 +3289,8 @@ inherit = "npc.slayer_crawling_hand_big_5"
 id = "npc.slayer_dustdevil"
 inherit = "npc.slayer_dustdevil"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_dust_devil"
 "param.killcount_notify"=false
 
@@ -2938,6 +3298,8 @@ inherit = "npc.slayer_dustdevil"
 id = "npc.slayer_gargoyle_1"
 inherit = "npc.slayer_gargoyle_1"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_gargoyle"
 "param.killcount_notify"=false
 
@@ -2945,6 +3307,8 @@ inherit = "npc.slayer_gargoyle_1"
 id = "npc.slayer_gargoyle_dead"
 inherit = "npc.slayer_gargoyle_dead"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_gargoyle"
 "param.killcount_notify"=false
 
@@ -2952,6 +3316,8 @@ inherit = "npc.slayer_gargoyle_dead"
 id = "npc.slayer_gryphon_1"
 inherit = "npc.slayer_gryphon_1"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_gryphon"
 "param.killcount_notify"=false
 
@@ -2959,6 +3325,8 @@ inherit = "npc.slayer_gryphon_1"
 id = "npc.slayer_gryphon_2"
 inherit = "npc.slayer_gryphon_2"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_gryphon"
 "param.killcount_notify"=false
 
@@ -2966,6 +3334,8 @@ inherit = "npc.slayer_gryphon_2"
 id = "npc.slayer_harpiebugswarm"
 inherit = "npc.slayer_harpiebugswarm"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_harpie_bug_swarm"
 "param.killcount_notify"=false
 
@@ -3008,6 +3378,8 @@ inherit = "npc.slayer_infernal_mage_5"
 id = "npc.slayer_jelly_1"
 inherit = "npc.slayer_jelly_1"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3015,6 +3387,8 @@ inherit = "npc.slayer_jelly_1"
 id = "npc.slayer_jelly_2"
 inherit = "npc.slayer_jelly_2"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3022,6 +3396,8 @@ inherit = "npc.slayer_jelly_2"
 id = "npc.slayer_jelly_3"
 inherit = "npc.slayer_jelly_3"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3029,6 +3405,8 @@ inherit = "npc.slayer_jelly_3"
 id = "npc.slayer_jelly_4"
 inherit = "npc.slayer_jelly_4"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3036,6 +3414,8 @@ inherit = "npc.slayer_jelly_4"
 id = "npc.slayer_jelly_5"
 inherit = "npc.slayer_jelly_5"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3043,6 +3423,8 @@ inherit = "npc.slayer_jelly_5"
 id = "npc.slayer_jelly_6"
 inherit = "npc.slayer_jelly_6"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3050,6 +3432,8 @@ inherit = "npc.slayer_jelly_6"
 id = "npc.slayer_killerwatt"
 inherit = "npc.slayer_killerwatt"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=60
 "param.killcount_varp"="varp.kc_killerwatt"
 "param.killcount_notify"=false
 
@@ -3057,6 +3441,8 @@ inherit = "npc.slayer_killerwatt"
 id = "npc.slayer_killerwatt_ball"
 inherit = "npc.slayer_killerwatt_ball"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=60
 "param.killcount_varp"="varp.kc_killerwatt"
 "param.killcount_notify"=false
 
@@ -3064,6 +3450,8 @@ inherit = "npc.slayer_killerwatt_ball"
 id = "npc.slayer_kraken"
 inherit = "npc.slayer_kraken"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_kraken"
 "param.killcount_notify"=false
 
@@ -3071,6 +3459,8 @@ inherit = "npc.slayer_kraken"
 id = "npc.slayer_kraken_boss"
 inherit = "npc.slayer_kraken_boss"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.total_kraken_boss_kills"
 
 [[npc]]
@@ -3104,6 +3494,8 @@ inherit = "npc.slayer_kursk_2"
 id = "npc.slayer_lava_strykewyrm"
 inherit = "npc.slayer_lava_strykewyrm"
 [npc.params]
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_lava_strykewyrm"
 "param.killcount_notify"=false
 
@@ -3181,6 +3573,7 @@ inherit = "npc.slayer_mutated_zygomite_adult"
 id = "npc.slayer_nechryael"
 inherit = "npc.slayer_nechryael"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_nechryael"
 "param.killcount_notify"=false
 
@@ -3188,6 +3581,7 @@ inherit = "npc.slayer_nechryael"
 id = "npc.slayer_nechryael_strongholdcave"
 inherit = "npc.slayer_nechryael_strongholdcave"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_nechryael"
 "param.killcount_notify"=false
 
@@ -3195,6 +3589,9 @@ inherit = "npc.slayer_nechryael_strongholdcave"
 id = "npc.slayer_pyrebeast_1"
 inherit = "npc.slayer_pyrebeast_1"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_pyrelord"
 "param.killcount_notify"=false
 
@@ -3202,6 +3599,9 @@ inherit = "npc.slayer_pyrebeast_1"
 id = "npc.slayer_pyrebeast_2"
 inherit = "npc.slayer_pyrebeast_2"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_pyrelord"
 "param.killcount_notify"=false
 
@@ -3209,6 +3609,9 @@ inherit = "npc.slayer_pyrebeast_2"
 id = "npc.slayer_pyrefiend_1"
 inherit = "npc.slayer_pyrefiend_1"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_pyrefiend"
 "param.killcount_notify"=false
 
@@ -3216,6 +3619,9 @@ inherit = "npc.slayer_pyrefiend_1"
 id = "npc.slayer_pyrefiend_2"
 inherit = "npc.slayer_pyrefiend_2"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_pyrefiend"
 "param.killcount_notify"=false
 
@@ -3223,6 +3629,9 @@ inherit = "npc.slayer_pyrefiend_2"
 id = "npc.slayer_pyrefiend_3"
 inherit = "npc.slayer_pyrefiend_3"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_pyrefiend"
 "param.killcount_notify"=false
 
@@ -3230,6 +3639,9 @@ inherit = "npc.slayer_pyrefiend_3"
 id = "npc.slayer_pyrefiend_4"
 inherit = "npc.slayer_pyrefiend_4"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_pyrefiend"
 "param.killcount_notify"=false
 
@@ -3237,6 +3649,8 @@ inherit = "npc.slayer_pyrefiend_4"
 id = "npc.slayer_rockslug"
 inherit = "npc.slayer_rockslug"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_rockslug"
 "param.killcount_notify"=false
 
@@ -3244,6 +3658,8 @@ inherit = "npc.slayer_rockslug"
 id = "npc.slayer_rockslug_baby"
 inherit = "npc.slayer_rockslug_baby"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_rockslug"
 "param.killcount_notify"=false
 
@@ -3251,6 +3667,8 @@ inherit = "npc.slayer_rockslug_baby"
 id = "npc.slayer_rockslug_crypt_of_tonali"
 inherit = "npc.slayer_rockslug_crypt_of_tonali"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_rockslug"
 "param.killcount_notify"=false
 
@@ -3286,6 +3704,8 @@ inherit = "npc.slayer_turoth_mum"
 id = "npc.smoke_devil"
 inherit = "npc.smoke_devil"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_smoke_devil"
 "param.killcount_notify"=false
 
@@ -3293,6 +3713,8 @@ inherit = "npc.smoke_devil"
 id = "npc.smoke_devil_boss"
 inherit = "npc.smoke_devil_boss"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_thermonuclear_smoke_devil"
 
 [[npc]]
@@ -3306,6 +3728,8 @@ inherit = "npc.sulphur_lizard"
 id = "npc.superior_abberant_spectre"
 inherit = "npc.superior_abberant_spectre"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3313,6 +3737,7 @@ inherit = "npc.superior_abberant_spectre"
 id = "npc.superior_abyssal_demon"
 inherit = "npc.superior_abyssal_demon"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3327,6 +3752,8 @@ inherit = "npc.superior_aquanite"
 id = "npc.superior_araxyte"
 inherit = "npc.superior_araxyte"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3334,6 +3761,8 @@ inherit = "npc.superior_araxyte"
 id = "npc.superior_banshee"
 inherit = "npc.superior_banshee"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3348,6 +3777,8 @@ inherit = "npc.superior_basilisk"
 id = "npc.superior_basilisk_knight"
 inherit = "npc.superior_basilisk_knight"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3355,6 +3786,7 @@ inherit = "npc.superior_basilisk_knight"
 id = "npc.superior_bloodveld"
 inherit = "npc.superior_bloodveld"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3362,6 +3794,8 @@ inherit = "npc.superior_bloodveld"
 id = "npc.superior_cave_crawler"
 inherit = "npc.superior_cave_crawler"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3376,6 +3810,8 @@ inherit = "npc.superior_cave_horror"
 id = "npc.superior_chilled_jelly"
 inherit = "npc.superior_chilled_jelly"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3397,6 +3833,8 @@ inherit = "npc.superior_crawling_hand"
 id = "npc.superior_custodian"
 inherit = "npc.superior_custodian"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3411,6 +3849,8 @@ inherit = "npc.superior_dark_beast"
 id = "npc.superior_drake"
 inherit = "npc.superior_drake"
 [npc.params]
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3418,6 +3858,8 @@ inherit = "npc.superior_drake"
 id = "npc.superior_dustdevil"
 inherit = "npc.superior_dustdevil"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3425,6 +3867,8 @@ inherit = "npc.superior_dustdevil"
 id = "npc.superior_gargoyle"
 inherit = "npc.superior_gargoyle"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3432,6 +3876,8 @@ inherit = "npc.superior_gargoyle"
 id = "npc.superior_gryphon"
 inherit = "npc.superior_gryphon"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3453,6 +3899,8 @@ inherit = "npc.superior_infernal_mage"
 id = "npc.superior_jelly"
 inherit = "npc.superior_jelly"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3460,6 +3908,8 @@ inherit = "npc.superior_jelly"
 id = "npc.superior_kourend_banshee"
 inherit = "npc.superior_kourend_banshee"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3467,6 +3917,7 @@ inherit = "npc.superior_kourend_banshee"
 id = "npc.superior_kourend_bloodveld"
 inherit = "npc.superior_kourend_bloodveld"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3474,6 +3925,8 @@ inherit = "npc.superior_kourend_bloodveld"
 id = "npc.superior_kourend_jelly"
 inherit = "npc.superior_kourend_jelly"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=30
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3481,6 +3934,8 @@ inherit = "npc.superior_kourend_jelly"
 id = "npc.superior_kourend_spectre"
 inherit = "npc.superior_kourend_spectre"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=40
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3495,6 +3950,8 @@ inherit = "npc.superior_kurask"
 id = "npc.superior_lava_strykewyrm"
 inherit = "npc.superior_lava_strykewyrm"
 [npc.params]
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3502,6 +3959,7 @@ inherit = "npc.superior_lava_strykewyrm"
 id = "npc.superior_nechryael"
 inherit = "npc.superior_nechryael"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3509,6 +3967,9 @@ inherit = "npc.superior_nechryael"
 id = "npc.superior_pyrefiend"
 inherit = "npc.superior_pyrefiend"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=100
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3516,6 +3977,7 @@ inherit = "npc.superior_pyrefiend"
 id = "npc.superior_pyrelord"
 inherit = "npc.superior_pyrelord"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3523,6 +3985,8 @@ inherit = "npc.superior_pyrelord"
 id = "npc.superior_rockslug"
 inherit = "npc.superior_rockslug"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3530,6 +3994,8 @@ inherit = "npc.superior_rockslug"
 id = "npc.superior_smoke_devil"
 inherit = "npc.superior_smoke_devil"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=20
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3551,6 +4017,8 @@ inherit = "npc.superior_warped_terrorbird"
 id = "npc.superior_warped_tortoise"
 inherit = "npc.superior_warped_tortoise"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3558,6 +4026,8 @@ inherit = "npc.superior_warped_tortoise"
 id = "npc.superior_wyrm_dark"
 inherit = "npc.superior_wyrm_dark"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_superior_monster"
 "param.killcount_notify"=false
 
@@ -3565,6 +4035,8 @@ inherit = "npc.superior_wyrm_dark"
 id = "npc.swamp_cave_bug"
 inherit = "npc.swamp_cave_bug"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_bug"
 "param.killcount_notify"=false
 
@@ -3572,6 +4044,8 @@ inherit = "npc.swamp_cave_bug"
 id = "npc.swamp_cave_slime"
 inherit = "npc.swamp_cave_slime"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_cave_slime"
 "param.killcount_notify"=false
 
@@ -3600,6 +4074,8 @@ inherit = "npc.varlamore_cockatrice_moon01"
 id = "npc.varlamore_wyrm_dark01"
 inherit = "npc.varlamore_wyrm_dark01"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_wyrmling"
 "param.killcount_notify"=false
 
@@ -3607,6 +4083,8 @@ inherit = "npc.varlamore_wyrm_dark01"
 id = "npc.varlamore_wyrm_light01"
 inherit = "npc.varlamore_wyrm_light01"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_wyrmling"
 "param.killcount_notify"=false
 
@@ -3614,6 +4092,8 @@ inherit = "npc.varlamore_wyrm_light01"
 id = "npc.vmq3_ruins_frost_nagua"
 inherit = "npc.vmq3_ruins_frost_nagua"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_frost_nagua"
 "param.killcount_notify"=false
 
@@ -3677,6 +4157,7 @@ inherit = "npc.vyrewatch_elite_8"
 id = "npc.wild_cave_abyssal"
 inherit = "npc.wild_cave_abyssal"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_abyssal_demon"
 "param.killcount_notify"=false
 
@@ -3684,6 +4165,8 @@ inherit = "npc.wild_cave_abyssal"
 id = "npc.wild_cave_dustdevil"
 inherit = "npc.wild_cave_dustdevil"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_dust_devil"
 "param.killcount_notify"=false
 
@@ -3691,6 +4174,8 @@ inherit = "npc.wild_cave_dustdevil"
 id = "npc.wild_cave_jelly_1"
 inherit = "npc.wild_cave_jelly_1"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3698,6 +4183,8 @@ inherit = "npc.wild_cave_jelly_1"
 id = "npc.wild_cave_jelly_2"
 inherit = "npc.wild_cave_jelly_2"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3705,6 +4192,8 @@ inherit = "npc.wild_cave_jelly_2"
 id = "npc.wild_cave_jelly_3"
 inherit = "npc.wild_cave_jelly_3"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3712,6 +4201,8 @@ inherit = "npc.wild_cave_jelly_3"
 id = "npc.wild_cave_jelly_4"
 inherit = "npc.wild_cave_jelly_4"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3719,6 +4210,8 @@ inherit = "npc.wild_cave_jelly_4"
 id = "npc.wild_cave_jelly_5"
 inherit = "npc.wild_cave_jelly_5"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_jelly"
 "param.killcount_notify"=false
 
@@ -3726,6 +4219,7 @@ inherit = "npc.wild_cave_jelly_5"
 id = "npc.wild_cave_nechryael"
 inherit = "npc.wild_cave_nechryael"
 [npc.params]
+"param.demon"=1
 "param.killcount_varp"="varp.kc_nechryael"
 "param.killcount_notify"=false
 
@@ -3733,6 +4227,8 @@ inherit = "npc.wild_cave_nechryael"
 id = "npc.wyrm_dark"
 inherit = "npc.wyrm_dark"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_wyrm"
 "param.killcount_notify"=false
 
@@ -3740,6 +4236,8 @@ inherit = "npc.wyrm_dark"
 id = "npc.wyrm_light"
 inherit = "npc.wyrm_light"
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=50
 "param.killcount_varp"="varp.kc_wyrm"
 "param.killcount_notify"=false
 
@@ -3747,6 +4245,8 @@ inherit = "npc.wyrm_light"
 id = "npc.wyvern_long_tailed"
 inherit = "npc.wyvern_long_tailed"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_long_tailed_wyvern"
 "param.killcount_notify"=false
 
@@ -3754,6 +4254,8 @@ inherit = "npc.wyvern_long_tailed"
 id = "npc.wyvern_spitting"
 inherit = "npc.wyvern_spitting"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=25
 "param.killcount_varp"="varp.kc_spitting_wyvern"
 "param.killcount_notify"=false
 
@@ -3761,6 +4263,8 @@ inherit = "npc.wyvern_spitting"
 id = "npc.wyvern_taloned"
 inherit = "npc.wyvern_taloned"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=35
 "param.killcount_varp"="varp.kc_taloned_wyvern"
 "param.killcount_notify"=false
 
@@ -3774,6 +4278,9 @@ wanderRange = 0
 id = "npc.mm2_demon_gorilla_1_melee"
 inherit = "npc.mm2_demon_gorilla_1_melee"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=35
 "param.death_anim"="seq.demonic_gorilla_death"
 "param.killcount_varp"="varp.kc_demonic_gorilla"
 "param.killcount_notify"=false
@@ -3782,6 +4289,9 @@ inherit = "npc.mm2_demon_gorilla_1_melee"
 id = "npc.mm2_demon_gorilla_1_ranged"
 inherit = "npc.mm2_demon_gorilla_1_ranged"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=35
 "param.death_anim"="seq.demonic_gorilla_death"
 "param.killcount_varp"="varp.kc_demonic_gorilla"
 "param.killcount_notify"=false
@@ -3790,6 +4300,9 @@ inherit = "npc.mm2_demon_gorilla_1_ranged"
 id = "npc.mm2_demon_gorilla_1_magic"
 inherit = "npc.mm2_demon_gorilla_1_magic"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=35
 "param.death_anim"="seq.demonic_gorilla_death"
 "param.killcount_varp"="varp.kc_demonic_gorilla"
 "param.killcount_notify"=false
@@ -3798,6 +4311,9 @@ inherit = "npc.mm2_demon_gorilla_1_magic"
 id = "npc.mm2_demon_gorilla_2_melee"
 inherit = "npc.mm2_demon_gorilla_2_melee"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=35
 "param.death_anim"="seq.demonic_gorilla_death"
 "param.killcount_varp"="varp.kc_demonic_gorilla"
 "param.killcount_notify"=false
@@ -3806,6 +4322,9 @@ inherit = "npc.mm2_demon_gorilla_2_melee"
 id = "npc.mm2_demon_gorilla_2_ranged"
 inherit = "npc.mm2_demon_gorilla_2_ranged"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=35
 "param.death_anim"="seq.demonic_gorilla_death"
 "param.killcount_varp"="varp.kc_demonic_gorilla"
 "param.killcount_notify"=false
@@ -3814,6 +4333,9 @@ inherit = "npc.mm2_demon_gorilla_2_ranged"
 id = "npc.mm2_demon_gorilla_2_magic"
 inherit = "npc.mm2_demon_gorilla_2_magic"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=35
 "param.death_anim"="seq.demonic_gorilla_death"
 "param.killcount_varp"="varp.kc_demonic_gorilla"
 "param.killcount_notify"=false
@@ -4596,6 +5118,9 @@ huntRange = 30
 maxRange = 30
 defaultMode = "Wander"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=30
 "param.tormented_demon"=1
 "param.attackrate"=4
 "param.attack_anim"="seq.luc2_undead_demon_melee"
@@ -4618,6 +5143,9 @@ huntRange = 30
 maxRange = 30
 defaultMode = "Wander"
 [npc.params]
+"param.demon"=1
+"param.elemental_weakness_type"=1
+"param.elemental_weakness_percent"=30
 "param.tormented_demon"=1
 "param.attackrate"=4
 "param.attack_anim"="seq.luc2_undead_demon_melee"
@@ -4641,6 +5169,8 @@ maxRange = 30
 attackRange = 10
 defaultMode = "Wander"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=25
 "param.death_anim"="seq.npc_venenatis_death_01"
 "param.killcount_varp"="varp.total_spindel_kills"
 "param.boss_hp_bar_mode"=1
@@ -4666,6 +5196,8 @@ maxRange = 30
 attackRange = 10
 defaultMode = "Wander"
 [npc.params]
+"param.elemental_weakness_type"=3
+"param.elemental_weakness_percent"=40
 "param.death_anim"="seq.npc_venenatis_death_01"
 "param.killcount_varp"="varp.total_venenatis_kills"
 "param.boss_hp_bar_mode"=1
@@ -4707,6 +5239,8 @@ maxRange = 15
 attackRange = 10
 defaultMode = "None"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=65
 "param.killcount_varp"="varp.total_muspah_kills"
 "param.boss_hp_bar_mode"=2
 "param.death_anim"="seq.npc_muspah_death_02"
@@ -4720,6 +5254,8 @@ maxRange = 15
 attackRange = 1
 defaultMode = "None"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=65
 "param.killcount_varp"="varp.total_muspah_kills"
 "param.boss_hp_bar_mode"=2
 "param.death_anim"="seq.npc_muspah_death_02"
@@ -4733,6 +5269,8 @@ maxRange = 15
 attackRange = 10
 defaultMode = "None"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=65
 "param.killcount_varp"="varp.total_muspah_kills"
 "param.boss_hp_bar_mode"=2
 "param.death_anim"="seq.npc_muspah_death_02"
@@ -4746,6 +5284,8 @@ maxRange = 15
 attackRange = 10
 defaultMode = "None"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=65
 "param.killcount_varp"="varp.total_muspah_kills"
 "param.boss_hp_bar_mode"=2
 "param.death_anim"="seq.npc_muspah_death_02"
@@ -4763,6 +5303,8 @@ maxRange = 15
 attackRange = 10
 defaultMode = "None"
 [npc.params]
+"param.elemental_weakness_type"=0
+"param.elemental_weakness_percent"=65
 "param.killcount_varp"="varp.total_muspah_kills"
 "param.boss_hp_bar_mode"=2
 "param.death_anim"="seq.npc_muspah_death_02"
@@ -4981,6 +5523,8 @@ attackRange = 10
 defaultMode = "None"
 respawnRate = 30
 [npc.params]
+"param.elemental_weakness_type"=2
+"param.elemental_weakness_percent"=60
 "param.killcount_varp"="varp.total_whisperer_kills"
 "param.boss_hp_bar_mode"=1
 "param.death_anim"="seq.npc_whisperer_01_death_01"
@@ -5576,6 +6120,7 @@ inherit = "npc.horror_rockcrab_small"
 id = "npc.hellhound"
 inherit = "npc.hellhound"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -5583,6 +6128,7 @@ inherit = "npc.hellhound"
 id = "npc.hellhound_strongholdcave"
 inherit = "npc.hellhound_strongholdcave"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -5653,6 +6199,7 @@ inherit = "npc.poh_skeleton"
 id = "npc.poh_hellhound"
 inherit = "npc.poh_hellhound"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -5716,6 +6263,7 @@ inherit = "npc.jungle_wolf"
 id = "npc.black_demon_strongholdcave_1"
 inherit = "npc.black_demon_strongholdcave_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -6675,6 +7223,7 @@ inherit = "npc.zogre_human_brentle_vahn"
 id = "npc.agrith_naar"
 inherit = "npc.agrith_naar"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=25
 
@@ -7207,6 +7756,7 @@ inherit = "npc.elemental_water"
 id = "npc.grandtree_blackdemon"
 inherit = "npc.grandtree_blackdemon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7214,6 +7764,7 @@ inherit = "npc.grandtree_blackdemon"
 id = "npc.mm_demon"
 inherit = "npc.mm_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=3
 "param.elemental_weakness_percent"=25
 
@@ -7265,6 +7816,7 @@ attackRange = 10
 "param.proj_type"="projanim.magic_spell"
 "param.elemental_weakness_type"=0
 "param.elemental_weakness_percent"=50
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_dharok"
@@ -7276,6 +7828,7 @@ inherit = "npc.barrows_dharok"
 "param.npc_attack_type"="category.attacktype_slash"
 "param.elemental_weakness_type"=0
 "param.elemental_weakness_percent"=50
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_guthan"
@@ -7287,6 +7840,7 @@ inherit = "npc.barrows_guthan"
 "param.npc_attack_type"="category.attacktype_crush"
 "param.elemental_weakness_type"=0
 "param.elemental_weakness_percent"=50
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_karil"
@@ -7301,6 +7855,7 @@ attackRange = 7
 "param.proj_type"="projanim.bolt"
 "param.elemental_weakness_type"=0
 "param.elemental_weakness_percent"=50
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_torag"
@@ -7312,6 +7867,7 @@ inherit = "npc.barrows_torag"
 "param.npc_attack_type"="category.attacktype_crush"
 "param.elemental_weakness_type"=0
 "param.elemental_weakness_percent"=50
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_verac"
@@ -7323,6 +7879,7 @@ inherit = "npc.barrows_verac"
 "param.npc_attack_type"="category.attacktype_stab"
 "param.elemental_weakness_type"=0
 "param.elemental_weakness_percent"=50
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_bloodworm"
@@ -7332,6 +7889,7 @@ inherit = "npc.barrows_bloodworm"
 "param.defend_anim"="seq.bloodworm_block"
 "param.death_anim"="seq.bloodworm_death"
 "param.npc_attack_type"="category.attacktype_stab"
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_rat"
@@ -7379,6 +7937,7 @@ inherit = "npc.barrows_spider"
 "param.npc_attack_type"="category.attacktype_stab"
 "param.elemental_weakness_type"=3
 "param.elemental_weakness_percent"=50
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.barrows_giantspider"
@@ -7390,6 +7949,7 @@ inherit = "npc.barrows_giantspider"
 "param.npc_attack_type"="category.attacktype_stab"
 "param.elemental_weakness_type"=3
 "param.elemental_weakness_percent"=40
+"param.dropped_remains"=-1
 
 [[npc]]
 id = "npc.ntk_scarab_swarm"
@@ -7493,6 +8053,7 @@ inherit = "npc.fris_troll_bodyguard"
 id = "npc.lesser_demon"
 inherit = "npc.lesser_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7500,6 +8061,7 @@ inherit = "npc.lesser_demon"
 id = "npc.lesser_demon2"
 inherit = "npc.lesser_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7507,6 +8069,7 @@ inherit = "npc.lesser_demon2"
 id = "npc.lesser_demon3"
 inherit = "npc.lesser_demon3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7514,6 +8077,7 @@ inherit = "npc.lesser_demon3"
 id = "npc.lesser_demon4"
 inherit = "npc.lesser_demon4"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7521,6 +8085,7 @@ inherit = "npc.lesser_demon4"
 id = "npc.lesser_demon5"
 inherit = "npc.lesser_demon5"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7528,6 +8093,7 @@ inherit = "npc.lesser_demon5"
 id = "npc.greater_demon"
 inherit = "npc.greater_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7535,6 +8101,7 @@ inherit = "npc.greater_demon"
 id = "npc.greater_demon2"
 inherit = "npc.greater_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7542,6 +8109,7 @@ inherit = "npc.greater_demon2"
 id = "npc.greater_demon3"
 inherit = "npc.greater_demon3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7549,6 +8117,7 @@ inherit = "npc.greater_demon3"
 id = "npc.greater_demon4"
 inherit = "npc.greater_demon4"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7556,6 +8125,7 @@ inherit = "npc.greater_demon4"
 id = "npc.greater_demon5"
 inherit = "npc.greater_demon5"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7563,6 +8133,7 @@ inherit = "npc.greater_demon5"
 id = "npc.greater_demon_strongholdcave_1"
 inherit = "npc.greater_demon_strongholdcave_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7570,6 +8141,7 @@ inherit = "npc.greater_demon_strongholdcave_1"
 id = "npc.greater_demon_strongholdcave_2"
 inherit = "npc.greater_demon_strongholdcave_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7577,6 +8149,7 @@ inherit = "npc.greater_demon_strongholdcave_2"
 id = "npc.greater_demon_strongholdcave_3"
 inherit = "npc.greater_demon_strongholdcave_3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7584,6 +8157,7 @@ inherit = "npc.greater_demon_strongholdcave_3"
 id = "npc.black_demon"
 inherit = "npc.black_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7591,6 +8165,7 @@ inherit = "npc.black_demon"
 id = "npc.black_demon2"
 inherit = "npc.black_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7598,6 +8173,7 @@ inherit = "npc.black_demon2"
 id = "npc.black_demon3"
 inherit = "npc.black_demon3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7605,6 +8181,7 @@ inherit = "npc.black_demon3"
 id = "npc.black_demon4"
 inherit = "npc.black_demon4"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -7612,6 +8189,7 @@ inherit = "npc.black_demon4"
 id = "npc.black_demon5"
 inherit = "npc.black_demon5"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -8508,6 +9086,7 @@ inherit = "npc.icewarrior_queen"
 id = "npc.brut_waterfiend"
 inherit = "npc.brut_waterfiend"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=2
 "param.elemental_weakness_percent"=100
 
@@ -8515,6 +9094,7 @@ inherit = "npc.brut_waterfiend"
 id = "npc.waterfiend_strongholdcave"
 inherit = "npc.waterfiend_strongholdcave"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=2
 "param.elemental_weakness_percent"=100
 
@@ -8732,6 +9312,7 @@ inherit = "npc.dungeon_dagganoth_mainroom"
 id = "npc.champions_lesserdemon"
 inherit = "npc.champions_lesserdemon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -8900,6 +9481,7 @@ inherit = "npc.viking_draugen"
 id = "npc.nezikchened"
 inherit = "npc.nezikchened"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=10
 
@@ -9019,6 +9601,7 @@ inherit = "npc.dragonslayer_zombie_2"
 id = "npc.dragonslayer_demon"
 inherit = "npc.dragonslayer_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -9411,6 +9994,7 @@ inherit = "npc.slug2_giant_lobster"
 id = "npc.slayer_icefiend_1"
 inherit = "npc.slayer_icefiend_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=3
 "param.elemental_weakness_percent"=100
 
@@ -9474,6 +10058,7 @@ inherit = "npc.fire_bird"
 id = "npc.chronozon"
 inherit = "npc.chronozon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=25
 
@@ -9481,6 +10066,7 @@ inherit = "npc.chronozon"
 id = "npc.skeleton_hellhound"
 inherit = "npc.skeleton_hellhound"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=2
 "param.elemental_weakness_percent"=35
 
@@ -10391,6 +10977,7 @@ inherit = "npc.babygreendragon3"
 id = "npc.black_demon_strongholdcave_2"
 inherit = "npc.black_demon_strongholdcave_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -10398,6 +10985,7 @@ inherit = "npc.black_demon_strongholdcave_2"
 id = "npc.black_demon_strongholdcave_3"
 inherit = "npc.black_demon_strongholdcave_3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -10405,6 +10993,7 @@ inherit = "npc.black_demon_strongholdcave_3"
 id = "npc.black_demon_strongholdcave_4"
 inherit = "npc.black_demon_strongholdcave_4"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -10412,6 +11001,7 @@ inherit = "npc.black_demon_strongholdcave_4"
 id = "npc.black_demon_strongholdcave_5"
 inherit = "npc.black_demon_strongholdcave_5"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -10531,6 +11121,7 @@ inherit = "npc.nzone_elvarg_normal"
 id = "npc.nzone_chronozon_normal"
 inherit = "npc.nzone_chronozon_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=25
 
@@ -10545,6 +11136,7 @@ inherit = "npc.nzone_fris_troll_king_true_normal"
 id = "npc.nzone_grandtree_blackdemon_normal"
 inherit = "npc.nzone_grandtree_blackdemon_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -10622,6 +11214,7 @@ inherit = "npc.nzone_hundred_minion3_normal"
 id = "npc.nzone_nezikchened_normal"
 inherit = "npc.nzone_nezikchened_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=10
 
@@ -10636,6 +11229,7 @@ inherit = "npc.nzone_tree_spirit_normal"
 id = "npc.nzone_mm_demon_normal"
 inherit = "npc.nzone_mm_demon_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=3
 "param.elemental_weakness_percent"=25
 
@@ -10657,6 +11251,7 @@ inherit = "npc.nzone_slagilith_normal"
 id = "npc.nzone_skeleton_hellhound_normal"
 inherit = "npc.nzone_skeleton_hellhound_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=2
 "param.elemental_weakness_percent"=35
 
@@ -10664,6 +11259,7 @@ inherit = "npc.nzone_skeleton_hellhound_normal"
 id = "npc.nzone_agrith_naar_normal"
 inherit = "npc.nzone_agrith_naar_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=25
 
@@ -10867,6 +11463,7 @@ inherit = "npc.clancup_godwars_bandos_avatar"
 id = "npc.clancup_godwars_zamorak_avatar"
 inherit = "npc.clancup_godwars_zamorak_avatar"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -11133,6 +11730,7 @@ inherit = "npc.wcguild_ent"
 id = "npc.kourend_black_demon_1"
 inherit = "npc.kourend_black_demon_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11140,6 +11738,7 @@ inherit = "npc.kourend_black_demon_1"
 id = "npc.kourend_black_demon_2"
 inherit = "npc.kourend_black_demon_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11147,6 +11746,7 @@ inherit = "npc.kourend_black_demon_2"
 id = "npc.kourend_greater_demon1"
 inherit = "npc.kourend_greater_demon1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11154,6 +11754,7 @@ inherit = "npc.kourend_greater_demon1"
 id = "npc.kourend_greater_demon2"
 inherit = "npc.kourend_greater_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11161,6 +11762,7 @@ inherit = "npc.kourend_greater_demon2"
 id = "npc.kourend_greater_demon3"
 inherit = "npc.kourend_greater_demon3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11168,6 +11770,7 @@ inherit = "npc.kourend_greater_demon3"
 id = "npc.kourend_lesser_demon1"
 inherit = "npc.kourend_lesser_demon1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11175,6 +11778,7 @@ inherit = "npc.kourend_lesser_demon1"
 id = "npc.kourend_lesser_demon2"
 inherit = "npc.kourend_lesser_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11217,6 +11821,7 @@ inherit = "npc.kourend_steel_dragon"
 id = "npc.kourend_hellhound"
 inherit = "npc.kourend_hellhound"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -11308,6 +11913,7 @@ inherit = "npc.kourend_black_dragon"
 id = "npc.cata_boss"
 inherit = "npc.cata_boss"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11364,6 +11970,7 @@ inherit = "npc.olm_head"
 id = "npc.lesser_demon_slayercave_1"
 inherit = "npc.lesser_demon_slayercave_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11371,6 +11978,7 @@ inherit = "npc.lesser_demon_slayercave_1"
 id = "npc.lesser_demon_slayercave_2"
 inherit = "npc.lesser_demon_slayercave_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11378,6 +11986,7 @@ inherit = "npc.lesser_demon_slayercave_2"
 id = "npc.lesser_demon_slayercave_3"
 inherit = "npc.lesser_demon_slayercave_3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11644,6 +12253,7 @@ inherit = "npc.wild_cave_ankou"
 id = "npc.wild_cave_lesser_demon"
 inherit = "npc.wild_cave_lesser_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11651,6 +12261,7 @@ inherit = "npc.wild_cave_lesser_demon"
 id = "npc.wild_cave_lesser_demon2"
 inherit = "npc.wild_cave_lesser_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11658,6 +12269,7 @@ inherit = "npc.wild_cave_lesser_demon2"
 id = "npc.wild_cave_lesser_demon3"
 inherit = "npc.wild_cave_lesser_demon3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11686,6 +12298,7 @@ inherit = "npc.wild_cave_green_dragon3"
 id = "npc.wild_cave_greater_demon"
 inherit = "npc.wild_cave_greater_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11693,6 +12306,7 @@ inherit = "npc.wild_cave_greater_demon"
 id = "npc.wild_cave_greater_demon2"
 inherit = "npc.wild_cave_greater_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11700,6 +12314,7 @@ inherit = "npc.wild_cave_greater_demon2"
 id = "npc.wild_cave_greater_demon3"
 inherit = "npc.wild_cave_greater_demon3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11707,6 +12322,7 @@ inherit = "npc.wild_cave_greater_demon3"
 id = "npc.wild_cave_black_demon"
 inherit = "npc.wild_cave_black_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11714,6 +12330,7 @@ inherit = "npc.wild_cave_black_demon"
 id = "npc.wild_cave_black_demon2"
 inherit = "npc.wild_cave_black_demon2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11721,6 +12338,7 @@ inherit = "npc.wild_cave_black_demon2"
 id = "npc.wild_cave_black_demon3"
 inherit = "npc.wild_cave_black_demon3"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -11728,6 +12346,7 @@ inherit = "npc.wild_cave_black_demon3"
 id = "npc.wild_cave_hell_hound"
 inherit = "npc.wild_cave_hell_hound"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -13359,6 +13978,7 @@ inherit = "npc.akd_judge_of_yama_cutscene"
 id = "npc.akd_judge_of_yama_combat"
 inherit = "npc.akd_judge_of_yama_combat"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=15
 
@@ -13996,6 +14616,7 @@ inherit = "npc.dt2_assassin_wight_combat"
 id = "npc.dt2_scar_maze_mage_demon"
 inherit = "npc.dt2_scar_maze_mage_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14003,6 +14624,7 @@ inherit = "npc.dt2_scar_maze_mage_demon"
 id = "npc.dt2_scar_maze_mage_demon_normal"
 inherit = "npc.dt2_scar_maze_mage_demon_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14010,6 +14632,7 @@ inherit = "npc.dt2_scar_maze_mage_demon_normal"
 id = "npc.dt2_scar_maze_melee_demon"
 inherit = "npc.dt2_scar_maze_melee_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14017,6 +14640,7 @@ inherit = "npc.dt2_scar_maze_melee_demon"
 id = "npc.dt2_scar_maze_melee_demon_normal"
 inherit = "npc.dt2_scar_maze_melee_demon_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14024,6 +14648,7 @@ inherit = "npc.dt2_scar_maze_melee_demon_normal"
 id = "npc.dt2_scar_maze_ranged_demon"
 inherit = "npc.dt2_scar_maze_ranged_demon"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14031,6 +14656,7 @@ inherit = "npc.dt2_scar_maze_ranged_demon"
 id = "npc.dt2_scar_maze_ranged_demon_normal"
 inherit = "npc.dt2_scar_maze_ranged_demon_normal"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14038,6 +14664,7 @@ inherit = "npc.dt2_scar_maze_ranged_demon_normal"
 id = "npc.dt2_scar_maze_2_pillar_attacker"
 inherit = "npc.dt2_scar_maze_2_pillar_attacker"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14045,6 +14672,7 @@ inherit = "npc.dt2_scar_maze_2_pillar_attacker"
 id = "npc.dt2_scar_maze_2_pillar_attacker_dog"
 inherit = "npc.dt2_scar_maze_2_pillar_attacker_dog"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -14052,6 +14680,7 @@ inherit = "npc.dt2_scar_maze_2_pillar_attacker_dog"
 id = "npc.dt2_scar_maze_3_link_chanter"
 inherit = "npc.dt2_scar_maze_3_link_chanter"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14059,6 +14688,7 @@ inherit = "npc.dt2_scar_maze_3_link_chanter"
 id = "npc.dt2_scar_maze_3_link_npc"
 inherit = "npc.dt2_scar_maze_3_link_npc"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=10
 
@@ -14066,6 +14696,7 @@ inherit = "npc.dt2_scar_maze_3_link_npc"
 id = "npc.dt2_scar_maze_3_link_attacker"
 inherit = "npc.dt2_scar_maze_3_link_attacker"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14073,6 +14704,7 @@ inherit = "npc.dt2_scar_maze_3_link_attacker"
 id = "npc.dt2_scar_maze_3_link_attacker_dog"
 inherit = "npc.dt2_scar_maze_3_link_attacker_dog"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -14080,6 +14712,7 @@ inherit = "npc.dt2_scar_maze_3_link_attacker_dog"
 id = "npc.dt2_scar_black_demon_1"
 inherit = "npc.dt2_scar_black_demon_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14087,6 +14720,7 @@ inherit = "npc.dt2_scar_black_demon_1"
 id = "npc.dt2_scar_black_demon_2"
 inherit = "npc.dt2_scar_black_demon_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14094,6 +14728,7 @@ inherit = "npc.dt2_scar_black_demon_2"
 id = "npc.dt2_scar_greater_demon_1"
 inherit = "npc.dt2_scar_greater_demon_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14101,6 +14736,7 @@ inherit = "npc.dt2_scar_greater_demon_1"
 id = "npc.dt2_scar_greater_demon_2"
 inherit = "npc.dt2_scar_greater_demon_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14108,6 +14744,7 @@ inherit = "npc.dt2_scar_greater_demon_2"
 id = "npc.dt2_scar_lesser_demon_1"
 inherit = "npc.dt2_scar_lesser_demon_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14115,6 +14752,7 @@ inherit = "npc.dt2_scar_lesser_demon_1"
 id = "npc.dt2_scar_lesser_demon_2"
 inherit = "npc.dt2_scar_lesser_demon_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14234,6 +14872,7 @@ inherit = "npc.deadman_breach_godwars_bandos"
 id = "npc.deadman_breach_godwars_zamorak"
 inherit = "npc.deadman_breach_godwars_zamorak"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -14248,6 +14887,7 @@ inherit = "npc.deadman_breach_barrows_dharok"
 id = "npc.deadman_breach_superior_pyrefiend"
 inherit = "npc.deadman_breach_superior_pyrefiend"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=100
 
@@ -14500,6 +15140,7 @@ inherit = "npc.wilderness_hill_giant3"
 id = "npc.tormented_demon_quest_1"
 inherit = "npc.tormented_demon_quest_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -14507,6 +15148,7 @@ inherit = "npc.tormented_demon_quest_1"
 id = "npc.tormented_demon_quest_2"
 inherit = "npc.tormented_demon_quest_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -14514,6 +15156,7 @@ inherit = "npc.tormented_demon_quest_2"
 id = "npc.invisible_tormented_demon_1"
 inherit = "npc.invisible_tormented_demon_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -14521,6 +15164,7 @@ inherit = "npc.invisible_tormented_demon_1"
 id = "npc.invisible_tormented_demon_2"
 inherit = "npc.invisible_tormented_demon_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -14528,6 +15172,7 @@ inherit = "npc.invisible_tormented_demon_2"
 id = "npc.invisible_tormented_demon_quest_1"
 inherit = "npc.invisible_tormented_demon_quest_1"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -14535,6 +15180,7 @@ inherit = "npc.invisible_tormented_demon_quest_1"
 id = "npc.invisible_tormented_demon_quest_2"
 inherit = "npc.invisible_tormented_demon_quest_2"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=30
 
@@ -14549,6 +15195,7 @@ inherit = "npc.deadman_breach_vardorvis"
 id = "npc.deadman_breach_cerberus"
 inherit = "npc.deadman_breach_cerberus"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=40
 
@@ -14759,6 +15406,7 @@ inherit = "npc.rt_summon_elemental_fire"
 id = "npc.yama"
 inherit = "npc.yama"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -14766,6 +15414,7 @@ inherit = "npc.yama"
 id = "npc.yama_judge_of_yama"
 inherit = "npc.yama_judge_of_yama"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=15
 
@@ -14787,6 +15436,7 @@ inherit = "npc.chasm_smithing_imp_noname"
 id = "npc.imp_notele"
 inherit = "npc.imp_notele"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=10
 
@@ -14794,6 +15444,7 @@ inherit = "npc.imp_notele"
 id = "npc.ic_basement_imp"
 inherit = "npc.ic_basement_imp"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=10
 
@@ -15179,6 +15830,7 @@ inherit = "npc.deadman_breach_dscim_npc"
 id = "npc.deadman_breach_yama"
 inherit = "npc.deadman_breach_yama"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -15396,6 +16048,7 @@ inherit = "npc.deadman_all_stars_mission_jad"
 id = "npc.deadman_all_stars_mission_yama"
 inherit = "npc.deadman_all_stars_mission_yama"
 [npc.params]
+"param.demon"=1
 "param.elemental_weakness_type"=1
 "param.elemental_weakness_percent"=50
 
@@ -15749,3 +16402,690 @@ inherit = "npc.barrows_skeleton_armed2"
 "param.defend_anim"="seq.skeleton_update_defend"
 "param.death_anim"="seq.skeleton_update_death"
 "param.npc_attack_type"="category.attacktype_slash"
+
+[[npc]]
+id = "npc.duke_sucellus_asleep"
+inherit = "npc.duke_sucellus_asleep"
+moveRestrict = "NoMove"
+wanderRange = 0
+[npc.params]
+"param.demon"=1
+"param.demonbane_resistant"=1
+"param.boss_hp_bar_mode"=2
+
+
+[[npc]]
+id = "npc.leviathan"
+inherit = "npc.leviathan"
+huntMode = 2
+huntRange = 24
+attackRange = 20
+defaultMode = "None"
+maxRange = 40
+respawnRate = 30
+[npc.params]
+"param.killcount_varp"="varp.total_leviathan_kills"
+"param.killcount_varp_awakened"="varp.total_leviathan_awakened_kills"
+"param.boss_hp_bar_mode"=2
+"param.death_anim"="seq.npc_leviathan_01_death"
+
+[[npc]]
+id = "npc.leviathan_buff_npc"
+inherit = "npc.leviathan_buff_npc"
+defaultMode = "None"
+blockWalk = "None"
+
+[[npc]]
+id = "npc.leviathan_tornado"
+inherit = "npc.leviathan_tornado"
+defaultMode = "None"
+blockWalk = "None"
+
+[[npc]]
+id = "npc.leviathan_tail_ring_1"
+inherit = "npc.leviathan_tail_ring_1"
+defaultMode = "None"
+
+[[npc]]
+id = "npc.leviathan_tail_ring_2"
+inherit = "npc.leviathan_tail_ring_2"
+defaultMode = "None"
+
+[[npc]]
+id = "npc.leviathan_tail_ring_3"
+inherit = "npc.leviathan_tail_ring_3"
+defaultMode = "None"
+
+[[npc]]
+id = "npc.dom_boss"
+inherit = "npc.dom_boss"
+huntMode = 8
+huntRange = 20
+attackRange = 20
+defaultMode = "None"
+maxRange = 40
+[npc.params]
+"param.demon"=1
+"param.headbar"="headbar.health_120"
+"param.boss_hp_bar_mode"=2
+"param.boss_hp_bar_colour_back"=13107200
+"param.boss_hp_bar_colour_sliding"=36864
+"param.boss_hp_bar_colour_remaining"=51200
+
+[[npc]]
+id = "npc.dom_boss_shielded"
+inherit = "npc.dom_boss_shielded"
+huntMode = 8
+huntRange = 20
+attackRange = 20
+defaultMode = "None"
+maxRange = 40
+[npc.params]
+"param.demon"=1
+"param.headbar"="headbar.shield_120"
+"param.boss_hp_bar_mode"=2
+"param.boss_hp_bar_colour_back"=8224
+"param.boss_hp_bar_colour_sliding"=39032
+"param.boss_hp_bar_colour_remaining"=53416
+
+[[npc]]
+id = "npc.dom_boss_burrowed"
+inherit = "npc.dom_boss_burrowed"
+huntMode = 8
+huntRange = 20
+attackRange = 20
+defaultMode = "None"
+maxRange = 40
+[npc.params]
+"param.demon"=1
+"param.headbar"="headbar.health_120"
+"param.boss_hp_bar_mode"=2
+
+[[npc]]
+id = "npc.dom_demonic_energy"
+inherit = "npc.dom_demonic_energy"
+defaultMode = "None"
+[npc.params]
+"param.attackable_on_cooldown"=true
+"param.demon"=1
+
+[[npc]]
+id = "npc.dom_demonic_energy_range"
+inherit = "npc.dom_demonic_energy_range"
+defaultMode = "None"
+[npc.params]
+"param.attackable_on_cooldown"=true
+"param.demon"=1
+
+[[npc]]
+id = "npc.dom_demonic_energy_mage"
+inherit = "npc.dom_demonic_energy_mage"
+defaultMode = "None"
+[npc.params]
+"param.attackable_on_cooldown"=true
+"param.demon"=1
+
+[[npc]]
+id = "npc.dom_demonic_energy_melee"
+inherit = "npc.dom_demonic_energy_melee"
+defaultMode = "None"
+[npc.params]
+"param.attackable_on_cooldown"=true
+"param.demon"=1
+
+[[npc]]
+id = "npc.dom_demonic_energy_giant_mage"
+inherit = "npc.dom_demonic_energy_giant_mage"
+defaultMode = "None"
+[npc.params]
+"param.attackable_on_cooldown"=true
+"param.demon"=1
+
+[[npc]]
+id = "npc.dom_demonic_energy_giant_range"
+inherit = "npc.dom_demonic_energy_giant_range"
+defaultMode = "None"
+[npc.params]
+"param.attackable_on_cooldown"=true
+"param.demon"=1
+
+[[npc]]
+id = "npc.dom_shockwave_path_node"
+inherit = "npc.dom_shockwave_path_node"
+defaultMode = "None"
+moveRestrict = "NoMove"
+[npc.params]
+"param.attackable_on_cooldown"=true
+
+[[npc]]
+id = "npc.abyssalsire_lung"
+inherit = "npc.abyssalsire_lung"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_agrith_naar_hard"
+inherit = "npc.nzone_agrith_naar_hard"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.cata_boss_altar_open_n"
+inherit = "npc.cata_boss_altar_open_n"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.cata_boss_altar_open_e"
+inherit = "npc.cata_boss_altar_open_e"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.cata_boss_altar_open_s"
+inherit = "npc.cata_boss_altar_open_s"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.cata_boss_altar_open_w"
+inherit = "npc.cata_boss_altar_open_w"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_grandtree_blackdemon_hard"
+inherit = "npc.nzone_grandtree_blackdemon_hard"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nex_prison_blood_reaver"
+inherit = "npc.nex_prison_blood_reaver"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nex_prison_blood_reaver_boss"
+inherit = "npc.nex_prison_blood_reaver_boss"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.arena_bouncer"
+inherit = "npc.arena_bouncer"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_arena_bouncer_normal"
+inherit = "npc.nzone_arena_bouncer_normal"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_arena_bouncer_hard"
+inherit = "npc.nzone_arena_bouncer_hard"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_chronozon_hard"
+inherit = "npc.nzone_chronozon_hard"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.doomion"
+inherit = "npc.doomion"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.doomion_vis"
+inherit = "npc.doomion_vis"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.holthion"
+inherit = "npc.holthion"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.holthion_vis"
+inherit = "npc.holthion_vis"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.othainian"
+inherit = "npc.othainian"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.othainian_vis"
+inherit = "npc.othainian_vis"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.duke_sucellus_awake"
+inherit = "npc.duke_sucellus_awake"
+[npc.params]
+"param.demon"=1
+"param.demonbane_resistant"=1
+
+[[npc]]
+id = "npc.duke_sucellus_dead"
+inherit = "npc.duke_sucellus_dead"
+[npc.params]
+"param.demon"=1
+"param.demonbane_resistant"=1
+
+[[npc]]
+id = "npc.duke_sucellus_asleep_quest"
+inherit = "npc.duke_sucellus_asleep_quest"
+[npc.params]
+"param.demon"=1
+"param.demonbane_resistant"=1
+
+[[npc]]
+id = "npc.duke_sucellus_awake_quest"
+inherit = "npc.duke_sucellus_awake_quest"
+[npc.params]
+"param.demon"=1
+"param.demonbane_resistant"=1
+
+[[npc]]
+id = "npc.duke_sucellus_dead_quest"
+inherit = "npc.duke_sucellus_dead_quest"
+[npc.params]
+"param.demon"=1
+"param.demonbane_resistant"=1
+
+[[npc]]
+id = "npc.deadman_breach_superior_abyssal_demon"
+inherit = "npc.deadman_breach_superior_abyssal_demon"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.raids_icedemon_combat"
+inherit = "npc.raids_icedemon_combat"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.raids_icedemon_noncombat"
+inherit = "npc.raids_icedemon_noncombat"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_mm_demon_hard"
+inherit = "npc.nzone_mm_demon_hard"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.myq5_bloodveld"
+inherit = "npc.myq5_bloodveld"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_nezikchened_hard"
+inherit = "npc.nzone_nezikchened_hard"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.ma2_boss_zamorak"
+inherit = "npc.ma2_boss_zamorak"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.ma2_boss_zamorak_spawning"
+inherit = "npc.ma2_boss_zamorak_spawning"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.deadman_breach_ma2_zamorak"
+inherit = "npc.deadman_breach_ma2_zamorak"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.arceuus_reanimated_abyssal"
+inherit = "npc.arceuus_reanimated_abyssal"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.arceuus_reanimated_demon"
+inherit = "npc.arceuus_reanimated_demon"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.cata_boss_minion"
+inherit = "npc.cata_boss_minion"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.arceuus_reanimated_hellhound"
+inherit = "npc.arceuus_reanimated_hellhound"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.arceuus_reanimated_imp"
+inherit = "npc.arceuus_reanimated_imp"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.nzone_skeleton_hellhound_hard"
+inherit = "npc.nzone_skeleton_hellhound_hard"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.yama_voidflare"
+inherit = "npc.yama_voidflare"
+[npc.params]
+"param.demon"=1
+
+[[npc]]
+id = "npc.kittens_mew"
+inherit = "npc.kittens_mew"
+timer = 1
+moveRestrict = "NoMove"
+wanderRange = 0
+
+[[npc]]
+id = "npc.crystal_rat"
+inherit = "npc.crystal_rat"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.giant_rat_update_attack"
+"param.death_anim"="seq.giant_rat_update_death_fast"
+
+[[npc]]
+id = "npc.crystal_rat_hm"
+inherit = "npc.crystal_rat_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.giant_rat_update_attack"
+"param.death_anim"="seq.giant_rat_update_death_fast"
+
+[[npc]]
+id = "npc.crystal_spider"
+inherit = "npc.crystal_spider"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.sote_gauntlet_spider_attack_melee"
+"param.death_anim"="seq.sote_gauntlet_spider_death"
+
+[[npc]]
+id = "npc.crystal_spider_hm"
+inherit = "npc.crystal_spider_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.sote_gauntlet_spider_attack_melee"
+"param.death_anim"="seq.sote_gauntlet_spider_death"
+
+[[npc]]
+id = "npc.crystal_bat"
+inherit = "npc.crystal_bat"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.bat_rework_attack"
+"param.death_anim"="seq.bat_rework_death"
+
+[[npc]]
+id = "npc.crystal_bat_hm"
+inherit = "npc.crystal_bat_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.bat_rework_attack"
+"param.death_anim"="seq.bat_rework_death"
+
+[[npc]]
+id = "npc.crystal_unicorn"
+inherit = "npc.crystal_unicorn"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.unicorn_rework_attack"
+"param.death_anim"="seq.unicorn_rework_death"
+
+[[npc]]
+id = "npc.crystal_unicorn_hm"
+inherit = "npc.crystal_unicorn_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.unicorn_rework_attack"
+"param.death_anim"="seq.unicorn_rework_death"
+
+[[npc]]
+id = "npc.crystal_scorpion"
+inherit = "npc.crystal_scorpion"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.scorpion_update_attack_tail"
+"param.death_anim"="seq.scorpion_update_death"
+
+[[npc]]
+id = "npc.crystal_scorpion_hm"
+inherit = "npc.crystal_scorpion_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.scorpion_update_attack_tail"
+"param.death_anim"="seq.scorpion_update_death"
+
+[[npc]]
+id = "npc.crystal_wolf"
+inherit = "npc.crystal_wolf"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.dog_update_wolf_attack"
+"param.death_anim"="seq.dog_update_wolf_death_quick"
+
+[[npc]]
+id = "npc.crystal_wolf_hm"
+inherit = "npc.crystal_wolf_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.dog_update_wolf_attack"
+"param.death_anim"="seq.dog_update_wolf_death_quick"
+
+[[npc]]
+id = "npc.crystal_bear"
+inherit = "npc.crystal_bear"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.bear_rework_attack"
+"param.death_anim"="seq.bear_rework_death"
+
+[[npc]]
+id = "npc.crystal_bear_hm"
+inherit = "npc.crystal_bear_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.attack_anim"="seq.bear_rework_attack"
+"param.death_anim"="seq.bear_rework_death"
+
+[[npc]]
+id = "npc.crystal_dragon"
+inherit = "npc.crystal_dragon"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.npc_attack_type"="category.attacktype_magic"
+"param.attack_anim"="seq.dragon_firebreath_all_attack"
+"param.death_anim"="seq.dragon_death"
+"param.proj_type"="projanim.crystal_dragon_magic"
+"param.proj_travel"="spotanim.crystal_dragon_magic_travel"
+
+[[npc]]
+id = "npc.crystal_dragon_hm"
+inherit = "npc.crystal_dragon_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.npc_attack_type"="category.attacktype_magic"
+"param.attack_anim"="seq.dragon_firebreath_all_attack"
+"param.death_anim"="seq.dragon_death"
+"param.proj_type"="projanim.crystal_dragon_magic"
+"param.proj_travel"="spotanim.crystal_dragon_magic_travel_hm"
+
+[[npc]]
+id = "npc.crystal_dark_beast"
+inherit = "npc.crystal_dark_beast"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.npc_attack_type"="category.attacktype_standard"
+"param.attack_anim"="seq.dark_beast_update_attack"
+"param.death_anim"="seq.dark_beast_update_death"
+"param.proj_type"="projanim.crystal_dark_beast_ranged"
+"param.proj_travel"="spotanim.crystal_dark_beast_range_travel"
+
+[[npc]]
+id = "npc.crystal_dark_beast_hm"
+inherit = "npc.crystal_dark_beast_hm"
+maxRange = 20
+wanderRange = 10
+[npc.params]
+"param.dropped_remains"=-1
+"param.npc_attack_type"="category.attacktype_standard"
+"param.attack_anim"="seq.dark_beast_update_attack"
+"param.death_anim"="seq.dark_beast_update_death"
+"param.proj_type"="projanim.crystal_dark_beast_ranged"
+"param.proj_travel"="spotanim.crystal_dark_beast_range_travel_hm"
+
+[[npc]]
+id = "npc.crystal_hunllef_melee"
+inherit = "npc.crystal_hunllef_melee"
+[npc.params]
+"param.boss_hp_bar_mode"=1
+"param.dropped_remains"=-1
+"param.boss_hp_bar_colour_back"=13107200
+"param.boss_hp_bar_colour_sliding"=36864
+"param.boss_hp_bar_colour_remaining"=51200
+
+[[npc]]
+id = "npc.crystal_hunllef_melee_hm"
+inherit = "npc.crystal_hunllef_melee_hm"
+[npc.params]
+"param.boss_hp_bar_mode"=1
+"param.dropped_remains"=-1
+"param.boss_hp_bar_colour_back"=13107200
+"param.boss_hp_bar_colour_sliding"=36864
+"param.boss_hp_bar_colour_remaining"=51200
+
+[[npc]]
+id = "npc.crystal_hunllef_ranged"
+inherit = "npc.crystal_hunllef_ranged"
+[npc.params]
+"param.boss_hp_bar_mode"=1
+"param.dropped_remains"=-1
+"param.boss_hp_bar_colour_back"=13107200
+"param.boss_hp_bar_colour_sliding"=36864
+"param.boss_hp_bar_colour_remaining"=51200
+
+[[npc]]
+id = "npc.crystal_hunllef_ranged_hm"
+inherit = "npc.crystal_hunllef_ranged_hm"
+[npc.params]
+"param.boss_hp_bar_mode"=1
+"param.dropped_remains"=-1
+"param.boss_hp_bar_colour_back"=13107200
+"param.boss_hp_bar_colour_sliding"=36864
+"param.boss_hp_bar_colour_remaining"=51200
+
+[[npc]]
+id = "npc.crystal_hunllef_magic"
+inherit = "npc.crystal_hunllef_magic"
+[npc.params]
+"param.boss_hp_bar_mode"=1
+"param.dropped_remains"=-1
+"param.boss_hp_bar_colour_back"=13107200
+"param.boss_hp_bar_colour_sliding"=36864
+"param.boss_hp_bar_colour_remaining"=51200
+
+[[npc]]
+id = "npc.crystal_hunllef_magic_hm"
+inherit = "npc.crystal_hunllef_magic_hm"
+[npc.params]
+"param.boss_hp_bar_mode"=1
+"param.dropped_remains"=-1
+"param.boss_hp_bar_colour_back"=13107200
+"param.boss_hp_bar_colour_sliding"=36864
+"param.boss_hp_bar_colour_remaining"=51200
+
+[[npc]]
+id = "npc.crystal_hunllef_death"
+inherit = "npc.crystal_hunllef_death"
+[npc.params]
+"param.dropped_remains"=-1
+
+[[npc]]
+id = "npc.crystal_hunllef_death_hm"
+inherit = "npc.crystal_hunllef_death_hm"
+[npc.params]
+"param.dropped_remains"=-1
+
+[[npc]]
+id = "npc.crystal_hunllef_crystals"
+inherit = "npc.crystal_hunllef_crystals"
+[npc.params]
+"param.dropped_remains"=-1
+
+[[npc]]
+id = "npc.crystal_hunllef_crystals_hm"
+inherit = "npc.crystal_hunllef_crystals_hm"
+[npc.params]
+"param.dropped_remains"=-1
+
+[[npc]]
+id = "npc.poh_sawmill_opp"
+inherit = "npc.poh_sawmill_opp"
+wanderRange = 0

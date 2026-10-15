@@ -3,6 +3,7 @@ package org.rsmod.content.other.pets.dogs
 import dev.openrune.types.ItemServerType
 import jakarta.inject.Inject
 import org.rsmod.api.player.hook.PlayerPostTickHook
+import org.rsmod.api.player.hook.SpadeDigHook
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onOpHeld5
 import org.rsmod.content.other.pets.PetFollowers
@@ -10,8 +11,8 @@ import org.rsmod.content.other.pets.minutesAsText
 import org.rsmod.content.other.pets.onPetOp
 import org.rsmod.content.other.pets.onPetOpIfPresent
 import org.rsmod.content.other.pets.onPetOpU
+import org.rsmod.content.other.pets.petDig
 import org.rsmod.content.other.pets.ticksToMinutes
-import org.rsmod.content.quest.manager.DigSpots
 import org.rsmod.game.entity.Npc
 import org.rsmod.game.entity.Player
 import org.rsmod.plugin.scripts.PluginScript
@@ -19,7 +20,11 @@ import org.rsmod.plugin.scripts.ScriptContext
 
 class DogScript
 @Inject
-constructor(private val followers: PetFollowers, private val care: DogCare) : PluginScript(), PlayerPostTickHook {
+constructor(
+    private val followers: PetFollowers,
+    private val care: DogCare,
+    private val digHooks: Set<@JvmSuppressWildcards SpadeDigHook>,
+) : PluginScript(), PlayerPostTickHook {
     override fun ScriptContext.startup() {
         for (dog in Dogs.all) {
             onOpHeld5(dog.obj) { drop(it.slot, dog) }
@@ -91,17 +96,13 @@ constructor(private val followers: PetFollowers, private val care: DogCare) : Pl
         }
     }
 
-    /** Adult dogs dig in place of a spade, sharing the quest dig-spot handlers. */
+    /** Adult dogs dig in place of a spade, through the same dig hooks a spade uses. */
     private suspend fun ProtectedAccess.dig(npc: Npc, dog: DogForm) {
         if (!followers.requireOwned(this, npc)) {
             return
         }
         npc.anim(if (dog.breed.large) DIG_ANIM else DIG_ANIM_SMALL)
-        if (DigSpots.dig(this)) {
-            return
-        }
-        delay(1)
-        mes("Nothing interesting happens.")
+        petDig(digHooks)
     }
 
     private suspend fun ProtectedAccess.useItem(npc: Npc, dog: DogForm, obj: ItemServerType) {
