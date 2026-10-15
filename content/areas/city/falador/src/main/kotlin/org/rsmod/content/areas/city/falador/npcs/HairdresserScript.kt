@@ -21,7 +21,7 @@ import org.rsmod.game.entity.player.Appearance
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
-private enum class MakeoverType(
+enum class MakeoverType(
     val interfaceType: Int,
     val stylesEnum: String,
     val kitSlot: Int,
@@ -96,32 +96,6 @@ class HairdresserScript : PluginScript() {
         }
     }
 
-    private suspend fun Dialogue.hasHatOn(): Boolean {
-        val hat = player.worn[Wearpos.Hat.slot] ?: return false
-        objbox(hat, "You should take off your hat if you want to get a haircut!")
-        return true
-    }
-
-    private fun ProtectedAccess.showMakeover(type: MakeoverType) {
-        val styles = type.styles()
-        val kit = player.appearance.identKitSnapshot()[type.kitSlot].toInt()
-        val colour = player.appearance.coloursSnapshot()[HAIR_COLOUR_SLOT].toInt()
-        val current = styles.indexOfFirst { it.kitFor(player) == kit }.coerceAtLeast(0)
-
-        vars[VAR_ACTIVE] = 1
-        vars[VAR_ORIGINAL_KIT] = kit + 1
-        vars[VAR_ORIGINAL_COLOUR] = colour
-        vars["varbit.makeover_interface_type"] = type.interfaceType
-        vars["varp.makeover_hair"] = current * SLOTS_PER_STYLE
-        vars["varp.makeover_colour"] = colour
-
-        ifOpenMainModal("interface.makeover")
-        ifSetEvents("component.makeover:item_area", 0..styles.size * SLOTS_PER_STYLE, IfEvent.Op1)
-        ifSetEvents("component.makeover:colours", 0..COLOUR_SLOTS, IfEvent.Op1)
-        ifSetEvents("component.makeover:select", 0..10, IfEvent.Op1)
-        ifSetEvents("component.makeover:select_and_close", 0..10, IfEvent.Op1)
-    }
-
     private fun ProtectedAccess.previewStyle(button: IfModalButton) {
         val type = player.activeMakeover() ?: return
         val style = type.styles().getOrNull(button.comsub / SLOTS_PER_STYLE) ?: return
@@ -163,41 +137,71 @@ class HairdresserScript : PluginScript() {
         val interfaceType = vars["varbit.makeover_interface_type"]
         return MakeoverType.entries.firstOrNull { it.interfaceType == interfaceType }
     }
+}
 
-    private fun MakeoverType.styles(): List<MakeoverStyle> {
-        val enum =
-            ServerCacheManager.getEnum(stylesEnum.asRSCM(RSCMType.ENUM)) ?: return emptyList()
-        return enum.values.entries
-            .sortedBy { it.key }
-            .map { (_, row) ->
-                val rowId = (row as Number).toInt() and 0xFFFF
-                when (this) {
-                    MakeoverType.Hair ->
-                        HairStylesRow.getRow(rowId).let {
-                            MakeoverStyle(it.playerKitIdTypeA, it.playerKitIdTypeB)
-                        }
-                    MakeoverType.FacialHair ->
-                        FacialHairStylesRow.getRow(rowId).let {
-                            MakeoverStyle(it.playerKitIdTypeA, it.playerKitIdTypeB)
-                        }
-                }
-            }
-    }
-
-    private class MakeoverStyle(val kitTypeA: Int, val kitTypeB: Int) {
-        fun kitFor(player: Player): Int =
-            if (player.appearance.bodyType == Appearance.BODY_TYPE_A) kitTypeA else kitTypeB
-    }
-
-    private companion object {
-        const val HAIRDRESSER = "npc.hairdresser"
-        const val HAIR_COLOUR_SLOT = 0
-        const val SLOTS_PER_STYLE = 5
-        const val SLOTS_PER_COLOUR = 2
-        const val COLOUR_SLOTS = 60
-
-        const val VAR_ACTIVE = "varbit.falador_makeover_active"
-        const val VAR_ORIGINAL_KIT = "varbit.falador_makeover_original_kit"
-        const val VAR_ORIGINAL_COLOUR = "varbit.falador_makeover_original_colour"
+suspend fun Dialogue.hairdresserMakeover(type: MakeoverType) {
+    if (!hasHatOn()) {
+        access.showMakeover(type)
     }
 }
+
+private suspend fun Dialogue.hasHatOn(): Boolean {
+    val hat = player.worn[Wearpos.Hat.slot] ?: return false
+    objbox(hat, "You should take off your hat if you want to get a haircut!")
+    return true
+}
+
+private fun ProtectedAccess.showMakeover(type: MakeoverType) {
+    val styles = type.styles()
+    val kit = player.appearance.identKitSnapshot()[type.kitSlot].toInt()
+    val colour = player.appearance.coloursSnapshot()[HAIR_COLOUR_SLOT].toInt()
+    val current = styles.indexOfFirst { it.kitFor(player) == kit }.coerceAtLeast(0)
+
+    vars[VAR_ACTIVE] = 1
+    vars[VAR_ORIGINAL_KIT] = kit + 1
+    vars[VAR_ORIGINAL_COLOUR] = colour
+    vars["varbit.makeover_interface_type"] = type.interfaceType
+    vars["varp.makeover_hair"] = current * SLOTS_PER_STYLE
+    vars["varp.makeover_colour"] = colour
+
+    ifOpenMainModal("interface.makeover")
+    ifSetEvents("component.makeover:item_area", 0..styles.size * SLOTS_PER_STYLE, IfEvent.Op1)
+    ifSetEvents("component.makeover:colours", 0..COLOUR_SLOTS, IfEvent.Op1)
+    ifSetEvents("component.makeover:select", 0..10, IfEvent.Op1)
+    ifSetEvents("component.makeover:select_and_close", 0..10, IfEvent.Op1)
+}
+
+private fun MakeoverType.styles(): List<MakeoverStyle> {
+    val enum =
+        ServerCacheManager.getEnum(stylesEnum.asRSCM(RSCMType.ENUM)) ?: return emptyList()
+    return enum.values.entries
+        .sortedBy { it.key }
+        .map { (_, row) ->
+            val rowId = (row as Number).toInt() and 0xFFFF
+            when (this) {
+                MakeoverType.Hair ->
+                    HairStylesRow.getRow(rowId).let {
+                        MakeoverStyle(it.playerKitIdTypeA, it.playerKitIdTypeB)
+                    }
+                MakeoverType.FacialHair ->
+                    FacialHairStylesRow.getRow(rowId).let {
+                        MakeoverStyle(it.playerKitIdTypeA, it.playerKitIdTypeB)
+                    }
+            }
+        }
+}
+
+private class MakeoverStyle(val kitTypeA: Int, val kitTypeB: Int) {
+    fun kitFor(player: Player): Int =
+        if (player.appearance.bodyType == Appearance.BODY_TYPE_A) kitTypeA else kitTypeB
+}
+
+private const val HAIRDRESSER = "npc.hairdresser"
+private const val HAIR_COLOUR_SLOT = 0
+private const val SLOTS_PER_STYLE = 5
+private const val SLOTS_PER_COLOUR = 2
+private const val COLOUR_SLOTS = 60
+
+private const val VAR_ACTIVE = "varbit.falador_makeover_active"
+private const val VAR_ORIGINAL_KIT = "varbit.falador_makeover_original_kit"
+private const val VAR_ORIGINAL_COLOUR = "varbit.falador_makeover_original_colour"

@@ -1,0 +1,80 @@
+# The shared mesanim.shocked plays the happy heads; Varrock needs the real chatshock ones.
+[[mesanim]]
+id = "mesanim.shock"
+len1 = "seq.chatshock1"
+len2 = "seq.chatshock2"
+len3 = "seq.chatshock3"
+len4 = "seq.chatshock4"
+
+# Romily Weaklax pie errand: pie type index (0 = none) and pies still owed.
+[[varp]]
+id = "varp.varrock_romily_pies"
+scope = "Perm"
+transmit = "Never"
+
+[[varbit]]
+id = "varbit.varrock_romily_pie_type"
+varp = "varp.varrock_romily_pies"
+startBit = 0
+endBit = 3
+
+[[varbit]]
+id = "varbit.varrock_romily_pie_count"
+varp = "varp.varrock_romily_pies"
+startBit = 4
+endBit = 8
+
+## Doors
+
+[[object]]
+id = "loc.fai_varrock_poor_door"
+inherit = "loc.fai_varrock_poor_door"
+contentGroup = "content.closed_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_varrock_poor_door_open"
+
+[[object]]
+id = "loc.fai_varrock_poor_door_open"
+inherit = "loc.fai_varrock_poor_door_open"
+contentGroup = "content.opened_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_varrock_poor_door"
+
+## NPCs
+
+[[npc]]
+id = "npc.qip_soa_newspaperseller"
+inherit = "npc.qip_soa_newspaperseller"
+timer = 20
+
+[[npc]]
+id = "npc.fai_varrock_guard_training02"
+inherit = "npc.fai_varrock_guard_training02"
+wanderRange = 0
+timer = 10
+
+[[npc]]
+id = "npc.fai_varrock_guard_training02_f"
+inherit = "npc.fai_varrock_guard_training02_f"
+wanderRange = 0
+timer = 10
+
+[[npc]]
+id = "npc.fai_varrock_guard_training02_variant01"
+inherit = "npc.fai_varrock_guard_training02_variant01"
+wanderRange = 0
+timer = 10
+
+[[npc]]
+id = "npc.fai_varrock_guard_training02_f_variant01"
+inherit = "npc.fai_varrock_guard_training02_f_variant01"
+wanderRange = 0
+timer = 10
+
+[[npc]]
+id = "npc.fai_varrock_guard_trainer02"
+inherit = "npc.fai_varrock_guard_trainer02"
+wanderRange = 0
+timer = 50

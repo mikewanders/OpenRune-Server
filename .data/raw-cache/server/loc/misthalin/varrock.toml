@@ -74,6 +74,7 @@ contentGroup = "content.closed_single_door"
 
 [object.params]
 "param.next_loc_stage" = "loc.fai_varrock_castle_door_open"
+"param.opensound" = "synth.varrock_castle_door_open"
 
 [[object]]
 id = "loc.fai_varrock_castle_door_open"

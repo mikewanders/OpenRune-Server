@@ -27,6 +27,8 @@ private enum class StraightStairs(
     NarrowWoodenUp("loc.narrowstairs_wooden_bottom", 0, -1, 1),
     NarrowWoodenDown("loc.narrowstairs_wooden_top", 0, 3, -1),
     VarrockUp("loc.fai_varrock_stairs_taller", 0, 3, 1, keepLane = true),
+    VarrockCastleUp("loc.fai_varrock_stairs_taller_new_fix", 0, 3, 1, keepLane = true),
+    VarrockWoodenUp("loc.fai_varrock_woodenstairs_castle", 0, 3, 1, keepLane = true),
     VarrockDown("loc.fai_varrock_stairs_top", 0, -2, -1, keepLane = true),
 }
 

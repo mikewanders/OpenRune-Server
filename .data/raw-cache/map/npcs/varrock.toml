@@ -1282,3 +1282,11 @@ coords = "0_50_52_60_55"
 
 ## Varrock Zamorak Temple End
 
+
+[[spawn]]
+npc = "npc.events_shop"
+coords = "0_50_53_9_43"
+
+[[spawn]]
+npc = "npc.postie_pete"
+coords = "0_50_54_10_38"

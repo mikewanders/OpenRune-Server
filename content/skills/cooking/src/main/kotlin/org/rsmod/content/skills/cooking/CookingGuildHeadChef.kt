@@ -31,7 +31,7 @@ class CookingGuildHeadChef @Inject constructor() : PluginScript() {
     private suspend fun Dialogue.dialogueWithout99Cooking() {
         chatNpc(
             happy,
-            "Hello, welcome to the Cooking Guild. Only accomplished chefs and cooks are allowed in here. " +
+            "Hello, welcome to the Cooking Guild.  Only accomplished chefs and cooks are allowed in here.  " +
                 "Feel free to use any of our facilities.",
         )
         when (
@@ -43,7 +43,7 @@ class CookingGuildHeadChef @Inject constructor() : PluginScript() {
             )
         ) {
             1 -> {
-                chatPlayer(happy, "Nice cape you're wearing!")
+                chatPlayer(neutral, "Nice cape, you're wearing!")
                 chatNpc(
                     happy,
                     "Thank you! It's my most prized possession, it's a Skillcape of Cooking; it shows that I've " +
@@ -51,7 +51,7 @@ class CookingGuildHeadChef @Inject constructor() : PluginScript() {
                 )
                 chatNpc(
                     happy,
-                    "If you ever achieve level 99 Cooking you'll get to wear one too and doing so means you'll never " +
+                    "If you ever achieve level 99 cooking you'll get to wear one too and doing so means you'll never " +
                         "burn any food!",
                 )
             }

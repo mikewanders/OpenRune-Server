@@ -6,25 +6,25 @@ import org.rsmod.map.CoordGrid
 
 private val logger = InlineLogger()
 
-internal class SceneCamera(
+public class SceneCamera(
     val eye: CoordGrid,
     val eyeHeight: Int,
     val lookAt: CoordGrid,
     val lookAtHeight: Int,
 )
 
-internal const val SceneSnapRate = 232
+public const val SceneSnapRate = 232
 
-internal const val SceneDriftRate = 10
+public const val SceneDriftRate = 10
 
-internal const val SceneCreepRate = 5
+public const val SceneCreepRate = 5
 
 /** Ticks to let a 50-client-cycle (1s) fade finish before closing the overlay. */
-internal const val SceneFadeTicks = 2
+public const val SceneFadeTicks = 2
 
-internal const val SceneFadeDuration = 50
+public const val SceneFadeDuration = 50
 
-internal suspend fun ProtectedAccess.lockedScene(
+public suspend fun ProtectedAccess.lockedScene(
     vantage: CoordGrid,
     faceAt: CoordGrid,
     camera: SceneCamera,
@@ -34,18 +34,28 @@ internal suspend fun ProtectedAccess.lockedScene(
     fadeOutDuration: Int = SceneFadeDuration,
     fadeInDuration: Int = SceneFadeDuration,
     reveal: (suspend ProtectedAccess.() -> Unit)? = null,
+    cameraRate: Int = SceneSnapRate,
     exitCut: Boolean = false,
     body: suspend ProtectedAccess.() -> Unit,
 ) {
     try {
-        beginScene(vantage, faceAt, camera, underFade, fadeOutDuration, fadeInDuration, reveal)
+        beginScene(
+            vantage,
+            faceAt,
+            camera,
+            underFade,
+            fadeOutDuration,
+            fadeInDuration,
+            reveal,
+            cameraRate,
+        )
         body()
     } finally {
         endScene(returnTo, teardown, fadeOutDuration, fadeInDuration, exitCut)
     }
 }
 
-internal suspend fun ProtectedAccess.beginScene(
+public suspend fun ProtectedAccess.beginScene(
     vantage: CoordGrid,
     faceAt: CoordGrid,
     camera: SceneCamera,
@@ -53,6 +63,7 @@ internal suspend fun ProtectedAccess.beginScene(
     fadeOutDuration: Int = SceneFadeDuration,
     fadeInDuration: Int = SceneFadeDuration,
     reveal: (suspend ProtectedAccess.() -> Unit)? = null,
+    cameraRate: Int = SceneSnapRate,
 ) {
     fadeOverlay(
         startColour = 0,
@@ -84,12 +95,12 @@ internal suspend fun ProtectedAccess.beginScene(
     telejump(vantage)
     rebuildAppearance()
 
-    camMoveToV3(camera.eye, height = camera.eyeHeight, rate = SceneSnapRate, rate2 = SceneSnapRate)
+    camMoveToV3(camera.eye, height = camera.eyeHeight, rate = cameraRate, rate2 = cameraRate)
     camLookAtV3(
         camera.lookAt,
         height = camera.lookAtHeight,
-        rate = SceneSnapRate,
-        rate2 = SceneSnapRate,
+        rate = cameraRate,
+        rate2 = cameraRate,
     )
     faceSquare(faceAt)
 
@@ -117,7 +128,7 @@ internal suspend fun ProtectedAccess.beginScene(
 }
 
 // Cancellation cleanup cannot suspend again; restore camera, HUD and movement synchronously on failure.
-internal suspend fun ProtectedAccess.endScene(
+public suspend fun ProtectedAccess.endScene(
     returnTo: CoordGrid?,
     teardown: () -> Unit = {},
     fadeOutDuration: Int = SceneFadeDuration,

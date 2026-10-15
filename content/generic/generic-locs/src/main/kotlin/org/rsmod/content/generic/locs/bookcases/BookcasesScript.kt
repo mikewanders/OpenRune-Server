@@ -13,7 +13,6 @@ class BookcasesScript : PluginScript() {
     private suspend fun ProtectedAccess.search() {
         arriveDelay()
         spam("You search the books...")
-        delay(2)
         val message =
             random.pick(
                 "None of them look very interesting.",

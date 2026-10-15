@@ -155,6 +155,7 @@ class RomeoAndJuliet @Inject constructor(private val npcRepo: NpcRepository) :
             POTION_GIVEN -> romeoCrypt()
             else -> {
                 chatNpc(sad, "I heard Juliet had died. Terrible business.")
+                npc?.spotanim("spotanim.trollromance_heart")
                 chatNpc(happy, "Her cousin and I are getting on well though. Thanks for your help.")
             }
         }
@@ -1209,10 +1210,14 @@ class RomeoAndJuliet @Inject constructor(private val npcRepo: NpcRepository) :
                 chatPlayer(neutral, "Ok, that's as good a place to start looking as any.")
             }
             else -> {
-                chatNpc(drunk, "Oh to be a father in the times of whiskey.")
-                chatNpc(drunk, "I sing and I drink and I wake up in gutters.")
+                chatNpc(
+                    happy,
+                    "Oh, to be a father in the times of whiskey!<br>I sing and I drink and I " +
+                        "wake up in gutters.",
+                )
                 if (access.random.of(0, 1) == 0) {
-                    chatNpc(drunk, "Top of the morning to you.")
+                    chatPlayer(shifty, "Good morning.")
+                    chatNpc(happy, "Top of the morning to you.")
                 } else {
                     chatNpc(drunk, "To err is human, to forgive, quite difficult.")
                     chatNpc(drunk, "I need a think I drink.")

@@ -1,0 +1,30 @@
+[gamevals.varp]
+varrock_romily_pies = 64870
+
+[gamevals.varbit]
+varrock_romily_pie_type = 64870
+varrock_romily_pie_count = 64871
+
+[gamevals.mesanim]
+shock = 65528
+
+[gamevals.synth]
+varrock_castle_door_open = 44
+varrock_chest_open = 52
+varrock_trellis_climb = 2461
+varrock_white_tree_pick = 2437
+varrock_museum_gate = 3642
+
+[gamevals.area]
+varrock_museum = 32762
+
+[gamevals.models]
+vm_display_talisman = 25530
+vm_display_tablet = 25529
+vm_display_symbol_ancient = 25521
+vm_display_arrowheads = 25524
+vm_display_vase = 25531
+vm_display_jewellery = 25525
+vm_display_pottery = 25526
+vm_display_coin_senntisten = 25523
+vm_display_coin_saranthium = 25522

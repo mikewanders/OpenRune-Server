@@ -20,9 +20,14 @@ class FlourMillScript @Inject constructor(private val locRepo: LocRepository) : 
     override fun ScriptContext.startup() {
         onOpLoc1("loc.hopper1") { fillHopper() }
         onOpLocU("loc.hopper1", "obj.grain") { fillHopper() }
+        onOpLoc1("loc.fai_varrock_windmill_hopper") { fillHopper() }
+        onOpLocU("loc.fai_varrock_windmill_hopper", "obj.grain") { fillHopper() }
         onOpLoc1("loc.hopperlevers1") { operateHopper(it.loc) }
         onOpLoc1("loc.millbase") { takeFlour() }
         onOpLocU("loc.millbase", "obj.pot_empty") { takeFlour() }
+        onOpLoc1("loc.fai_varrock_windmill_levers") { operateHopper(it.loc) }
+        onOpLoc1("loc.fai_varrock_windmill_base") { takeFlour() }
+        onOpLocU("loc.fai_varrock_windmill_base", "obj.pot_empty") { takeFlour() }
     }
 
     private suspend fun ProtectedAccess.fillHopper() {
