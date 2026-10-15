@@ -23,6 +23,7 @@ import org.rsmod.content.quest.manager.QuestScript
 import org.rsmod.content.quest.manager.menu
 import org.rsmod.content.quest.manager.rewards
 import org.rsmod.content.quest.manager.startQuestPrompt
+import org.rsmod.content.quest.manager.tradeItems
 import org.rsmod.game.entity.Npc
 import org.rsmod.game.entity.Player
 import org.rsmod.game.entity.player.PlayerUid
@@ -498,11 +499,14 @@ constructor(
             mes("I can't dig up anything with him attacking me!")
             return
         }
-        gardeners.remove(player.uid)
         mes("You dig a hole in the ground...")
         delay(2)
+        if (!tradeItems(give = mapOf(CASKET to 1))) {
+            mes("You don't have enough inventory space.")
+            return
+        }
+        gardeners.remove(player.uid)
         mes("and find a little chest of treasure.")
-        invAdd(inv, CASKET)
         quest.advanceQuestStageTo(this, COMPLETE)
     }
 
@@ -515,10 +519,10 @@ constructor(
     }
 
     private fun ProtectedAccess.openCasket() {
-        invDel(inv, CASKET)
-        invAdd(inv, "obj.coins", 450)
-        invAdd(inv, "obj.gold_ring")
-        invAdd(inv, "obj.emerald")
+        if (!tradeItems(take = mapOf(CASKET to 1), give = TREASURE)) {
+            mes("You don't have enough inventory space.")
+            return
+        }
         mes("You open the casket, and find One-Eyed Hector's treasure.")
     }
 
@@ -534,6 +538,7 @@ constructor(
         const val KEY = "obj.chest_key"
         const val MESSAGE = "obj.piratemessage"
         const val CASKET = "obj.pirate_casket"
+        val TREASURE = mapOf("obj.coins" to 450, "obj.gold_ring" to 1, "obj.emerald" to 1)
 
         const val CRATE_CAPACITY = 10
         const val CRATE_PAYMENT = 30

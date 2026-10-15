@@ -25,6 +25,7 @@ import org.rsmod.content.quest.manager.QuestScript
 import org.rsmod.content.quest.manager.menu
 import org.rsmod.content.quest.manager.rewards
 import org.rsmod.content.quest.manager.startQuestPrompt
+import org.rsmod.content.quest.manager.tradeItems
 import org.rsmod.game.entity.Player
 import org.rsmod.game.loc.BoundLocInfo
 import org.rsmod.game.loc.LocAngle
@@ -570,8 +571,15 @@ class PrinceAliRescue @Inject constructor(private val locRepo: LocRepository) :
                 return
             }
             chatPlayer(neutral, "Here, I have 15 coins.")
-            access.invDel(access.inv, COINS, KEY_REPLACEMENT_COST)
-            access.invAdd(access.inv, KEY)
+            val paid =
+                access.tradeItems(
+                    take = mapOf(COINS to KEY_REPLACEMENT_COST),
+                    give = mapOf(KEY to 1),
+                )
+            if (!paid) {
+                access.mes("You don't have enough inventory space.")
+                return
+            }
             objbox(KEY, "Leela gives you a key.")
             chatNpc(quiz, "Now, how are things going with that guard?")
             chatPlayer(neutral, "I haven't spoken to him yet.")
