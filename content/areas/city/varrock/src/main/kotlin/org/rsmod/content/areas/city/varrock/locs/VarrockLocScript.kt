@@ -225,8 +225,8 @@ constructor(private val locRepo: LocRepository, private val worldRepo: WorldRepo
             delay2 = 112,
             dir = if (leaving) em_face_south else em_face_north,
         )
-        soundSynth("synth.varrock_trellis_climb")
-        soundSynth("synth.varrock_trellis_climb", delay = 75)
+        soundSynth("synth.varrock_fence_jump")
+        soundSynth("synth.varrock_fence_jump", delay = 75)
         delay(5)
         resetAnim()
     }

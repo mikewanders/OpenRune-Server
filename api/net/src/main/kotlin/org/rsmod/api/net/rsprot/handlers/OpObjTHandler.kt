@@ -24,7 +24,7 @@ class OpObjTHandler
 constructor(
     private val eventBus: EventBus,
     private val objRegistry: ObjRegistry,
-    private val objTInteractions: ObjTInteractions,
+    private val objInteractions: ObjTInteractions,
 ) : MessageHandler<OpObjT> {
     private val logger = InlineLogger()
 
@@ -33,6 +33,7 @@ constructor(
 
     override fun handle(player: Player, message: OpObjT) {
         if (player.isDelayed) {
+            player.clearMapFlag()
             return
         }
 
@@ -46,6 +47,11 @@ constructor(
 
         val interfaceType = ServerCacheManager.fromInterface(message.asComponent.packed)
         val componentType = ServerCacheManager.fromComponent(message.asComponent.packed)
+        val selectedObj =
+            message.selectedObj
+                .takeIf { it != -1 }
+                ?.let { id -> ServerCacheManager.getItems().values.firstOrNull { it.id == id } }
+
         val isValidInterface =
             player.ui.containsOverlay(interfaceType) || player.ui.containsModal(interfaceType)
         if (!isValidInterface) {
@@ -63,19 +69,15 @@ constructor(
             return
         }
 
-        val objType =
-            message.selectedObj
-                .takeIf { it != -1 }
-                ?.let { id -> ServerCacheManager.getItems().values.firstOrNull { it.id == id } }
         val speed = if (message.controlKey) player.ctrlMoveSpeed() else null
         val interaction =
             InteractionObjT(
-                objType = objType,
+                objType = selectedObj,
                 component = componentType,
                 comsub = comsub,
                 target = obj,
-                hasOpTrigger = objTInteractions.hasOpTrigger(obj, objType, componentType, comsub),
-                hasApTrigger = objTInteractions.hasApTrigger(obj, objType, componentType, comsub),
+                hasOpTrigger = objInteractions.hasOpTrigger(obj, componentType, comsub, selectedObj),
+                hasApTrigger = objInteractions.hasApTrigger(obj, componentType, comsub, selectedObj),
             )
         player.clearPendingAction(eventBus)
         player.resetFaceEntity()
@@ -83,7 +85,7 @@ constructor(
         player.interaction = interaction
         player.routeRequest = RouteRequestCoord(coords, clientRequest = true)
         player.tempMoveSpeed = speed
-        logger.debug { "OpObjT: obj=$obj, comsub=$comsub, component=$componentType, obj=$objType" }
+        logger.debug { "OpObjT: obj=$obj, comsub=$comsub, component=$componentType" }
     }
 
     private fun findObj(player: Player, coords: CoordGrid, type: Int): Obj? =

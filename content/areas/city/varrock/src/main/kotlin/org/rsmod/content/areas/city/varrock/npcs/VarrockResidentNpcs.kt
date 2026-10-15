@@ -3,7 +3,6 @@ package org.rsmod.content.areas.city.varrock.npcs
 import org.rsmod.api.player.dialogue.Dialogue
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onOpNpc1
-import org.rsmod.api.script.onOpNpc3
 import org.rsmod.api.script.onOpNpc4
 import org.rsmod.api.script.onOpNpc5
 import org.rsmod.content.areas.city.falador.npcs.MakeoverType
@@ -20,11 +19,6 @@ private enum class EmmaTopic(val option: String) {
 
 class VarrockResidentNpcs : PluginScript() {
     override fun ScriptContext.startup() {
-        for (gertrude in listOf("npc.gertrude_quest", "npc.gertrude_post")) {
-            onOpNpc1(gertrude) { startDialogue(it.npc) { gertrude() } }
-        }
-        onOpNpc3("npc.gertrude_post") { startDialogue(it.npc) { gertrudeKitten() } }
-
         for (child in listOf("npc.philop", "npc.kanel")) {
             onOpNpc1(child) { startDialogue(it.npc) { busyChild() } }
         }
@@ -36,67 +30,6 @@ class VarrockResidentNpcs : PluginScript() {
         onOpNpc4("npc.hairdresser_boutique") { boutiqueMakeover(it.npc, MakeoverType.Hair) }
         onOpNpc5("npc.hairdresser_boutique") { boutiqueMakeover(it.npc, MakeoverType.FacialHair) }
         onOpNpc1("npc.tailor_boutique") { startDialogue(it.npc) { suzie() } }
-    }
-
-    private suspend fun Dialogue.gertrude() {
-        chatPlayer(happy, "Hello again.")
-        chatNpc(quiz, "Did you ever get to talk to those ratcatchers I told you about?")
-        chatPlayer(neutral, "Yes, they were... interesting...")
-        chatNpc(happy, "Well, my dear. Is there anything I can do for you?")
-        if (!choice2("Do you have any more kittens?", true, GERTRUDE_GOODBYE, false)) {
-            chatPlayer(happy, GERTRUDE_GOODBYE)
-            return
-        }
-        chatPlayer(happy, "Do you have any more kittens?")
-        if (raisingCat()) {
-            chatNpc(
-                neutral,
-                "You're still raising that last cat and it needs your attention. Only when the " +
-                    "cat doesn't need your attention any longer could I possibly let you have " +
-                    "another kitten.",
-            )
-            return
-        }
-        chatNpc(happy, "Indeed I have. They are 100 coins each, do you want one?")
-        if (access.invTotal(player.inv, "obj.coins") < KITTEN_PRICE) {
-            chatPlayer(sad, "Oops, looks like I'm a bit short. I'll have to come back later.")
-            return
-        }
-        if (!choice2("Yes please.", true, "No thanks.", false)) {
-            chatPlayer(neutral, "No thanks, I've paid that boy enough already.")
-            return
-        }
-        chatPlayer(happy, "Yes please.")
-        chatNpc(happy, "Okay then, here you go.")
-        chatPlayer(happy, "Thanks.")
-        sellKitten()
-    }
-
-    private suspend fun Dialogue.gertrudeKitten() {
-        if (raisingCat()) {
-            chatNpc(
-                neutral,
-                "Aren't you still raising that other kitten? Only once it's fully grown and it " +
-                    "no longer needs your attention will I let you have another kitten.",
-            )
-            return
-        }
-        if (access.invTotal(player.inv, "obj.coins") < KITTEN_PRICE) {
-            chatNpc(neutral, "I'll want 100 coins for a kitten.")
-            return
-        }
-        sellKitten()
-    }
-
-    private suspend fun Dialogue.sellKitten() {
-        access.invDel(player.inv, "obj.coins", count = KITTEN_PRICE)
-        access.invAdd(player.inv, access.random.pick(KITTENS))
-        mesbox("Gertrude gives you another kitten.")
-    }
-
-    private fun Dialogue.raisingCat(): Boolean {
-        val bank = player.invMap.getOrPut("inv.bank")
-        return RAISING_CATS.any { it in player.inv || it in bank }
     }
 
     private suspend fun Dialogue.busyChild() {
@@ -246,28 +179,5 @@ class VarrockResidentNpcs : PluginScript() {
 
     private companion object {
         const val BUSY = "Please excuse me, I'm rather busy."
-        const val GERTRUDE_GOODBYE = "I'll be off. See you another time."
-        const val KITTEN_PRICE = 100
-
-        val KITTENS =
-            listOf(
-                "obj.kittenobject",
-                "obj.kittenobject_light",
-                "obj.kittenobject_brown",
-                "obj.kittenobject_black",
-                "obj.kittenobject_browngrey",
-                "obj.kittenobject_bluegrey",
-            )
-
-        val RAISING_CATS =
-            KITTENS +
-                listOf(
-                    "obj.growncatobject",
-                    "obj.growncatobject_light",
-                    "obj.growncatobject_brown",
-                    "obj.growncatobject_black",
-                    "obj.growncatobject_browngrey",
-                    "obj.growncatobject_bluegrey",
-                )
     }
 }

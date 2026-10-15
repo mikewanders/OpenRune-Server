@@ -5,9 +5,7 @@ import dev.openrune.rscm.RSCMType
 import dev.openrune.types.ItemServerType
 import org.rsmod.api.player.events.interact.ObjContentEvents
 import org.rsmod.api.player.events.interact.ObjEvents
-import org.rsmod.api.player.events.interact.ObjTDefaultEvents
 import org.rsmod.api.player.events.interact.ObjTEvents
-import org.rsmod.events.EventBus
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.plugin.scripts.ScriptContext
 
@@ -63,30 +61,10 @@ public fun ScriptContext.onOpObj5(
 
 public fun ScriptContext.onOpObjT(
     component: String,
-    action: suspend ProtectedAccess.(ObjTDefaultEvents.Op) -> Unit,
-): Unit = onProtectedEvent(component.asRSCM(RSCMType.COMPONENT), action)
-
-public fun ScriptContext.onOpObjT(
-    type: String,
-    component: String,
     action: suspend ProtectedAccess.(ObjTEvents.Op) -> Unit,
-): Unit =
-    onProtectedEvent(
-        EventBus.composeLongKey(type.asRSCM(RSCMType.OBJ), component.asRSCM(RSCMType.COMPONENT)),
-        action,
-    )
-
-public fun ScriptContext.onApObjT(
-    component: String,
-    action: suspend ProtectedAccess.(ObjTDefaultEvents.Ap) -> Unit,
 ): Unit = onProtectedEvent(component.asRSCM(RSCMType.COMPONENT), action)
 
 public fun ScriptContext.onApObjT(
-    type: String,
     component: String,
     action: suspend ProtectedAccess.(ObjTEvents.Ap) -> Unit,
-): Unit =
-    onProtectedEvent(
-        EventBus.composeLongKey(type.asRSCM(RSCMType.OBJ), component.asRSCM(RSCMType.COMPONENT)),
-        action,
-    )
+): Unit = onProtectedEvent(component.asRSCM(RSCMType.COMPONENT), action)

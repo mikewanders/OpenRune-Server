@@ -6,14 +6,16 @@ import org.rsmod.map.CoordGrid
 
 private val logger = InlineLogger()
 
+public const val SceneSnapRate = 232
+
 public class SceneCamera(
     val eye: CoordGrid,
     val eyeHeight: Int,
     val lookAt: CoordGrid,
     val lookAtHeight: Int,
+    val rate: Int = SceneSnapRate,
+    val rate2: Int = SceneSnapRate,
 )
-
-public const val SceneSnapRate = 232
 
 public const val SceneDriftRate = 10
 
@@ -34,21 +36,11 @@ public suspend fun ProtectedAccess.lockedScene(
     fadeOutDuration: Int = SceneFadeDuration,
     fadeInDuration: Int = SceneFadeDuration,
     reveal: (suspend ProtectedAccess.() -> Unit)? = null,
-    cameraRate: Int = SceneSnapRate,
     exitCut: Boolean = false,
     body: suspend ProtectedAccess.() -> Unit,
 ) {
     try {
-        beginScene(
-            vantage,
-            faceAt,
-            camera,
-            underFade,
-            fadeOutDuration,
-            fadeInDuration,
-            reveal,
-            cameraRate,
-        )
+        beginScene(vantage, faceAt, camera, underFade, fadeOutDuration, fadeInDuration, reveal)
         body()
     } finally {
         endScene(returnTo, teardown, fadeOutDuration, fadeInDuration, exitCut)
@@ -63,7 +55,6 @@ public suspend fun ProtectedAccess.beginScene(
     fadeOutDuration: Int = SceneFadeDuration,
     fadeInDuration: Int = SceneFadeDuration,
     reveal: (suspend ProtectedAccess.() -> Unit)? = null,
-    cameraRate: Int = SceneSnapRate,
 ) {
     fadeOverlay(
         startColour = 0,
@@ -95,12 +86,12 @@ public suspend fun ProtectedAccess.beginScene(
     telejump(vantage)
     rebuildAppearance()
 
-    camMoveToV3(camera.eye, height = camera.eyeHeight, rate = cameraRate, rate2 = cameraRate)
+    camMoveToV3(camera.eye, height = camera.eyeHeight, rate = camera.rate, rate2 = camera.rate2)
     camLookAtV3(
         camera.lookAt,
         height = camera.lookAtHeight,
-        rate = cameraRate,
-        rate2 = cameraRate,
+        rate = camera.rate,
+        rate2 = camera.rate2,
     )
     faceSquare(faceAt)
 
@@ -193,8 +184,6 @@ public suspend fun ProtectedAccess.endScene(
 
 private fun ProtectedAccess.restoreSceneState() {
     ifClose()
-    camUnlock(unlock = false)
-    camReset()
 
     showEntityOps()
     restoreLastAcceptAid()
@@ -204,6 +193,7 @@ private fun ProtectedAccess.restoreSceneState() {
     camModeReset()
     showTopLevel()
     showHealthHud()
+    camReset()
     openTopLevelTabs()
 
     syncDrawDistance()

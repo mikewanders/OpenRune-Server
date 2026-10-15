@@ -158,7 +158,6 @@ constructor(
             returnTo = lecture.returnTo,
             underFade = { historian = spawnHistorian(lecture) },
             teardown = { historian?.let(::despawn) },
-            cameraRate = CAMERA_RATE,
         ) {
             val npc = historian ?: return@lockedScene
             startDialogue(npc) {
@@ -195,7 +194,7 @@ constructor(
         const val HISTORIAN_TICKS = 300
 
         fun camera(eye: CoordGrid, eyeHeight: Int, look: CoordGrid, lookHeight: Int) =
-            SceneCamera(eye, eyeHeight, look, lookHeight)
+            SceneCamera(eye, eyeHeight, look, lookHeight, CAMERA_RATE, CAMERA_RATE)
 
         fun at(x: Int, z: Int) = CoordGrid(x, z, 0)
 

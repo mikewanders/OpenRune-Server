@@ -281,6 +281,16 @@ public fun Player.ifCloseModal(interf: String, eventBus: EventBus) {
     closeModal(interf, eventBus)
 }
 
+public fun Player.ifCloseChat(eventBus: EventBus) {
+    val target =
+        ServerCacheManager.fromComponent("component.chatbox:chatmodal".asRSCM(RSCMType.COMPONENT))
+            .toIdComponent()
+    if (target !in ui.modals) {
+        return
+    }
+    closeModal(ui.modals[target], target, eventBus)
+}
+
 public fun Player.ifCloseOverlay(interf: String, eventBus: EventBus) {
     closeOverlay(interf, eventBus)
 }
@@ -506,6 +516,22 @@ internal fun Player.ifObjbox(
     }
     ifSetObj("component.objectbox:item", obj, zoom)
     ifSetText("component.objectbox:text", text)
+}
+
+internal fun Player.ifLevelUpDisplay(
+    layer: ComponentType,
+    title: String,
+    text: String,
+    pauseText: String,
+    eventBus: EventBus,
+) {
+    ifOpenChat("interface.levelup_display", constants.modal_fixedwidthandheight, eventBus)
+    ifSetText("component.levelup_display:text1", title)
+    ifSetText("component.levelup_display:text2", text)
+    // The cache already makes this a pause button, so the client is sent no if_setevents for it.
+    ui.events.add("component.levelup_display:continue", -1..-1, IfEvent.PauseButton.bitmask)
+    ifSetText("component.levelup_display:continue", pauseText)
+    client.write(IfSetHide(layer.interfaceId, layer.component, false))
 }
 
 internal fun Player.ifDoubleobjbox(

@@ -108,8 +108,8 @@ constructor(
     private val closeModal: CloseModalHandler,
     private val resumePauseButton: ResumePauseButtonHandler,
     private val opObj: OpObjHandler,
-    private val opObjT: OpObjTHandler,
     private val opObj6: OpObj6Handler,
+    private val opObjT: OpObjTHandler,
     private val ifSubOp: IfSubOpHandler,
     private val resumePCountDialog: ResumePCountDialogHandler,
     private val resumePNameDialog: ResumePNameDialogHandler,
@@ -147,8 +147,8 @@ constructor(
         builder.addListener(CloseModal::class.java, closeModal)
         builder.addListener(ResumePauseButton::class.java, resumePauseButton)
         builder.addListener(OpObjV2::class.java, opObj)
-        builder.addListener(OpObjT::class.java, opObjT)
         builder.addListener(OpObj6::class.java, opObj6)
+        builder.addListener(OpObjT::class.java, opObjT)
         builder.addListener(IfSubOp::class.java, ifSubOp)
         builder.addListener(ResumePCountDialog::class.java, resumePCountDialog)
         builder.addListener(ResumePNameDialog::class.java, resumePNameDialog)

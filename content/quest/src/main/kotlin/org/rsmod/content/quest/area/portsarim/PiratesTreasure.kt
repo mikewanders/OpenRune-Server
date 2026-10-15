@@ -4,6 +4,7 @@ import jakarta.inject.Inject
 import org.rsmod.api.npc.interact.AiPlayerInteractions
 import org.rsmod.api.npc.opPlayer2
 import org.rsmod.api.player.dialogue.Dialogue
+import org.rsmod.api.player.hook.SpadeDigHook
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.vars.boolVarBit
 import org.rsmod.api.player.vars.intVarBit
@@ -17,7 +18,6 @@ import org.rsmod.api.script.onOpNpc1
 import org.rsmod.api.script.onOpNpc3
 import org.rsmod.api.script.onOpNpcU
 import org.rsmod.api.shops.Shops
-import org.rsmod.content.quest.manager.DigSpots
 import org.rsmod.content.quest.manager.ItemRewardDisplay
 import org.rsmod.content.quest.manager.QuestScript
 import org.rsmod.content.quest.manager.menu
@@ -48,7 +48,8 @@ constructor(
         "varp.hunt",
         rewards { extra("One-Eyed Hector's Treasure") },
         ItemRewardDisplay(CASKET),
-    ) {
+    ),
+    SpadeDigHook {
 
     private val gardeners = mutableMapOf<PlayerUid, Npc>()
 
@@ -84,7 +85,6 @@ constructor(
         onOpLocU("loc.piratechest", KEY) { unlockChest(it.loc) }
         onOpHeld1(MESSAGE) { readMessage() }
         onOpHeld1(CASKET) { openCasket() }
-        DigSpots.register { coords -> digForTreasure(coords) }
     }
 
     override fun subTitle(): String =
@@ -485,26 +485,25 @@ constructor(
         }
     }
 
-    private suspend fun ProtectedAccess.digForTreasure(coords: CoordGrid): Boolean {
-        if (coords != TREASURE_SPOT || stage(player) != MESSAGE_READ) {
-            return false
-        }
+    override fun claims(player: Player): Boolean =
+        player.coords == TREASURE_SPOT && stage(player) == MESSAGE_READ
+
+    override suspend fun ProtectedAccess.dig() {
         val gardener = gardeners[player.uid]
         if (gardener == null) {
             spawnGardener()
-            return true
+            return
         }
         if (gardener.isSlotAssigned && gardener.hitpoints > 0) {
             mes("I can't dig up anything with him attacking me!")
-            return true
+            return
         }
         gardeners.remove(player.uid)
         mes("You dig a hole in the ground...")
-        delay(4)
+        delay(2)
         mes("and find a little chest of treasure.")
         invAdd(inv, CASKET)
         quest.advanceQuestStageTo(this, COMPLETE)
-        return true
     }
 
     private fun ProtectedAccess.spawnGardener() {

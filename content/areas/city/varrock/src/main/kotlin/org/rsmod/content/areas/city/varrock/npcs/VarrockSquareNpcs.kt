@@ -9,7 +9,6 @@ import org.rsmod.api.script.onAiTimer
 import org.rsmod.api.script.onOpNpc1
 import org.rsmod.api.script.onOpNpc3
 import org.rsmod.api.script.onOpNpc4
-import org.rsmod.content.quest.manager.QuestRequirements
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
@@ -32,8 +31,6 @@ class VarrockSquareNpcs @Inject constructor(private val random: GameRandom) : Pl
         onAiTimer("npc.qip_soa_newspaperseller") { npc.say(random.pick(BENNY_SHOUTS)) }
 
         onOpNpc1("npc.baraek") { startDialogue(it.npc) { baraek() } }
-        onOpNpc1("npc.wilough") { startDialogue(it.npc) { wilough() } }
-        onOpNpc1("npc.shilop") { startDialogue(it.npc) { shilop() } }
     }
 
     private suspend fun Dialogue.aris() {
@@ -392,45 +389,6 @@ class VarrockSquareNpcs @Inject constructor(private val random: GameRandom) : Pl
         access.invAdd(player.inv, "obj.coins", count = count * price)
     }
 
-    private suspend fun Dialogue.wilough() {
-        if (!QuestRequirements.hasCompleted(player, GERTRUDES_CAT)) {
-            strangeOldPeople()
-            return
-        }
-        chatPlayer(happy, "Hello again.")
-        chatNpc(angry, "You think you're tough do you?")
-        chatPlayer(shock, "Pardon?")
-        chatNpc(angry, "I can beat anyone up.")
-        chatPlayer(bored, "Really?")
-        mesbox(
-            "The boy begins to jump around with his fists up.<br>You decide it's best not to " +
-                "kill him just yet."
-        )
-    }
-
-    private suspend fun Dialogue.shilop() {
-        if (!QuestRequirements.hasCompleted(player, GERTRUDES_CAT)) {
-            strangeOldPeople()
-            return
-        }
-        chatPlayer(happy, "Hello again.")
-        chatNpc(angry, "You think you're tough do you?")
-        chatPlayer(shock, "Pardon?")
-        chatNpc(angry, "I can beat anyone up!")
-        chatNpcSpecific("Wilough", "npc.wilough", angry, "He can you know!")
-        chatPlayer(bored, "Really?")
-        mesbox(
-            "The boy begins to jump around with his fists up. You decide it's best not to kill " +
-                "him just yet."
-        )
-    }
-
-    private suspend fun Dialogue.strangeOldPeople() {
-        chatPlayer(happy, "Hello youngster!")
-        chatNpc(angry, "I don't talk to strange old people.")
-        chatPlayer(angry, "Hey who you calling old?! And strange?!")
-    }
-
     private val Dialogue.shock
         get() = mesanim("mesanim.shock")
 
@@ -438,7 +396,6 @@ class VarrockSquareNpcs @Inject constructor(private val random: GameRandom) : Pl
         const val ELIZA_MET = "varbit.speedrunning_shop_owner_met"
         const val NEVET_MET = "varbit.events_shop_owner_met"
         const val ELIZA_CLAIM = "I'd like to claim some trophies."
-        const val GERTRUDES_CAT = "quest_gertrudescat"
 
         const val NEWSPAPER_PRICE = 50
         const val FUR_PRICE = 20

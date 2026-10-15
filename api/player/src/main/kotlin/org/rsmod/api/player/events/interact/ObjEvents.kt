@@ -1,8 +1,5 @@
 package org.rsmod.api.player.events.interact
 
-import dev.openrune.definition.type.widget.ComponentType
-import dev.openrune.types.ItemServerType
-import org.rsmod.events.EventBus
 import org.rsmod.game.obj.Obj
 
 public sealed class ObjEvents {
@@ -87,41 +84,4 @@ public sealed class ObjDefaultEvents {
     public class Ap4(obj: Obj) : Ap(obj)
 
     public class Ap5(obj: Obj) : Ap(obj)
-}
-
-/**
- * A component (usually a spell) used on a ground obj.
- *
- * @param objType The selected inventory obj, if the component was used from an inventory slot.
- */
-public class ObjTEvents {
-    public class Op(
-        public val obj: Obj,
-        public val objType: ItemServerType?,
-        public val comsub: Int,
-        component: ComponentType,
-    ) : OpEvent(EventBus.composeLongKey(obj.type, component.packed))
-
-    public class Ap(
-        public val obj: Obj,
-        public val objType: ItemServerType?,
-        public val comsub: Int,
-        component: ComponentType,
-    ) : ApEvent(EventBus.composeLongKey(obj.type, component.packed))
-}
-
-public class ObjTDefaultEvents {
-    public class Op(
-        public val obj: Obj,
-        public val objType: ItemServerType?,
-        public val comsub: Int,
-        component: ComponentType,
-    ) : OpEvent(component.packed.toLong())
-
-    public class Ap(
-        public val obj: Obj,
-        public val objType: ItemServerType?,
-        public val comsub: Int,
-        component: ComponentType,
-    ) : ApEvent(component.packed.toLong())
 }

@@ -11,7 +11,6 @@ shock = 65528
 [gamevals.synth]
 varrock_castle_door_open = 44
 varrock_chest_open = 52
-varrock_trellis_climb = 2461
 varrock_white_tree_pick = 2437
 varrock_museum_gate = 3642
 

@@ -107,11 +107,13 @@ import org.rsmod.api.player.ui.ifChatNpcSpecific
 import org.rsmod.api.player.ui.ifChatPlayer
 import org.rsmod.api.player.ui.ifChoice
 import org.rsmod.api.player.ui.ifClose
+import org.rsmod.api.player.ui.ifCloseChat
 import org.rsmod.api.player.ui.ifCloseSub
 import org.rsmod.api.player.ui.ifConfirmDestroy
 import org.rsmod.api.player.ui.ifConfirmOverlay
 import org.rsmod.api.player.ui.ifConfirmOverlayClose
 import org.rsmod.api.player.ui.ifDoubleobjbox
+import org.rsmod.api.player.ui.ifLevelUpDisplay
 import org.rsmod.api.player.ui.ifMenu
 import org.rsmod.api.player.ui.ifMesbox
 import org.rsmod.api.player.ui.ifObjbox
@@ -2221,6 +2223,18 @@ public class ProtectedAccess(
      *   the coroutine suspension.
      * @see [resumePauseButtonWithProtectedAccess]
      */
+    public suspend fun levelUpDisplay(layer: ComponentType, title: String, text: String) {
+        player.ifLevelUpDisplay(layer, title, text, constants.cm_pausebutton, context.eventBus)
+        val modal = player.ui.getModalOrNull("component.chatbox:chatmodal")
+        val input = coroutine.pause(ResumePauseButtonInput::class)
+        resumePauseButtonWithProtectedAccess(input, modal, "component.levelup_display:continue")
+    }
+
+    /**
+     * @throws ProtectedAccessLostException if the player could not retain protected access after
+     *   the coroutine suspension.
+     * @see [resumePauseButtonWithProtectedAccess]
+     */
     public suspend fun objbox(obj: InvObj, text: String) {
         objbox(obj, zoom = 400, text)
     }
@@ -3262,6 +3276,10 @@ public class ProtectedAccess(
 
     public fun ifCloseSub(interf: String) {
         player.ifCloseSub(interf, context.eventBus)
+    }
+
+    public fun ifCloseChat() {
+        player.ifCloseChat(context.eventBus)
     }
 
     public fun ifOpenSide(interf: String) {

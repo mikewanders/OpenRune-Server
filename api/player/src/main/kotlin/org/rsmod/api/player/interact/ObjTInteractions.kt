@@ -4,58 +4,66 @@ import dev.openrune.definition.type.widget.ComponentType
 import dev.openrune.types.ItemServerType
 import jakarta.inject.Inject
 import org.rsmod.api.player.events.interact.ApEvent
-import org.rsmod.api.player.events.interact.ObjTDefaultEvents
 import org.rsmod.api.player.events.interact.ObjTEvents
 import org.rsmod.api.player.events.interact.OpEvent
 import org.rsmod.events.EventBus
+import org.rsmod.game.entity.Player
+import org.rsmod.game.interact.InteractionObjT
+import org.rsmod.game.movement.RouteRequestCoord
 import org.rsmod.game.obj.Obj
 
 public class ObjTInteractions @Inject constructor(private val eventBus: EventBus) {
-    public fun opTrigger(
+    public fun interact(
+        player: Player,
         obj: Obj,
-        objType: ItemServerType?,
         component: ComponentType,
         comsub: Int,
+        objType: ItemServerType?,
+    ) {
+        val interaction =
+            InteractionObjT(
+                objType = objType,
+                component = component,
+                comsub = comsub,
+                target = obj,
+                hasOpTrigger = hasOpTrigger(obj, component, comsub, objType),
+                hasApTrigger = hasApTrigger(obj, component, comsub, objType),
+            )
+        player.interaction = interaction
+        player.routeRequest = RouteRequestCoord(obj.coords)
+    }
+
+    public fun opTrigger(
+        obj: Obj,
+        component: ComponentType,
+        comsub: Int,
+        objType: ItemServerType?,
     ): OpEvent? {
-        val typeEvent = ObjTEvents.Op(obj, objType, comsub, component)
-        if (eventBus.contains(typeEvent::class.java, typeEvent.id)) {
-            return typeEvent
-        }
-        val defaultEvent = ObjTDefaultEvents.Op(obj, objType, comsub, component)
-        if (eventBus.contains(defaultEvent::class.java, defaultEvent.id)) {
-            return defaultEvent
-        }
-        return null
+        val event = ObjTEvents.Op(obj, comsub, objType, component)
+        return event.takeIf { eventBus.contains(it::class.java, it.id) }
     }
 
     public fun hasOpTrigger(
         obj: Obj,
-        objType: ItemServerType?,
         component: ComponentType,
         comsub: Int,
-    ): Boolean = opTrigger(obj, objType, component, comsub) != null
+        objType: ItemServerType?,
+    ): Boolean = opTrigger(obj, component, comsub, objType) != null
 
     public fun apTrigger(
         obj: Obj,
-        objType: ItemServerType?,
         component: ComponentType,
         comsub: Int,
+        objType: ItemServerType?,
     ): ApEvent? {
-        val typeEvent = ObjTEvents.Ap(obj, objType, comsub, component)
-        if (eventBus.contains(typeEvent::class.java, typeEvent.id)) {
-            return typeEvent
-        }
-        val defaultEvent = ObjTDefaultEvents.Ap(obj, objType, comsub, component)
-        if (eventBus.contains(defaultEvent::class.java, defaultEvent.id)) {
-            return defaultEvent
-        }
-        return null
+        val event = ObjTEvents.Ap(obj, comsub, objType, component)
+        return event.takeIf { eventBus.contains(it::class.java, it.id) }
     }
 
     public fun hasApTrigger(
         obj: Obj,
-        objType: ItemServerType?,
         component: ComponentType,
         comsub: Int,
-    ): Boolean = apTrigger(obj, objType, component, comsub) != null
+        objType: ItemServerType?,
+    ): Boolean = apTrigger(obj, component, comsub, objType) != null
 }
