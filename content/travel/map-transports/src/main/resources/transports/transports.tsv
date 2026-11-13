@@ -2479,8 +2479,6 @@
 3539 3544 1	3539 3544 0	Climb-down Ladder loc.laddertop						2
 3539 3542 0	3539 3542 1	Climb-up Ladder loc.ladder						2
 3539 3542 1	3539 3542 0	Climb-down Ladder loc.laddertop						2
-3538 3543 1	3538 3543 0	Climb-down Ladder loc.laddertop						2
-3538 3543 0	3538 3543 1	Climb-up Ladder loc.ladder						2
 3548 3565 0	3547 3565 0	Open Door loc.fenk_shed_door						1
 3547 3565 0	3548 3565 0	Open Door loc.fenk_shed_door						1
 3548 3551 1	3548 3552 1	Open Door loc.fenk_tower_door						1
@@ -6537,6 +6535,10 @@
 3658 9815 0	3647 9815 0	Squeeze-through Web tunnel loc.araxxor_cave_outer_tunnel_op	92 stat.slayer			varbit.tobquest_in_instanced_cave=0	varp.slayer_count>0;varp.slayer_target=124
 3647 9815 0	3658 9815 0	Squeeze-through Web tunnel loc.araxxor_cave_outer_tunnel_op_4				varbit.tobquest_in_instanced_cave=0
 
+# Haunted Woods - A Shell of a Friend island
+3567 3489 0	3569 3487 0	Cross Stepping stone loc.snailquest_stepping_stone						4
+3569 3487 0	3567 3489 0	Cross Stepping stone loc.snailquest_stepping_stone						4
+
 # Mort Myre Swamp - quest Hespori island
 3501 3355 0	3497 3355 0	Cross Stepping stone loc.tobquest_stepping_stone						4
 3497 3355 0	3501 3355 0	Cross Stepping stone loc.tobquest_stepping_stone				varbit.tobquest>39		4
@@ -6668,3 +6670,26 @@
 3271 2464 0	3288 8868 1	Climb Steps loc.conch_farming_entrance		obj.hundred_pirate_diving_helmet=1|obj.medallion_of_the_deep=1&obj.hundred_pirate_diving_backpack=1|obj.medallion_of_the_deep=1				2
 3288 8869 1	3271 2463 0	Climb Steps loc.conch_farming_exit						2
 3288 8868 1	3271 2463 0	Climb Steps loc.conch_farming_exit						2
+
+# Lassar Undercity - rope entrance
+# shortcut: entry requires the attached-rope quest state; expand to earlier stages with verified access.
+2922 5826 0	2588 6435 0	Climb-rope Rock loc.dt2_lassar_entry_rock				varbit.dt2_lassar>4		2
+2587 6435 0	2922 5826 0	Climb-up Rope loc.dt2_lassar_exit						2
+
+# Lassar Undercity - Shadow Realm puddle
+2597 6365 0	2341 6365 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+2341 6365 0	2597 6365 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+2667 6419 0	2411 6419 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+2411 6419 0	2667 6419 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+2667 6418 0	2411 6418 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+2411 6418 0	2667 6418 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+2617 6405 0	2361 6405 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+2361 6405 0	2617 6405 0	Use Puddle loc.dt2_lassar_shadow_puddle				varbit.dt2_lassar>14
+
+# Lassar Undercity - central drain
+2656 6421 0	2784 6282 1	Enter Drain loc.dt2_lassar_church_entry				varbit.dt2_lassar>30
+2784 6282 1	2623 6408 0	Climb-up Rope loc.dt2_lassar_church_exit						2
+
+# Lassar Undercity - drain dungeon ladder
+2805 6303 1	2804 6303 0	Climb-down Ladder loc.dt2_lassar_church_ladder_top						2
+2804 6303 0	2805 6303 1	Climb-up Ladder loc.dt2_lassar_church_ladder						3
