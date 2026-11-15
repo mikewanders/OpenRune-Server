@@ -40,7 +40,7 @@ constructor(private val locRepo: LocRepository, private val worldRepo: WorldRepo
                 locRepo,
                 it.vis,
                 "loc.ds2_varrock_door_open",
-                "synth.varrock_castle_door_open",
+                "synth.big_wooden_door_open",
             )
         }
         onOpLoc1("loc.vmq1_prisondoor") { lockedPrisonGate() }
@@ -143,7 +143,7 @@ constructor(private val locRepo: LocRepository, private val worldRepo: WorldRepo
     private suspend fun ProtectedAccess.openChest(chest: BoundLocInfo) {
         arriveDelay()
         anim("seq.human_openchest")
-        soundSynth("synth.varrock_chest_open")
+        soundSynth("synth.chest_open")
         delay(1)
         locRepo.change(chest, "loc.fai_varrock_chest_open", CHEST_OPEN_TICKS)
     }
@@ -164,7 +164,7 @@ constructor(private val locRepo: LocRepository, private val worldRepo: WorldRepo
         spam("You hit the dummy.")
         anim(player.weaponAttackAnim())
         locAnim(worldRepo, dummy, "seq.varrock_heavybag_defend")
-        soundSynth("synth.human_unarmedblock")
+        soundSynth("synth.unarmed_punch")
         delay(1)
         if (player.baseAttackLvl >= DUMMY_MAX_ATTACK) {
             mes("There is nothing more you can learn from hitting a dummy.")
@@ -225,8 +225,8 @@ constructor(private val locRepo: LocRepository, private val worldRepo: WorldRepo
             delay2 = 112,
             dir = if (leaving) em_face_south else em_face_north,
         )
-        soundSynth("synth.varrock_fence_jump")
-        soundSynth("synth.varrock_fence_jump", delay = 75)
+        soundSynth("synth.jump")
+        soundSynth("synth.jump", delay = 75)
         delay(5)
         resetAnim()
     }
@@ -245,7 +245,7 @@ constructor(private val locRepo: LocRepository, private val worldRepo: WorldRepo
         spam("You pick a white fruit.")
         player.whiteTree--
         invAdd(inv, "obj.garden_white_tree_fruit")
-        soundSynth("synth.varrock_white_tree_pick")
+        soundSynth("synth.farming_pick")
         statAdvance("stat.farming", WHITE_FRUIT_XP)
     }
 

@@ -1,6 +1,2 @@
 [gamevals.queue]
-telegrab = 65513
-
-[gamevals.synth]
-telegrab_cast = 3006
-telegrab_impact = 3007
+telegrab = 65512

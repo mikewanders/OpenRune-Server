@@ -142,7 +142,7 @@ constructor(
         guard?.anim(
             if (entering) "seq.vm_museum_guard_gate_mirrored" else "seq.vm_museum_guard_gate"
         )
-        soundSynth("synth.varrock_museum_gate")
+        soundSynth("synth.vm_barrier_open")
         delay(GATE_SWING_TICKS)
         locRepo.add(GATE, "loc.vm_invisbarrier", GATE_OPEN_TICKS, LocAngle.North, WALL)
         locRepo.add(GATE_OPEN, "loc.vm_barrier_guard_gate", GATE_OPEN_TICKS, LocAngle.West, WALL)

@@ -61,6 +61,7 @@ import org.rsmod.api.player.hit.processor.InstantPlayerHitProcessor
 import org.rsmod.api.player.hook.PlayerGroundItemDropHook
 import org.rsmod.api.player.hook.PlayerInvUpdateHook
 import org.rsmod.api.player.hook.PlayerObjTakeValidateHook
+import org.rsmod.api.player.hook.PlayerObjTakenHook
 import org.rsmod.api.player.hook.PlayerPostTickHook
 import org.rsmod.api.player.hook.PlayerTeleportValidateHook
 import org.rsmod.api.player.protect.ProtectedAccess
@@ -914,6 +915,7 @@ constructor(
             Multibinder.newSetBinder(binder(), PlayerPostTickHook::class.java)
             Multibinder.newSetBinder(binder(), PlayerGroundItemDropHook::class.java)
             Multibinder.newSetBinder(binder(), PlayerObjTakeValidateHook::class.java)
+            Multibinder.newSetBinder(binder(), PlayerObjTakenHook::class.java)
             Multibinder.newSetBinder(binder(), PlayerTeleportValidateHook::class.java)
             bind(NpcHitModifier::class.java).to(StandardNpcHitModifier::class.java)
             bind(PlayerHitModifier::class.java).to(StandardPlayerHitModifier::class.java)

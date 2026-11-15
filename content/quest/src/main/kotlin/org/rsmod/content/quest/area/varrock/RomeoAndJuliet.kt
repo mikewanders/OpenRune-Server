@@ -1633,10 +1633,10 @@ class RomeoAndJuliet @Inject constructor(private val npcRepo: NpcRepository) :
 
         const val POTION_JINGLE = "jingle.soul_wars"
         const val CRYPT_JINGLE = "jingle.camdozaal_ruins_2021"
-        const val DRINK_SYNTH = "synth.romeo_juliet_drink"
-        const val COLLAPSE_SYNTH = "synth.romeo_juliet_collapse"
-        const val CRYPT_ENTER_SYNTH = "synth.romeo_juliet_crypt_enter"
-        const val CRYPT_DOOR_SYNTH = "synth.romeo_juliet_crypt_door"
+        const val DRINK_SYNTH = "synth.liquid"
+        const val COLLAPSE_SYNTH = "synth.female_death"
+        const val CRYPT_ENTER_SYNTH = "synth.trek_walkaway"
+        const val CRYPT_DOOR_SYNTH = "synth.trek_walktoward"
         const val CUTSCENE_NPC_TICKS = 200
 
         val SERMON_CAMERA = CoordGrid(3254, 3486, 0)

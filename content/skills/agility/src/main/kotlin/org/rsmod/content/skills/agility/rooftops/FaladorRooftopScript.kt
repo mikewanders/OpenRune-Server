@@ -25,13 +25,13 @@ private const val SEQ_WALL_JUMP_DOWN_LAND = "seq.agility_shortcut_wall_jumpdown2
 private const val SEQ_HANDHOLDS_MIDDLE = "seq.agilityarena_handholds_middle"
 private const val SEQ_HANDHOLDS_LAST = "seq.agilityarena_handholds_last"
 
-private const val SOUND_TIGHTROPE = 2495
-private const val SOUND_TIGHTROPE_3 = 1934
-private const val SOUND_TIGHTROPE_3_LAND = 2455
-private const val SOUND_JUMP = 2461
-private const val SOUND_WALL_JUMP = 2468
-private const val SOUND_WALL_JUMP_DOWN = 2462
-private const val SOUND_HANDHOLDS = 2459
+private const val SOUND_TIGHTROPE = "synth.tightrope"
+private const val SOUND_TIGHTROPE_3 = "synth.deathslide_first"
+private const val SOUND_TIGHTROPE_3_LAND = "synth.fall_land"
+private const val SOUND_JUMP = "synth.jump"
+private const val SOUND_WALL_JUMP = "synth.jump_up"
+private const val SOUND_WALL_JUMP_DOWN = "synth.jump2"
+private const val SOUND_HANDHOLDS = "synth.handholds_loop"
 
 private var Player.highlightedCourse by intVarBit(Agility.HIGHLIGHTED_COURSE)
 

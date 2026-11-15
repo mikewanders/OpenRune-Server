@@ -116,7 +116,7 @@ constructor(
         private const val CAST_SEQ = "seq.human_casttelegrab"
         private const val CAST_SPOTANIM = "spotanim.telegrab_casting"
         private const val CAST_SPOTANIM_HEIGHT = 92
-        private const val CAST_SYNTH = "synth.telegrab_cast"
+        private const val CAST_SYNTH = "synth.telegrab_cast_and_fire"
 
         private const val TRAVEL_SPOTANIM = "spotanim.telegrab_travel"
         private const val PROJ_START_HEIGHT = 140
@@ -129,7 +129,7 @@ constructor(
         private const val IMPACT_SPOTANIM = "spotanim.telegrab_impact"
         private const val IMPACT_HEIGHT = 100
         private const val IMPACT_DELAY = 90
-        private const val IMPACT_SYNTH = "synth.telegrab_impact"
+        private const val IMPACT_SYNTH = "synth.telegrab_hit"
         private const val IMPACT_SYNTH_DELAY = 3
     }
 }

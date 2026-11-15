@@ -8,12 +8,6 @@ varrock_romily_pie_count = 64871
 [gamevals.mesanim]
 shock = 65528
 
-[gamevals.synth]
-varrock_castle_door_open = 44
-varrock_chest_open = 52
-varrock_white_tree_pick = 2437
-varrock_museum_gate = 3642
-
 [gamevals.area]
 varrock_museum = 32762
 

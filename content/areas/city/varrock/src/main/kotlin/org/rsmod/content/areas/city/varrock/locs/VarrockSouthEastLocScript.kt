@@ -59,7 +59,7 @@ class VarrockSouthEastLocScript @Inject constructor(private val locRepo: LocRepo
             LocAngle.South,
             LocShape.WallStraight,
         )
-        soundSynth("synth.picketgate_open")
+        soundSynth("synth.gate_open")
         val z = player.coords.z.coerceIn(GATE_LEFT.z, GATE_RIGHT.z)
         val x = if (player.coords.x < GATE_LEFT.x) GATE_LEFT.x else GATE_LEFT.x - 1
         forcedWalk(CoordGrid(x, z, GATE_LEFT.level), crossTiles = 1)
