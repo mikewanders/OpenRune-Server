@@ -42,7 +42,69 @@ contentGroup = "content.opened_single_door"
 [object.params]
 "param.next_loc_stage" = "loc.fai_varrock_poor_door"
 
+[[object]]
+id = "loc.fai_varrock_door_taller"
+inherit = "loc.fai_varrock_door_taller"
+contentGroup = "content.closed_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_varrock_door_open_taller"
+
+[[object]]
+id = "loc.fai_varrock_door_open_taller"
+inherit = "loc.fai_varrock_door_open_taller"
+contentGroup = "content.opened_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_varrock_door_taller"
+
+[[object]]
+id = "loc.fai_varrock_shanty_door"
+inherit = "loc.fai_varrock_shanty_door"
+contentGroup = "content.closed_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_varrock_shanty_door_open"
+
+[[object]]
+id = "loc.fai_varrock_shanty_door_open"
+inherit = "loc.fai_varrock_shanty_door_open"
+contentGroup = "content.opened_single_door"
+
+[object.params]
+"param.next_loc_stage" = "loc.fai_varrock_shanty_door"
+
+## Phoenix Gang hideout
+
+[[object]]
+id = "loc.fai_varrock_ladder_deep"
+inherit = "loc.fai_varrock_ladder_deep"
+contentGroup = "content.dungeonladder_down"
+
+[object.params]
+"param.climb_anim" = "seq.human_pickupfloor"
+
+[[object]]
+id = "loc.phoenixladder"
+inherit = "loc.phoenixladder"
+contentGroup = "content.dungeonladder_up"
+
+[object.params]
+"param.climb_anim" = "seq.human_reachforladder"
+
+## Construction contract house (south Varrock)
+
+[[object]]
+id = "loc.con_contract_falador_south_range_fixed"
+inherit = "loc.con_contract_falador_south_range_fixed"
+contentGroup = "content.cooking_range_standard"
+
 ## NPCs
+
+[[npc]]
+id = "npc.pmod_town_crier_varrock"
+inherit = "npc.pmod_town_crier_varrock"
+timer = 50
 
 [[npc]]
 id = "npc.qip_soa_newspaperseller"

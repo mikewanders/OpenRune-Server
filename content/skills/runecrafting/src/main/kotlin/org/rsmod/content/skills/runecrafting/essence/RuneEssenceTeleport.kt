@@ -2,6 +2,7 @@ package org.rsmod.content.skills.runecrafting.essence
 
 import org.rsmod.api.player.dialogue.Dialogue
 import org.rsmod.api.player.output.soundSynth
+import org.rsmod.api.player.output.spam
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.script.onOpLoc1
 import org.rsmod.game.entity.Npc
@@ -53,7 +54,7 @@ suspend fun Dialogue.teleportToRuneEssenceMine() {
     val npc = checkNotNull(npc) { "Rune essence mine teleport requires an npc dialogue context." }
     val dest = EssencePortals.randomEssenceMineDest(access)
 
-    npc.say("Seventior Disthine Molenko!")
+    npc.say("Senventior Disthine Molenko!")
     npc.spotanim("spotanim.curse_casting", height = 92)
     player.soundSynth("synth.curse_cast_and_fire")
     delay(1)
@@ -67,6 +68,7 @@ suspend fun Dialogue.teleportToRuneEssenceMine() {
 }
 
 suspend fun Dialogue.teleportToMainLand() {
+    player.spam("You step through the portal...")
     access.spotanim("spotanim.curse_impact", delay = 15, height = 124)
     player.soundSynth("synth.teleport_all", delay = 15)
     delay(1)

@@ -15,8 +15,8 @@ import org.rsmod.plugin.scripts.ScriptContext
 class PortSarimLocScript @Inject constructor(private val locRepo: LocRepository) : PluginScript() {
     override fun ScriptContext.startup() {
         onOpLoc1("loc.fai_trapdoor") { climbDownTrapdoor() }
-        onOpLoc1("loc.vc_manhole_open") { climbDownManhole() }
-        onOpLoc1("loc.vc_ladder") { climbUpFromSewer() }
+        onOpLoc1("loc.vc_manhole_open") { climbDownManhole(it.loc) }
+        onOpLoc1("loc.vc_ladder") { climbUpFromSewer(it.loc) }
         onOpLoc1("loc.jewellersdoor") { walkThroughDoor(it.loc) }
         onOpLoc1("loc.cavewall_shortcut_wyvern_west") { wyvernTunnel() }
         onOpLoc1("loc.draynor_diary_under_wall_w") { underwallTunnel(UNDERWALL_EAST_EXIT) }
@@ -30,19 +30,19 @@ class PortSarimLocScript @Inject constructor(private val locRepo: LocRepository)
         telejump(player.coords.translateZ(UNDERGROUND_OFFSET))
     }
 
-    private suspend fun ProtectedAccess.climbDownManhole() {
+    private suspend fun ProtectedAccess.climbDownManhole(manhole: BoundLocInfo) {
         arriveDelay()
         anim("seq.human_pickupfloor")
         delay(1)
         mes("You climb through the manhole")
-        telejump(SEWER_LANDING)
+        telejump(if (manhole.coords == VARROCK_MANHOLE) VARROCK_PIT_LANDING else SEWER_LANDING)
     }
 
-    private suspend fun ProtectedAccess.climbUpFromSewer() {
+    private suspend fun ProtectedAccess.climbUpFromSewer(ladder: BoundLocInfo) {
         arriveDelay()
         anim("seq.human_reachforladder")
         delay(1)
-        telejump(MANHOLE_EXIT)
+        telejump(if (ladder.coords == VARROCK_PIT_LADDER) VARROCK_MANHOLE_EXIT else MANHOLE_EXIT)
     }
 
     private suspend fun ProtectedAccess.walkThroughDoor(door: BoundLocInfo) {
@@ -119,6 +119,10 @@ class PortSarimLocScript @Inject constructor(private val locRepo: LocRepository)
 
         val SEWER_LANDING = CoordGrid(2962, 9650, 0)
         val MANHOLE_EXIT = CoordGrid(3018, 3233, 0)
+        val VARROCK_MANHOLE = CoordGrid(3267, 3400, 0)
+        val VARROCK_MANHOLE_EXIT = CoordGrid(3268, 3400, 0)
+        val VARROCK_PIT_LADDER = CoordGrid(2895, 5097, 0)
+        val VARROCK_PIT_LANDING = CoordGrid(2894, 5097, 0)
         val UNDERWALL_EAST_EXIT = CoordGrid(3070, 3257, 0)
         val UNDERWALL_WEST_EXIT = CoordGrid(3066, 3257, 0)
     }

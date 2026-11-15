@@ -22,7 +22,13 @@ class VarrockResidentNpcs : PluginScript() {
         for (child in listOf("npc.philop", "npc.kanel")) {
             onOpNpc1(child) { startDialogue(it.npc) { busyChild() } }
         }
-        for (client in listOf("npc.con_contract_client_1", "npc.con_contract_client_2")) {
+        val clients =
+            listOf(
+                "npc.con_contract_client_1",
+                "npc.con_contract_client_2",
+                "npc.con_contract_client_3",
+            )
+        for (client in clients) {
             onOpNpc1(client) { startDialogue(it.npc) { chatNpc(confused, BUSY) } }
         }
 

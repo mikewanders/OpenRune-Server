@@ -27,21 +27,22 @@ class FancyClothesStore @Inject constructor(private val shops: Shops) : PluginSc
 
     private suspend fun Dialogue.shopKeeper(npc: Npc) {
         chatNpc(happy, "Now you look like someone who goes to a lot of fancy dress parties.")
-        chatPlayer(happy, "Errr...what are you saying exactly?")
+        chatPlayer(confused, "Errr... what are you saying exactly?")
         chatNpc(
             happy,
             "I'm just saying that perhaps you would like to peruse my selection of garments.",
         )
         chatNpc(
-            happy,
+            quiz,
             "Or, if that doesn't interest you, then maybe you have something else to offer? " +
                 "I'm always on the look out for interesting or unusual new materials.",
         )
 
-
-        val choice = choice2(
+        val choice = choice4(
             "Okay, let's see what you've got then.", 1,
-            "I think I might just leave the perusing for now thanks.", 2,
+            "I think I might just leave the perusing for now, thanks.", 2,
+            "Can you make clothing suitable for hunting?", 3,
+            "What sort of unusual materials did you have in mind?", 4,
         )
 
         when (choice) {
@@ -49,9 +50,9 @@ class FancyClothesStore @Inject constructor(private val shops: Shops) : PluginSc
                 chatPlayer(happy, "Okay, let's see what you've got then.")
                 player.openFancyClothesStore(npc)
             }
-            2 -> {
-                chatPlayer(neutral, "I think I might just leave the perusing for now thanks.")
-            }
+            2 -> chatPlayer(neutral, "I think I might just leave the perusing for now, thanks.")
+            3 -> chatPlayer(quiz, "Can you make clothing suitable for hunting?")
+            4 -> chatPlayer(quiz, "What sort of unusual materials did you have in mind?")
         }
     }
 }

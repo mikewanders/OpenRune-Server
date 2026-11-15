@@ -26,9 +26,12 @@ class Aubury @Inject constructor(
         get() = runeMysteries.quest
 
     override fun ScriptContext.startup() {
-        onOpNpc1("npc.aubury") { startAuburyDialogue(it.npc) }
-        onOpNpc3("npc.aubury") { player.openAuburyShop(it.npc) }
+        for (aubury in listOf("npc.aubury", "npc.aubury_2op", "npc.aubury_3op")) {
+            onOpNpc1(aubury) { startAuburyDialogue(it.npc) }
+            onOpNpc3(aubury) { player.openAuburyShop(it.npc) }
+        }
         onOpNpc4("npc.aubury") { teleportToRuneEssenceMine(it.npc) }
+        onOpNpc4("npc.aubury_3op") { teleportToRuneEssenceMine(it.npc) }
     }
 
     private suspend fun ProtectedAccess.startAuburyDialogue(npc: Npc) {
@@ -187,37 +190,33 @@ class Aubury @Inject constructor(
     }
 
     private suspend fun Dialogue.auburyShopDialogue(npc: Npc, includeTeleport: Boolean) {
-        chatNpc(quiz, "Do you want to buy some runes?")
         if (includeTeleport) {
+            chatNpc(happy, "Do you want to buy some runes?")
             when (
-                choice3(
+                choice4(
                     "Yes please!",
                     1,
-                    "No thank you.",
+                    "Can you tell me about your cape?",
                     2,
-                    "Can you teleport me to the Rune Essence?",
+                    "Can you teleport me to the Rune Essence Mine?",
                     3,
+                    "No thank you.",
+                    4,
                 )
             ) {
                 1 -> {
                     chatPlayer(happy, "Yes please!")
                     player.openAuburyShop(npc)
                 }
-                2 -> {
-                    chatPlayer(quiz, "No thank you.")
-                    chatNpc(sad, "Well, if you find someone who does want runes, please send them my way.")
-                }
+                2 -> auburyCape(npc)
                 3 -> {
-                    chatPlayer(quiz, "Can you teleport me to the Rune Essence?")
-                    chatNpc(
-                        happy,
-                        "Of course. By the way, if you end up making any runes from the essence you " +
-                            "mine, I'll happily buy them from you.",
-                    )
+                    chatPlayer(quiz, "Can you teleport me to the Rune Essence Mine?")
                     teleportToRuneEssenceMine()
                 }
+                4 -> declineRunes()
             }
         } else {
+            chatNpc(quiz, "Do you want to buy some runes?")
             when (
                 choice2(
                     "Yes please!",
@@ -236,6 +235,32 @@ class Aubury @Inject constructor(
                 }
             }
         }
+    }
+
+    private suspend fun Dialogue.auburyCape(npc: Npc) {
+        chatPlayer(quiz, "Can you tell me about your cape?")
+        chatNpc(
+            happy,
+            "Certainly! Skillcapes are a symbol of achievement. Only people who have mastered a " +
+                "skill and reached level 99 can get their hands on them and gain the benefits " +
+                "they carry.",
+        )
+        chatNpc(
+            neutral,
+            "The Cape of Runecrafting has been upgraded with each talisman, allowing you to " +
+                "access all Runecrafting altars. Is there anything else I can help you with?",
+        )
+        if (choice2("I'd like to view your store please.", true, "No thank you.", false)) {
+            chatPlayer(happy, "I'd like to view your store please.")
+            player.openAuburyShop(npc)
+        } else {
+            declineRunes()
+        }
+    }
+
+    private suspend fun Dialogue.declineRunes() {
+        chatPlayer(neutral, "No thank you.")
+        chatNpc(happy, "Well, if you find someone who does want runes, please send them my way.")
     }
 
     private fun Player.openAuburyShop(npc: Npc) {

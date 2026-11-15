@@ -31,7 +31,7 @@ class SwordShop @Inject constructor(private val shops: Shops) : PluginScript() {
         chatNpc(happy, "Hello, bold adventurer! Can I interest you in some swords?")
 
         val choice = choice2(
-            "Yes please!", 1,
+            "Yes, please!", 1,
             "No, I'm okay for swords right now.", 2,
         )
 

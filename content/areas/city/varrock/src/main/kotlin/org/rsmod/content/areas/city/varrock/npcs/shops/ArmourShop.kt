@@ -29,8 +29,8 @@ class ArmourShop @Inject constructor(private val shops: Shops) : PluginScript() 
         chatNpc(happy, "Hello, do you need any help?")
 
         val choice = choice2(
-            "No thanks. I'm just looking around.", 1,
             "Do you want to trade?", 2,
+            "No thanks. I'm just looking around.", 1,
         )
 
         when (choice) {

@@ -1290,3 +1290,11 @@ coords = "0_50_53_9_43"
 [[spawn]]
 npc = "npc.postie_pete"
 coords = "0_50_54_10_38"
+
+[[spawn]]
+npc = "npc.25th_host"
+coords = "1_50_52_32_56"
+
+[[spawn]]
+npc = "npc.25th_cat"
+coords = "1_50_52_34_56"

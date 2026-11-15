@@ -26,10 +26,10 @@ class ArcheryShop @Inject constructor(private val shops: Shops) : PluginScript()
         startDialogue(npc) { shopKeeper(npc) }
 
     private suspend fun Dialogue.shopKeeper(npc: Npc) {
-        chatNpc(happy, "Welcome to Lowe's Archery Emporium. Do you want to see my wares?")
+        chatNpc(neutral, "Welcome to Lowe's Archery Emporium. Do you want to see my wares?")
 
         val choice = choice2(
-            "Yes please!", 1,
+            "Yes, please.", 1,
             "No, I prefer to bash things close up.", 2,
         )
 
