@@ -49,7 +49,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 3)
             val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
 
         (right ?: mirroredRight)?.let {
@@ -57,7 +57,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 1)
             val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
     }
 
@@ -88,7 +88,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 1)
             val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
 
         (left ?: mirroredLeft)?.let {
@@ -96,7 +96,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 3)
             val openedCoords = if (mirrored) it.openCoordsOpposite() else it.openCoords()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
     }
 
@@ -109,7 +109,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 1)
             val openedCoords = it.closeCoordsOpposite()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
 
         val right =
@@ -123,7 +123,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 3)
             val openedCoords = it.closeCoords()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
     }
 
@@ -136,7 +136,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 3)
             val openedCoords = it.closeCoords()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
 
         val left =
@@ -150,7 +150,7 @@ class DoubleDoorScript @Inject constructor(private val locRepo: LocRepository) :
             val openedAngle = it.turnAngle(rotations = 1)
             val openedCoords = it.closeCoordsOpposite()
             locRepo.del(it, DoorConstants.DURATION)
-            locRepo.add(openedCoords, openedLoc, DoorConstants.DURATION, openedAngle, it.shape)
+            locRepo.add(openedCoords, openedLoc.internalName, DoorConstants.DURATION, openedAngle, it.shape)
         }
     }
 

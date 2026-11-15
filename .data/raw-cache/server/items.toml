@@ -220,6 +220,7 @@ contentGroup = 34
 [item.params]
 "param.statreq1_skill"=4
 "param.statreq1_level"=99
+"param.ammo_recovery_rate"=72
 
 
 [[item]]
@@ -229,6 +230,7 @@ contentGroup = 34
 [item.params]
 "param.statreq1_skill"=4
 "param.statreq1_level"=99
+"param.ammo_recovery_rate"=72
 
 
 [[item]]
@@ -723,6 +725,8 @@ inherit = "obj.skillcape_max"
 contentGroup = 36
 
 transformlink="obj.skillcape_max_worn"
+[item.params]
+"param.ammo_recovery_rate"=72
 
 
 [[item]]
@@ -732,6 +736,8 @@ contentGroup = 36
 
 transformlink="obj.skillcape_max"
 transformtemplate="obj.template_for_transform"
+[item.params]
+"param.ammo_recovery_rate"=72
 
 
 [[item]]
@@ -8592,6 +8598,7 @@ weaponCategory="Blunt"
 [[item]]
 id = "obj.slayer_leafbladed_spear"
 inherit = "obj.slayer_leafbladed_spear"
+contentGroup = "content.slayer_leaf_weapon"
 weaponCategory="Spear"
 tradeable = false
 [item.params]
@@ -13413,6 +13420,7 @@ inherit = "obj.aide_shortbow"
 weaponCategory="Bow"
 tradeable = false
 [item.params]
+"param.required_ammo"="category.arrows_training"
 "param.proj_type"="projanim.arrow"
 "param.equipment_sound"=2244
 "param.attack_range"=7
@@ -15510,6 +15518,7 @@ tradeable = false
 [[item]]
 id = "obj.leafbladed_sword"
 inherit = "obj.leafbladed_sword"
+contentGroup = "content.slayer_leaf_weapon"
 weaponCategory="StabSword"
 [item.params]
 "param.equipment_sound"=2248
@@ -15529,6 +15538,7 @@ id = "obj.tots"
 inherit = "obj.tots"
 weaponCategory="PoweredStaff"
 [item.params]
+"param.charged_variant"="obj.tots_charged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -15552,6 +15562,7 @@ inherit = "obj.tots_charged"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.uncharged_variant"="obj.tots_uncharged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -15574,6 +15585,7 @@ id = "obj.tots_uncharged"
 inherit = "obj.tots_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
+"param.charged_variant"="obj.tots_charged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -16248,6 +16260,7 @@ inherit = "obj.toxic_tots_charged"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.uncharged_variant"="obj.toxic_tots_uncharged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -16270,6 +16283,7 @@ id = "obj.toxic_tots_uncharged"
 inherit = "obj.toxic_tots_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
+"param.charged_variant"="obj.toxic_tots_charged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -17957,6 +17971,7 @@ tradeable = false
 [[item]]
 id = "obj.leafbladed_battleaxe"
 inherit = "obj.leafbladed_battleaxe"
+contentGroup = "content.slayer_leaf_weapon"
 weaponCategory="Axe"
 [item.params]
 "param.equipment_sound"=2248
@@ -18535,6 +18550,7 @@ inherit = "obj.tots_i_charged"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.uncharged_variant"="obj.tots_i_uncharged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -18557,6 +18573,7 @@ id = "obj.tots_i_uncharged"
 inherit = "obj.tots_i_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
+"param.charged_variant"="obj.tots_i_charged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -18580,6 +18597,7 @@ inherit = "obj.toxic_tots_i_charged"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.uncharged_variant"="obj.toxic_tots_i_uncharged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -18602,6 +18620,7 @@ id = "obj.toxic_tots_i_uncharged"
 inherit = "obj.toxic_tots_i_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
+"param.charged_variant"="obj.toxic_tots_i_charged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -18642,6 +18661,7 @@ inherit = "obj.sanguinesti_staff"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.uncharged_variant"="obj.sanguinesti_staff_uncharged"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -18855,6 +18875,7 @@ id = "obj.sanguinesti_staff_uncharged"
 inherit = "obj.sanguinesti_staff_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
+"param.charged_variant"="obj.sanguinesti_staff"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -21824,6 +21845,7 @@ inherit = "obj.sanguinesti_staff_or"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.uncharged_variant"="obj.sanguinesti_staff_uncharged_or"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -21848,6 +21870,7 @@ inherit = "obj.sanguinesti_staff_uncharged_or"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.charged_variant"="obj.sanguinesti_staff_or"
 "param.bas_walk_l"="seq.human_halberdwalk_l"
 "param.bas_walk_r"="seq.human_halberdwalk_r"
 "param.bas_running"="seq.human_halberdrunning"
@@ -25505,6 +25528,7 @@ inherit = "obj.rune_armoured_boots"
 [[item]]
 id = "obj.slayer_mirror_shield"
 inherit = "obj.slayer_mirror_shield"
+contentGroup = "content.slayer_mirror_shield"
 [item.params]
 "param.equipment_sound"=2245
 
@@ -28632,6 +28656,8 @@ id = "obj.aide_arrow"
 inherit = "obj.aide_arrow"
 tradeable = false
 [item.params]
+"param.proj_travel"="spotanim.aide_arrow_travel"
+"param.proj_launch"="spotanim.aide_arrow_launch"
 "param.equipment_sound"=2244
 "param.destroy_note_desc"="You can get more Training arrows by talking to the Ranged Combat skill tutor north of Lumbridge Castle."
 
@@ -29442,6 +29468,7 @@ inherit = "obj.dragon_boots"
 [[item]]
 id = "obj.slayer_helm"
 inherit = "obj.slayer_helm"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -29450,6 +29477,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i"
 inherit = "obj.slayer_helm_i"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -30774,6 +30802,7 @@ inherit = "obj.dragon_javelin_p++"
 [[item]]
 id = "obj.slayer_helm_black"
 inherit = "obj.slayer_helm_black"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -30782,6 +30811,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_black"
 inherit = "obj.slayer_helm_i_black"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -30790,6 +30820,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_green"
 inherit = "obj.slayer_helm_green"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -30798,6 +30829,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_green"
 inherit = "obj.slayer_helm_i_green"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -30806,6 +30838,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_red"
 inherit = "obj.slayer_helm_red"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -30814,6 +30847,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_red"
 inherit = "obj.slayer_helm_i_red"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -31414,6 +31448,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_purple"
 inherit = "obj.slayer_helm_purple"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -31422,6 +31457,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_purple"
 inherit = "obj.slayer_helm_i_purple"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -31627,6 +31663,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_turquoise"
 inherit = "obj.slayer_helm_turquoise"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -31635,6 +31672,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_turquoise"
 inherit = "obj.slayer_helm_i_turquoise"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -32437,6 +32475,7 @@ inherit = "obj.mystic_boots_dusk"
 [[item]]
 id = "obj.slayer_helm_hydra"
 inherit = "obj.slayer_helm_hydra"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -32445,6 +32484,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_hydra"
 inherit = "obj.slayer_helm_i_hydra"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33207,6 +33247,7 @@ tradeable = false
 [[item]]
 id = "obj.v_shield"
 inherit = "obj.v_shield"
+contentGroup = "content.slayer_mirror_shield"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2245
@@ -33251,6 +33292,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_twisted"
 inherit = "obj.slayer_helm_twisted"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33328,6 +33370,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_twisted"
 inherit = "obj.slayer_helm_i_twisted"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33470,6 +33513,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i"
 inherit = "obj.sw_slayer_helm_i"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33478,6 +33522,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_black"
 inherit = "obj.sw_slayer_helm_i_black"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33486,6 +33531,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_green"
 inherit = "obj.sw_slayer_helm_i_green"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33494,6 +33540,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_red"
 inherit = "obj.sw_slayer_helm_i_red"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33502,6 +33549,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_purple"
 inherit = "obj.sw_slayer_helm_i_purple"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33510,6 +33558,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_turquoise"
 inherit = "obj.sw_slayer_helm_i_turquoise"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33518,6 +33567,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_hydra"
 inherit = "obj.sw_slayer_helm_i_hydra"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33526,6 +33576,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_twisted"
 inherit = "obj.sw_slayer_helm_i_twisted"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33782,6 +33833,7 @@ weaponCategory="Thrown"
 [[item]]
 id = "obj.slayer_helm_jad"
 inherit = "obj.slayer_helm_jad"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33790,6 +33842,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_jad"
 inherit = "obj.slayer_helm_i_jad"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33798,6 +33851,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_jad"
 inherit = "obj.sw_slayer_helm_i_jad"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33806,6 +33860,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_verzik"
 inherit = "obj.slayer_helm_verzik"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33814,6 +33869,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_verzik"
 inherit = "obj.slayer_helm_i_verzik"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33822,6 +33878,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_verzik"
 inherit = "obj.sw_slayer_helm_i_verzik"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33830,6 +33887,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_zuk"
 inherit = "obj.slayer_helm_zuk"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33838,6 +33896,7 @@ tradeable = false
 [[item]]
 id = "obj.slayer_helm_i_zuk"
 inherit = "obj.slayer_helm_i_zuk"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -33846,6 +33905,7 @@ tradeable = false
 [[item]]
 id = "obj.sw_slayer_helm_i_zuk"
 inherit = "obj.sw_slayer_helm_i_zuk"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34104,6 +34164,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i"
 inherit = "obj.pvpa_slayer_helm_i"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34112,6 +34173,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_black"
 inherit = "obj.pvpa_slayer_helm_i_black"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34120,6 +34182,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_green"
 inherit = "obj.pvpa_slayer_helm_i_green"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34128,6 +34191,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_red"
 inherit = "obj.pvpa_slayer_helm_i_red"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34136,6 +34200,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_purple"
 inherit = "obj.pvpa_slayer_helm_i_purple"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34144,6 +34209,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_turquoise"
 inherit = "obj.pvpa_slayer_helm_i_turquoise"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34152,6 +34218,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_hydra"
 inherit = "obj.pvpa_slayer_helm_i_hydra"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34160,6 +34227,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_twisted"
 inherit = "obj.pvpa_slayer_helm_i_twisted"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34168,6 +34236,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_jad"
 inherit = "obj.pvpa_slayer_helm_i_jad"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34176,6 +34245,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_verzik"
 inherit = "obj.pvpa_slayer_helm_i_verzik"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -34184,6 +34254,7 @@ tradeable = false
 [[item]]
 id = "obj.pvpa_slayer_helm_i_zuk"
 inherit = "obj.pvpa_slayer_helm_i_zuk"
+contentGroup = "content.slayer_helmet"
 tradeable = false
 [item.params]
 "param.equipment_sound"=2240
@@ -41728,6 +41799,7 @@ tradeable = false
 [[item]]
 id = "obj.vikingexile_v_shield"
 inherit = "obj.vikingexile_v_shield"
+contentGroup = "content.slayer_mirror_shield"
 tradeable = false
 [item.params]
 "param.destroy_note_desc"="You'll have to recover the individual components and then make it again."
@@ -49552,6 +49624,20 @@ weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
 "param.attack_range"=8
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
 
 
 [[item]]
@@ -51094,6 +51180,7 @@ inherit = "obj.avas_assembler_trouver"
 tradeable = false
 [item.params]
 "param.statreq1_skill"="stat.ranged"
+"param.ammo_recovery_rate"=80
 "param.statreq1_level"=70
 
 
@@ -51482,6 +51569,13 @@ tradeable = false
 
 
 [[item]]
+id = "obj.br_anma_50_reward"
+inherit = "obj.br_anma_50_reward"
+[item.params]
+"param.ammo_recovery_rate"=72
+
+
+[[item]]
 id = "obj.amulet_mould"
 inherit = "obj.amulet_mould"
 [item.params]
@@ -51771,6 +51865,7 @@ id = "obj.warped_sceptre_uncharged"
 inherit = "obj.warped_sceptre_uncharged"
 weaponCategory="PoweredStaff"
 [item.params]
+"param.charged_variant"="obj.warped_sceptre"
 "param.attack_range"=7
 
 
@@ -52023,6 +52118,7 @@ inherit = "obj.warped_sceptre"
 weaponCategory="PoweredStaff"
 tradeable = false
 [item.params]
+"param.uncharged_variant"="obj.warped_sceptre_uncharged"
 "param.attack_range"=7
 
 
@@ -52882,3 +52978,337 @@ contentGroup = "content.max_cape"
 id = "obj.skillcape_max_mythical"
 inherit = "obj.skillcape_max_mythical"
 contentGroup = "content.max_cape"
+
+[[item]]
+id = "obj.osrs_bond"
+inherit = "obj.osrs_bond"
+[item.params]
+"param.bond_item"=1
+
+[[item]]
+id = "obj.osrs_bond_untradeable"
+inherit = "obj.osrs_bond_untradeable"
+[item.params]
+"param.bond_item"=1
+
+[[item]]
+id = "obj.cowbell_amulet"
+inherit = "obj.cowbell_amulet"
+[item.params]
+"param.uncharged_variant"="obj.cowbell_amulet_empty"
+
+[[item]]
+id = "obj.cowbell_amulet_empty"
+inherit = "obj.cowbell_amulet_empty"
+[item.params]
+"param.charged_variant"="obj.cowbell_amulet"
+
+[[item]]
+id = "obj.bottomless_milk_bucket_filled"
+inherit = "obj.bottomless_milk_bucket_filled"
+[item.params]
+"param.uncharged_variant"="obj.bottomless_milk_bucket"
+
+[[item]]
+id = "obj.bottomless_milk_bucket"
+inherit = "obj.bottomless_milk_bucket"
+[item.params]
+"param.charged_variant"="obj.bottomless_milk_bucket_filled"
+
+[[item]]
+id = "obj.slayer_helm_araxyte"
+inherit = "obj.slayer_helm_araxyte"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.slayer_helm_i_araxyte"
+inherit = "obj.slayer_helm_i_araxyte"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.sw_slayer_helm_i_araxyte"
+inherit = "obj.sw_slayer_helm_i_araxyte"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.pvpa_slayer_helm_i_araxyte"
+inherit = "obj.pvpa_slayer_helm_i_araxyte"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.slayer_helm_hooded"
+inherit = "obj.slayer_helm_hooded"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.slayer_helm_i_hooded"
+inherit = "obj.slayer_helm_i_hooded"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.sw_slayer_helm_i_hooded"
+inherit = "obj.sw_slayer_helm_i_hooded"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.pvpa_slayer_helm_i_hooded"
+inherit = "obj.pvpa_slayer_helm_i_hooded"
+contentGroup = "content.slayer_helmet"
+
+[[item]]
+id = "obj.eye_of_ayak"
+inherit = "obj.eye_of_ayak"
+weaponCategory="PoweredStaff"
+tradeable = false
+[item.params]
+"param.uncharged_variant"="obj.eye_of_ayak_uncharged"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=6
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.eye_of_ayak_uncharged"
+inherit = "obj.eye_of_ayak_uncharged"
+weaponCategory="PoweredStaff"
+[item.params]
+"param.charged_variant"="obj.eye_of_ayak"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=6
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.tots_orn"
+inherit = "obj.tots_orn"
+weaponCategory="PoweredStaff"
+[item.params]
+"param.charged_variant"="obj.tots_charged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.tots_charged_orn"
+inherit = "obj.tots_charged_orn"
+weaponCategory="PoweredStaff"
+tradeable = false
+[item.params]
+"param.uncharged_variant"="obj.tots_uncharged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.tots_uncharged_orn"
+inherit = "obj.tots_uncharged_orn"
+weaponCategory="PoweredStaff"
+[item.params]
+"param.charged_variant"="obj.tots_charged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.tots_i_charged_orn"
+inherit = "obj.tots_i_charged_orn"
+weaponCategory="PoweredStaff"
+tradeable = false
+[item.params]
+"param.uncharged_variant"="obj.tots_i_uncharged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.tots_i_uncharged_orn"
+inherit = "obj.tots_i_uncharged_orn"
+weaponCategory="PoweredStaff"
+[item.params]
+"param.charged_variant"="obj.tots_i_charged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.toxic_tots_charged_orn"
+inherit = "obj.toxic_tots_charged_orn"
+weaponCategory="PoweredStaff"
+tradeable = false
+[item.params]
+"param.uncharged_variant"="obj.toxic_tots_uncharged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.toxic_tots_uncharged_orn"
+inherit = "obj.toxic_tots_uncharged_orn"
+weaponCategory="PoweredStaff"
+[item.params]
+"param.charged_variant"="obj.toxic_tots_charged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.toxic_tots_i_charged_orn"
+inherit = "obj.toxic_tots_i_charged_orn"
+weaponCategory="PoweredStaff"
+tradeable = false
+[item.params]
+"param.uncharged_variant"="obj.toxic_tots_i_uncharged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+
+
+[[item]]
+id = "obj.toxic_tots_i_uncharged_orn"
+inherit = "obj.toxic_tots_i_uncharged_orn"
+weaponCategory="PoweredStaff"
+[item.params]
+"param.charged_variant"="obj.toxic_tots_i_charged_orn"
+"param.bas_walk_l"="seq.human_halberdwalk_l"
+"param.bas_walk_r"="seq.human_halberdwalk_r"
+"param.bas_running"="seq.human_halberdrunning"
+"param.attack_range"=7
+"param.attack_anim_stance1"="seq.human_castwave_staff"
+"param.attack_sound_stance1"=178
+"param.attack_anim_stance2"="seq.human_castwave_staff"
+"param.attack_sound_stance2"=178
+"param.attack_anim_stance4"="seq.human_castwave_staff"
+"param.attack_sound_stance4"=178
+"param.bas_readyanim"="seq.human_staffready"
+"param.bas_turnonspot"="seq.human_halberdturnonspot"
+"param.defend_anim"="seq.human_stafforb_block"
+"param.bas_walk_f"="seq.human_halberdwalk_f"
+"param.bas_walk_b"="seq.human_halberdwalk_b"
+

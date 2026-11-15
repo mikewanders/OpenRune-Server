@@ -2,6 +2,8 @@ package org.rsmod.content.quest.manager
 
 import org.rsmod.api.config.Constants
 import org.rsmod.api.player.dialogue.Dialogue
+import org.rsmod.api.player.stat.statBase
+import org.rsmod.api.table.QuestRow
 
 suspend fun <T> Dialogue.menu(
     vararg options: Pair<String, T>,
@@ -52,3 +54,14 @@ suspend fun Dialogue.startQuestPrompt(quest: Quest): Boolean =
 
 private fun startQuestTitle(name: String): String =
     if (name.startsWith("The ")) "Start $name quest?" else "Start the $name quest?"
+
+suspend fun Dialogue.recommendedStatsWarning(quest: Quest) {
+    val recommended = QuestRow.getRow(quest.rowID).recommendedStats
+    if (recommended.all { (stat, level) -> player.statBase(stat.internalName) >= level }) {
+        return
+    }
+    mesbox(
+        "Before starting this quest, be aware that one or more of your skill levels are lower " +
+            "than recommended."
+    )
+}

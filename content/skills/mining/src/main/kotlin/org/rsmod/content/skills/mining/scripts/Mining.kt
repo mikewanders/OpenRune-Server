@@ -98,7 +98,7 @@ constructor(
                 return
             }
             anim(miningAnim(pickaxe, data))
-            spam("You swing your pickaxe at the rock.")
+            spam("You swing your pick at the rock.")
             mine(rock, type)
         }
     }
@@ -173,9 +173,8 @@ constructor(
                 }
                 SkillingAwardResult.Cancelled -> Unit
                 SkillingAwardResult.Success -> {
-                    spam(
-                        "You manage to mine some ${getInvObj(InvObj(product.item)).name.lowercase()}.",
-                    )
+                    val ore = getInvObj(InvObj(product.item)).name.lowercase().removeSuffix(" ore")
+                    spam("You manage to mine some $ore.")
                     soundSynth(ORE_OBTAINED_SOUND)
                 }
             }
@@ -390,7 +389,7 @@ constructor(
     }
 
     companion object {
-        private const val ORE_OBTAINED_SOUND = 3600
+        private const val ORE_OBTAINED_SOUND = "synth.mine_ore"
         private const val PROSPECT_DELAY = 4
         private const val INFERNAL_SMITHING_REQ = 85
         private const val SONG_OF_THE_ELVES = "quest_songoftheelves"

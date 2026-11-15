@@ -5,6 +5,10 @@ import com.google.inject.multibindings.Multibinder
 import org.junit.jupiter.api.Test
 import org.rsmod.api.death.PlayerDeathCleanupHook
 import org.rsmod.api.death.PlayerDeathHook
+import org.rsmod.api.death.PlayerDeathOverrideHook
+import org.rsmod.api.death.PlayerDeathPreDropHook
+import org.rsmod.api.death.PlayerDeathStorageHook
+import org.rsmod.api.death.PlayerGraveHook
 import org.rsmod.api.death.PlayerRespawnHook
 import org.rsmod.api.death.plugin.PlayerDeathScript
 import org.rsmod.api.hit.plugin.PlayerHitScript
@@ -28,6 +32,7 @@ class LevelUpDeathTest {
             check(player.hitpoints == 0)
             assertFalse(player.isDelayed)
             assertFalse(player.ui.containsModal(LEVELUP_DISPLAY))
+            assertEquals(0, player.vars["varbit.busy"])
 
             advance()
             assertTrue(player.isDelayed)
@@ -47,11 +52,30 @@ class LevelUpDeathTest {
             assertTrue(player.isDelayed)
         }
 
+    @Test
+    fun GameTestState.`hit clears busy while interrupting an open level-up`() =
+        runInjectedGameTest(GameTestScope::class, DeathHooks(), *SCRIPTS) {
+            player.setCurrentLevel("stat.hitpoints", HITPOINTS)
+            player.statAdvance("stat.attack", XP_TO_LEVEL_2, rate = 1.0, globalRate = 1.0)
+            advance()
+            assertTrue(player.ui.containsModal(LEVELUP_DISPLAY))
+            assertEquals(1, player.vars["varbit.busy"])
+
+            player.queueHit(1, HitType.Typeless, 1, NoopPlayerHitModifier)
+            advance()
+            assertFalse(player.ui.containsModal(LEVELUP_DISPLAY))
+            assertEquals(0, player.vars["varbit.busy"])
+        }
+
     private class DeathHooks : AbstractModule() {
         override fun configure() {
             Multibinder.newSetBinder(binder(), PlayerDeathHook::class.java)
             Multibinder.newSetBinder(binder(), PlayerDeathCleanupHook::class.java)
+            Multibinder.newSetBinder(binder(), PlayerDeathPreDropHook::class.java)
+            Multibinder.newSetBinder(binder(), PlayerDeathOverrideHook::class.java)
             Multibinder.newSetBinder(binder(), PlayerRespawnHook::class.java)
+            Multibinder.newSetBinder(binder(), PlayerDeathStorageHook::class.java)
+            Multibinder.newSetBinder(binder(), PlayerGraveHook::class.java)
         }
     }
 

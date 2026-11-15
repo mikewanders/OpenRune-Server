@@ -38,6 +38,7 @@ import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.protect.ProtectedAccessLauncher
 import org.rsmod.api.player.queueDeath
 import org.rsmod.api.player.stat.PlayerSkillXP
+import org.rsmod.api.player.stat.XpSource
 import org.rsmod.api.player.stat.stat
 import org.rsmod.api.player.stat.statAdvance
 import org.rsmod.api.player.stat.statSub
@@ -553,8 +554,13 @@ constructor(
             }
             val id = arg.toIntOrNull()
             if (id != null) {
-                player.soundSynth(id)
-                player.mes("Synth: $id")
+                val name = RSCM.getReverseMapping(RSCMType.SYNTH, id)
+                if (RSCM.getRSCMOrNull("synth.$name", RSCMType.SYNTH) != id) {
+                    player.mes("There is no synth mapped to id: $id")
+                    return
+                }
+                player.soundSynth("synth.$name")
+                player.mes("Synth: '$name' ($id)")
                 return
             }
             val typeName = arg.removePrefix("synth.")
@@ -756,7 +762,7 @@ constructor(
             }
             val xpDelta = xp - statMap.getXP(statInternal)
             statMap.setCurrentLevel(statInternal, targetLevel.toByte())
-            statAdvance(statInternal, xpDelta.toDouble(), rate = 1.0)
+            statAdvance(statInternal, xpDelta.toDouble(), rate = 1.0, source = XpSource.Manual)
         }
     }
 
@@ -1071,7 +1077,15 @@ constructor(
         if (id != null) {
             return ServerCacheManager.getItem(id)
         }
-        return ServerCacheManager.getItem("obj.$input".asRSCM(RSCMType.OBJ))
+        val mapped = RSCM.getRSCMOrNull("obj.$input", RSCMType.OBJ)
+        if (mapped != null) {
+            return ServerCacheManager.getItem(mapped)
+        }
+        val name = input.replace('_', ' ')
+        return ServerCacheManager.getItems()
+            .values
+            .filter { it.name.equals(name, ignoreCase = true) && !it.isCert && !it.isPlaceholder }
+            .minByOrNull { it.id }
     }
 
     private fun List<String>.asTypeName(): String = joinToString("_")

@@ -2,6 +2,7 @@ package org.rsmod.content.quest.area.varrock.childrenofthesun
 
 import jakarta.inject.Inject
 import org.rsmod.api.player.dialogue.Dialogue
+import org.rsmod.api.player.music.MusicPlayer
 import org.rsmod.api.player.protect.ProtectedAccess
 import org.rsmod.api.player.vars.VarPlayerIntMapSetter
 import org.rsmod.api.player.vars.boolVarBit
@@ -28,8 +29,9 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
         "quest_childrenofthesun",
         "varp.vmq1_primary",
         rewards { extra("Access to Varlamore") },
-        ItemRewardDisplay(RewardModel),
+        ItemRewardDisplay(RewardModel, zoom = 400, x = 78, y = 128),
         questVarbit = "varbit.vmq1",
+        completeJingle = "jingle.quest_complete_1",
     ) {
 
     @Inject
@@ -38,7 +40,11 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
         locRepo: LocRepository,
         collision: CollisionFlagMap,
         sight: RayCastValidator,
-    ) : this(WorldScenes(npcRepo, locRepo, collision), GuardTails(npcRepo, sight))
+        music: MusicPlayer,
+    ) : this(
+        WorldScenes(npcRepo, locRepo, collision, music),
+        GuardTails(npcRepo, sight),
+    )
 
     private var Player.metAlina by boolVarBit("varbit.vmq1_met_alina")
 
@@ -90,7 +96,7 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
                 "I have marked <red>${markedCount(access.player)}</red> of the " +
                     "<red>$BanditCount</red> bandits so far."
             ) {
-                visibleWhen { stage(access.player) == CotsStage.Marking }
+                visibleWhen { stage(access.player) in CotsStage.Marking..CotsStage.MarkedAll }
             }
         }
 
@@ -122,7 +128,7 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
     }
 
     fun syncGuards(player: Player) {
-        val marking = stage(player) == CotsStage.Marking
+        val marking = stage(player) in CotsStage.Marking..CotsStage.MarkedAll
         for (guard in 1..CotsNpc.GuardCount) {
             val varbit = CotsNpc.guardVarbit(guard)
             val current = player.vars[varbit]
@@ -148,7 +154,7 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
         }
 
     private suspend fun ProtectedAccess.markGuard(guard: Int) {
-        if (stage(player) != CotsStage.Marking) {
+        if (stage(player) !in CotsStage.Marking..CotsStage.MarkedAll) {
             return
         }
         if (markedCount(player) >= CotsNpc.BanditGuards) {
@@ -157,14 +163,20 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
         }
         VarPlayerIntMapSetter.set(player, CotsNpc.guardVarbit(guard), GuardMarked)
         mes("You mark the guard.")
+        if (markedCount(player) == CotsNpc.BanditGuards && markedCorrectly(player)) {
+            setStage(CotsStage.MarkedAll)
+        }
     }
 
     private fun ProtectedAccess.unmarkGuard(guard: Int) {
-        if (stage(player) != CotsStage.Marking) {
+        if (stage(player) !in CotsStage.Marking..CotsStage.MarkedAll) {
             return
         }
         VarPlayerIntMapSetter.set(player, CotsNpc.guardVarbit(guard), GuardUnmarked)
         mes("You unmark the guard.")
+        if (stage(player) == CotsStage.MarkedAll) {
+            setStage(CotsStage.Marking)
+        }
     }
 
     internal suspend fun ProtectedAccess.tailTick() {
@@ -363,7 +375,8 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
             CotsStage.Tailing,
             CotsStage.Eavesdropping -> tobyn(neutral, "Move along, citizen.")
             CotsStage.ReportToTobyn -> reportBandits()
-            CotsStage.Marking -> markingStage()
+            CotsStage.Marking,
+            CotsStage.MarkedAll -> markingStage()
             CotsStage.OnRoof,
             CotsStage.Interrogating,
             CotsStage.Interrogated,
@@ -499,7 +512,7 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
                 chatPlayer(neutral, "Hello there. I'm $name.")
                 itzla(
                     happy,
-                    "$name? Kuaini! Pleased to meet you. Crown Prince Itzla Arkan, heir to the " +
+                    "$name? Kuani! Pleased to meet you. Crown Prince Itzla Arkan, heir to the " +
                         "Sun Throne, at your service.",
                 )
                 itzla(quiz, "Tell me, $name, are you the one who caught these would-be assassins?")
@@ -604,7 +617,7 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
     private class JournalStep(val from: Int, val until: Int, val text: String)
 
     private companion object {
-        private const val RewardModel = "obj.sunfirerune"
+        private const val RewardModel = "obj.cooked_chicken"
 
         private const val BanditCount = CotsNpc.BanditGuards
 
@@ -639,7 +652,7 @@ internal constructor(private val scenes: CotsScenes, private val tails: CotsTail
                 ),
                 JournalStep(
                     CotsStage.Marking,
-                    CotsStage.Marking,
+                    CotsStage.MarkedAll,
                     "<red>Sergeant Tobyn</red> wants me to <red>Mark</red> the four disguised " +
                         "bandits among the guards in the <red>square</red> and on the " +
                         "<red>eastern road</red> to the bank. Once I've marked all four, I " +

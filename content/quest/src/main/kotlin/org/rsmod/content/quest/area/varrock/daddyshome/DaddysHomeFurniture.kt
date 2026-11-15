@@ -268,11 +268,16 @@ class DaddysHomeFurniture @Inject constructor(private val daddysHome: DaddysHome
         val needsLogs =
             stage in DaddysHomeQuest.BUILDING until DaddysHomeQuest.COMPLETE &&
                 daddysHome.furnitureState(player, Furniture.bed) < Furniture.BUILT
-        if (!needsLogs) {
+        val held =
+            listOf(DaddysHomeQuest.WAXWOOD_LOGS, DaddysHomeQuest.WAXWOOD_PLANK).sumOf {
+                inv.count(it) + bank.count(it)
+            }
+        val missing = WAXWOOD_LOG_COUNT - held
+        if (!needsLogs || missing <= 0) {
             mes("You search the crates but find nothing interesting.")
             return
         }
-        if (invAdd(inv, DaddysHomeQuest.WAXWOOD_LOGS, WAXWOOD_LOG_COUNT).failure) {
+        if (invAdd(inv, DaddysHomeQuest.WAXWOOD_LOGS, missing).failure) {
             mes("You don't have enough inventory space.")
             return
         }
@@ -312,12 +317,12 @@ class DaddysHomeFurniture @Inject constructor(private val daddysHome: DaddysHome
 
     internal companion object {
         const val BUILD_SEQ = "seq.human_poh_build"
-        const val BUILD_SYNTH = "synth.poh_build_furniture"
+        const val BUILD_SYNTH = "synth.poh_build_wood"
         const val NAILS_PER_STROKE = 2
         const val NAIL_MESSAGE = "You use a nail."
         const val DEMOLISH_SEQ = "seq.human_throw_away"
-        const val DEMOLISH_SYNTH = "synth.poh_remove_furniture"
-        const val DEMOLISH_SYNTH_ALT = "synth.poh_remove_furniture_alt"
+        const val DEMOLISH_SYNTH = "synth.demolish_1"
+        const val DEMOLISH_SYNTH_ALT = "synth.demolish_2"
         const val DEMOLISH_SYNTH_DELAY = 20
         const val DEMOLISH_DELAY = 1
         const val BUILD_MENU = "interface.poh_furniture_creation"

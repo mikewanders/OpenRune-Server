@@ -56,18 +56,17 @@ constructor(
     }
 
     private fun Player.takeClose(obj: Obj) {
-        val removed = repo.del(obj)
-        if (!removed) {
-            mes(Constants.dm_take_taken)
-            return
-        }
         val take = transaction(obj)
         if (take.failure) {
             mes(Constants.dm_take_invspace)
-        } else {
-            take.commitAll()
-            takenNotifier.notify(this, obj, telegrab = false)
+            return
         }
+        if (!repo.del(obj)) {
+            mes(Constants.dm_take_taken)
+            return
+        }
+        take.commitAll()
+        takenNotifier.notify(this, obj, telegrab = false)
     }
 
     private fun Player.hasInvSpace(obj: Obj): Boolean = transaction(obj).success

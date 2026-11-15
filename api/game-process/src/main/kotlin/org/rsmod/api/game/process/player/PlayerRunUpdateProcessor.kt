@@ -1,6 +1,7 @@
 package org.rsmod.api.game.process.player
 
 import dev.openrune.util.Wearpos
+import jakarta.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 import org.rsmod.api.config.constants
@@ -8,13 +9,18 @@ import org.rsmod.api.config.refs.params
 import org.rsmod.api.inv.weight.InvWeight
 import org.rsmod.api.player.output.UpdateRun
 import org.rsmod.api.player.stat.agilityLvl
+import org.rsmod.api.player.vars.armRunAutoEnable
 import org.rsmod.api.player.vars.setActiveMoveSpeed
 import org.rsmod.api.player.vars.varMoveSpeed
+import org.rsmod.api.server.config.ServerConfig
 import org.rsmod.game.entity.Player
 import org.rsmod.game.movement.MoveSpeed
 import org.rsmod.game.type.getOrNull
 
-public class PlayerRunUpdateProcessor {
+public class PlayerRunUpdateProcessor @Inject constructor(config: ServerConfig) {
+    private val drainDenominator = config.gameplay.runEnergy.drainDenominator.coerceAtLeast(1)
+    private val infiniteRun = config.gameplay.runEnergy.infinite
+
     public fun process(player: Player) {
         player.updateRunWeight()
         player.updateRunEnergy()
@@ -30,10 +36,11 @@ public class PlayerRunUpdateProcessor {
         val startRunEnergy = runEnergy
 
         if (pendingStepCount > 1) {
-            decreaseRunEnergy()
+            if (!infiniteRun) {
+                decreaseRunEnergy()
+            }
         } else {
             restoreRunEnergy()
-            autoEnableRun(startRunEnergy)
         }
 
         if (runEnergy != startRunEnergy) {
@@ -51,9 +58,13 @@ public class PlayerRunUpdateProcessor {
         } else if (hasStaminaEffect()) {
             loss = (loss * 30) / 100
         }
+        loss = max(1, loss / drainDenominator)
 
         runEnergy = max(0, runEnergy - loss)
         if (runEnergy == 0 && isRunning()) {
+            if (varMoveSpeed == MoveSpeed.Run) {
+                armRunAutoEnable()
+            }
             setActiveMoveSpeed(MoveSpeed.Walk)
         }
     }
@@ -77,25 +88,6 @@ public class PlayerRunUpdateProcessor {
         val baseRecover = 15 + (agilityLvl / 10)
         val recover = (restorationRateMod() * baseRecover).toInt()
         runEnergy = min(constants.run_max_energy, runEnergy + recover)
-    }
-
-    /**
-     * The "Energy threshold to re-enable running" setting: once restored energy climbs past the
-     * chosen percentage while walking, run is switched back on through the same queue the run orb
-     * uses, which interrupts the current action like a manual toggle.
-     */
-    private fun Player.autoEnableRun(startRunEnergy: Int) {
-        val thresholdPercent = vars[RUN_AUTO_ENABLE_VARBIT]
-        if (thresholdPercent <= 0 || varMoveSpeed != MoveSpeed.Walk) {
-            return
-        }
-        val threshold = max(MIN_RUN_ENERGY, thresholdPercent * ENERGY_PER_PERCENT)
-        if (startRunEnergy >= threshold || runEnergy < threshold) {
-            return
-        }
-        if (RUN_TOGGLE_QUEUE !in queueList) {
-            strongQueue(RUN_TOGGLE_QUEUE, 1)
-        }
     }
 
     private fun Player.restorationRateMod(): Double {
@@ -137,11 +129,6 @@ public class PlayerRunUpdateProcessor {
 
     private companion object {
         private const val FULL_GRACEFUL_RESTORE_RATE = 3000
-
-        private const val RUN_AUTO_ENABLE_VARBIT = "varbit.runenergy_autoenable"
-        private const val RUN_TOGGLE_QUEUE = "queue.runmode_toggle"
-        private const val ENERGY_PER_PERCENT = 100
-        private const val MIN_RUN_ENERGY = 100
 
         private val gracefulWearpos =
             listOf(

@@ -29,8 +29,10 @@ import org.rsmod.game.damage.DamageContributions
 import org.rsmod.game.entity.player.Appearance
 import org.rsmod.game.entity.player.PlayerUid
 import org.rsmod.game.entity.player.PublicMessage
+import org.rsmod.game.entity.util.EntityAnimationFreeze
 import org.rsmod.game.entity.util.EntityFaceAngle
 import org.rsmod.game.entity.util.EntityTinting
+import org.rsmod.game.entity.util.EntityTransparency
 import org.rsmod.game.entity.util.PathingEntityCommon
 import org.rsmod.game.headbar.Headbar
 import org.rsmod.game.hero.HeroPoints
@@ -46,6 +48,7 @@ import org.rsmod.game.seq.EntitySeq
 import org.rsmod.game.shop.Shop
 import org.rsmod.game.spot.EntitySpotanim
 import org.rsmod.game.stat.PlayerStatMap
+import org.rsmod.game.stat.StatAdvance
 import org.rsmod.game.timer.PlayerTimerMap
 import org.rsmod.game.ui.UserInterfaceMap
 import org.rsmod.game.vars.VarPlayerIntMap
@@ -80,10 +83,18 @@ public class Player(
     public val vars: VarPlayerIntMap = VarPlayerIntMap()
     public val strVars: VarPlayerStrMap = VarPlayerStrMap()
 
+    /**
+     * Varp setters do not transmit before the first processed tick; these are sent on it unless a
+     * full var resync covers them first.
+     */
+    public val varpsSetBeforeFirstTick: MutableSet<Int> = HashSet()
+
     public val ui: UserInterfaceMap = UserInterfaceMap()
     public val statMap: PlayerStatMap = PlayerStatMap()
     public val timerMap: PlayerTimerMap = PlayerTimerMap()
     public val softTimerMap: PlayerTimerMap = PlayerTimerMap()
+    public var postInteractionSoftTimerMap: PlayerTimerMap? = null
+        private set
     public val queueList: PlayerQueueList = PlayerQueueList()
     public val weakQueueList: PlayerQueueList = PlayerQueueList()
     public val engineQueueList: EngineQueueList = EngineQueueList()
@@ -214,6 +225,8 @@ public class Player(
     public var publicMessage: PublicMessage? = null
     public var pendingSay: String? = null
     public var pendingTinting: EntityTinting? = null
+    public var pendingTransparency: EntityTransparency? = null
+    public var pendingAnimationFreeze: EntityAnimationFreeze? = null
     public var pendingRunWeight: Boolean = false
     public val pendingStatUpdates: BitSet = BitSet()
     public val activeHitmarks: LongArrayList = LongArrayList()
@@ -252,6 +265,7 @@ public class Player(
 
     public var forceDisconnect: Boolean = false
     public var manualLogout: Boolean = false
+    public var idleLogout: Boolean = false
     public var pendingLogout: Boolean = false
     public var loggingOut: Boolean = false
     public var pendingCloseClient: Boolean = false
@@ -383,14 +397,29 @@ public class Player(
         timerMap.remove(timerType)
     }
 
-    public fun softTimer(timer: String, cycles: Int) {
+    /**
+     * Repeating soft timers normally run before movement and interactions. Set [afterInteractions]
+     * when this tick's interaction must be consumed before the timer's work.
+     */
+    @OptIn(InternalApi::class)
+    public fun softTimer(timer: String, cycles: Int, afterInteractions: Boolean = false) {
         require(cycles > 0) { "`cycles` must be greater than 0. (cycles=$cycles)" }
-        softTimerMap.schedule(timer, mapClock = currentMapClock, interval = cycles)
+        val timers =
+            if (afterInteractions) {
+                softTimerMap.remove(timer)
+                postInteractionSoftTimerMap
+                    ?: PlayerTimerMap().also { postInteractionSoftTimerMap = it }
+            } else {
+                postInteractionSoftTimerMap?.remove(timer)
+                softTimerMap
+            }
+        timers.schedule(timer, mapClock = currentMapClock, interval = cycles)
     }
 
     @OptIn(InternalApi::class)
     public fun clearSoftTimer(timerType: String) {
         softTimerMap.remove(timerType)
+        postInteractionSoftTimerMap?.remove(timerType)
     }
 
         public fun weakQueue(queue: String, cycles: Int, args: Any? = null) {
@@ -437,8 +466,9 @@ public class Player(
     }
 
     @InternalApi
-    public fun engineQueueAdvanceStat(stat: StatType) {
-        engineQueueList.add(EngineQueueType.AdvanceStat, args = stat, label = stat.id)
+    public fun engineQueueAdvanceStat(stat: StatType, previousLevel: Int) {
+        val args = StatAdvance(stat, previousLevel)
+        engineQueueList.add(EngineQueueType.AdvanceStat, args = args, label = stat.id)
     }
 
     @InternalApi
@@ -492,7 +522,11 @@ public class Player(
     }
 
     override fun spotanim(spot: String, delay: Int, height: Int, slot: Int) {
-        PathingEntityCommon.spotanim(this, spot.asRSCM(RSCMType.SPOTANIM), delay, height, slot)
+        spotanim(spot, delay, height, slot, loop = false)
+    }
+
+    override fun spotanim(spot: String, delay: Int, height: Int, slot: Int, loop: Boolean) {
+        PathingEntityCommon.spotanim(this, spot.asRSCM(RSCMType.SPOTANIM), delay, height, slot, loop)
     }
 
     public fun resetSpotanim(height: Int = 0, slot: Int = 0) {

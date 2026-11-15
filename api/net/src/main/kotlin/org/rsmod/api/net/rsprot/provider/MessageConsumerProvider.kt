@@ -9,11 +9,19 @@ import net.rsprot.protocol.game.incoming.buttons.IfButtonD
 import net.rsprot.protocol.game.incoming.buttons.IfButtonT
 import net.rsprot.protocol.game.incoming.buttons.IfScriptTrigger
 import net.rsprot.protocol.game.incoming.buttons.IfSubOp
-import net.rsprot.protocol.game.incoming.locs.OpLoc6
-import net.rsprot.protocol.game.incoming.locs.OpLocT
+import net.rsprot.protocol.game.incoming.events.EventKeyboard
+import net.rsprot.protocol.game.incoming.events.EventMouseClickV1
+import net.rsprot.protocol.game.incoming.events.EventMouseClickV2
+import net.rsprot.protocol.game.incoming.events.EventMouseScroll
+import net.rsprot.protocol.game.incoming.locs.OpLoc6V1
+import net.rsprot.protocol.game.incoming.locs.OpLoc6V2
+import net.rsprot.protocol.game.incoming.locs.OpLocTV1
+import net.rsprot.protocol.game.incoming.locs.OpLocTV2
 import net.rsprot.protocol.game.incoming.locs.OpLocV2
+import net.rsprot.protocol.game.incoming.locs.OpLocV3
 import net.rsprot.protocol.game.incoming.messaging.MessagePrivate
 import net.rsprot.protocol.game.incoming.messaging.MessagePublic
+import net.rsprot.protocol.game.incoming.misc.client.Idle
 import net.rsprot.protocol.game.incoming.misc.client.MapBuildComplete
 import net.rsprot.protocol.game.incoming.misc.client.WindowStatus
 import net.rsprot.protocol.game.incoming.misc.user.ClickWorldMap
@@ -31,6 +39,7 @@ import net.rsprot.protocol.game.incoming.objs.OpObjV2
 import net.rsprot.protocol.game.incoming.players.OpPlayer
 import net.rsprot.protocol.game.incoming.players.OpPlayerT
 import net.rsprot.protocol.game.incoming.resumed.ResumePCountDialog
+import net.rsprot.protocol.game.incoming.resumed.ResumePLongDialog
 import net.rsprot.protocol.game.incoming.resumed.ResumePNameDialog
 import net.rsprot.protocol.game.incoming.resumed.ResumePObjDialog
 import net.rsprot.protocol.game.incoming.resumed.ResumePStringDialog
@@ -46,6 +55,7 @@ import org.rsmod.api.net.rsprot.handlers.ClientCheatHandler
 import org.rsmod.api.net.rsprot.handlers.CloseModalHandler
 import org.rsmod.api.net.rsprot.handlers.FriendListAddHandler
 import org.rsmod.api.net.rsprot.handlers.FriendListDeleteHandler
+import org.rsmod.api.net.rsprot.handlers.IdleHandler
 import org.rsmod.api.net.rsprot.handlers.If1ButtonHandler
 import org.rsmod.api.net.rsprot.handlers.If3ButtonHandler
 import org.rsmod.api.net.rsprot.handlers.IfButtonDHandler
@@ -54,6 +64,7 @@ import org.rsmod.api.net.rsprot.handlers.IfScriptTriggerHandler
 import org.rsmod.api.net.rsprot.handlers.IfSubOpHandler
 import org.rsmod.api.net.rsprot.handlers.IgnoreListAddHandler
 import org.rsmod.api.net.rsprot.handlers.IgnoreListDeleteHandler
+import org.rsmod.api.net.rsprot.handlers.InputEventHandler
 import org.rsmod.api.net.rsprot.handlers.MapBuildCompleteHandler
 import org.rsmod.api.net.rsprot.handlers.MessagePrivateHandler
 import org.rsmod.api.net.rsprot.handlers.MessagePublicHandler
@@ -71,12 +82,14 @@ import org.rsmod.api.net.rsprot.handlers.OpObjTHandler
 import org.rsmod.api.net.rsprot.handlers.OpPlayerHandler
 import org.rsmod.api.net.rsprot.handlers.OpPlayerTHandler
 import org.rsmod.api.net.rsprot.handlers.ResumePCountDialogHandler
+import org.rsmod.api.net.rsprot.handlers.ResumePLongDialogHandler
 import org.rsmod.api.net.rsprot.handlers.ResumePNameDialogHandler
 import org.rsmod.api.net.rsprot.handlers.ResumePObjDialogHandler
 import org.rsmod.api.net.rsprot.handlers.ResumePStringDialogHandler
 import org.rsmod.api.net.rsprot.handlers.ResumePauseButtonHandler
 import org.rsmod.api.net.rsprot.handlers.SetChatFilterSettingsHandler
 import org.rsmod.api.net.rsprot.handlers.WindowStatusHandler
+import org.rsmod.events.EventBus
 import org.rsmod.game.entity.Player
 
 @Singleton
@@ -106,19 +119,22 @@ constructor(
     private val if1Button: If1ButtonHandler,
     private val if3Button: If3ButtonHandler,
     private val closeModal: CloseModalHandler,
+    private val idle: IdleHandler,
     private val resumePauseButton: ResumePauseButtonHandler,
     private val opObj: OpObjHandler,
     private val opObj6: OpObj6Handler,
     private val opObjT: OpObjTHandler,
     private val ifSubOp: IfSubOpHandler,
     private val resumePCountDialog: ResumePCountDialogHandler,
+    private val resumePLongDialog: ResumePLongDialogHandler,
     private val resumePNameDialog: ResumePNameDialogHandler,
     private val resumePStringDialog: ResumePStringDialogHandler,
     private val resumePObjDialog: ResumePObjDialogHandler,
     private val ifButtonD: IfButtonDHandler,
     private val ifButtonT: IfButtonTHandler,
     private val mapBuildComplete: MapBuildCompleteHandler,
-    private val scriptTriggerHandler: IfScriptTriggerHandler
+    private val scriptTriggerHandler: IfScriptTriggerHandler,
+    private val eventBus: EventBus,
 ) {
     fun get(): DefaultGameMessageConsumerRepositoryProvider<Player> {
         val builder = GameMessageConsumerRepositoryBuilder<Player>()
@@ -126,8 +142,11 @@ constructor(
         builder.addListener(MoveGameClick::class.java, moveGameClick)
         builder.addListener(MoveMinimapClick::class.java, moveMinimapClick)
         builder.addListener(OpLocV2::class.java, opLoc)
-        builder.addListener(OpLocT::class.java, opLocT)
-        builder.addListener(OpLoc6::class.java, opLoc6)
+        builder.addListener(OpLocV3::class.java, opLoc.v3)
+        builder.addListener(OpLocTV1::class.java, opLocT.v1)
+        builder.addListener(OpLocTV2::class.java, opLocT.v2)
+        builder.addListener(OpLoc6V1::class.java, opLoc6.v1)
+        builder.addListener(OpLoc6V2::class.java, opLoc6.v2)
         builder.addListener(ClientCheat::class.java, clientCheat)
         builder.addListener(ClickWorldMap::class.java, clickWorldMap)
         builder.addListener(OpNpcV2::class.java, opNpc)
@@ -145,12 +164,14 @@ constructor(
         builder.addListener(If1Button::class.java, if1Button)
         builder.addListener(If3Button::class.java, if3Button)
         builder.addListener(CloseModal::class.java, closeModal)
+        builder.addListener(Idle::class.java, idle)
         builder.addListener(ResumePauseButton::class.java, resumePauseButton)
         builder.addListener(OpObjV2::class.java, opObj)
         builder.addListener(OpObj6::class.java, opObj6)
         builder.addListener(OpObjT::class.java, opObjT)
         builder.addListener(IfSubOp::class.java, ifSubOp)
         builder.addListener(ResumePCountDialog::class.java, resumePCountDialog)
+        builder.addListener(ResumePLongDialog::class.java, resumePLongDialog)
         builder.addListener(ResumePNameDialog::class.java, resumePNameDialog)
         builder.addListener(ResumePStringDialog::class.java, resumePStringDialog)
         builder.addListener(ResumePObjDialog::class.java, resumePObjDialog)
@@ -158,6 +179,10 @@ constructor(
         builder.addListener(IfButtonT::class.java, ifButtonT)
         builder.addListener(MapBuildComplete::class.java, mapBuildComplete)
         builder.addListener(IfScriptTrigger::class.java, scriptTriggerHandler)
+        builder.addListener(EventMouseClickV1::class.java, InputEventHandler(eventBus))
+        builder.addListener(EventMouseClickV2::class.java, InputEventHandler(eventBus))
+        builder.addListener(EventMouseScroll::class.java, InputEventHandler(eventBus))
+        builder.addListener(EventKeyboard::class.java, InputEventHandler(eventBus))
         return DefaultGameMessageConsumerRepositoryProvider(builder.build())
     }
 }

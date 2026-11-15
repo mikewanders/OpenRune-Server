@@ -66,7 +66,7 @@ constructor(
         } else {
             val pickaxe = Mining.findPickaxe(player) ?: return
             anim(pickaxeAnim(pickaxe))
-            spam("You swing your pickaxe at the rock.")
+            spam("You swing your pick at the rock.")
             mine(rock)
         }
     }
@@ -157,7 +157,7 @@ constructor(
         val xp = baseXp * xpMods.get(player, "stat.mining")
         statAdvance("stat.mining", xp)
         spam("You manage to mine some stardust.")
-        soundSynth(3600)
+        soundSynth("synth.mine_ore")
         return true
     }
 

@@ -2,7 +2,6 @@ package org.rsmod.api.registry.zone
 
 import net.rsprot.protocol.ServerProtCategory
 import net.rsprot.protocol.game.outgoing.util.OpFlags
-import net.rsprot.protocol.game.outgoing.zone.payload.LocAddChangeV2
 import net.rsprot.protocol.game.outgoing.zone.payload.LocAnim
 import net.rsprot.protocol.game.outgoing.zone.payload.LocDel
 import net.rsprot.protocol.game.outgoing.zone.payload.MapAnim
@@ -12,6 +11,7 @@ import net.rsprot.protocol.game.outgoing.zone.payload.ObjCount
 import net.rsprot.protocol.game.outgoing.zone.payload.ObjDel
 import net.rsprot.protocol.game.outgoing.zone.payload.SoundArea
 import net.rsprot.protocol.message.ZoneProt
+import org.rsmod.api.player.output.locAddChangePacket
 import org.rsmod.api.registry.loc.LocRegistry
 import org.rsmod.game.loc.LocInfo
 import org.rsmod.game.obj.Obj
@@ -22,33 +22,11 @@ import org.rsmod.map.zone.ZoneGrid
 public object ZoneUpdateTransformer {
     public fun collectEnclosedProtList(updates: ZoneUpdateList): List<ZoneProt> = updates.protList
 
-    public fun toPersistentLocChange(loc: LocInfo): ZoneProt {
-        val zoneGrid = ZoneGrid.from(loc.coords)
-        return if (loc.id == LocRegistry.DELETED_LOC_ID) {
-            LocDel(zoneGrid.x, zoneGrid.z, loc.shapeId, loc.angleId)
-        } else {
-            LocAddChangeV2(
-                loc.id,
-                zoneGrid.x,
-                zoneGrid.z,
-                loc.shapeId,
-                loc.angleId,
-                OpFlags.ALL_SHOWN,
-            )
-        }
-    }
+    public fun toPersistentLocChange(loc: LocInfo): ZoneProt =
+        if (loc.id == LocRegistry.DELETED_LOC_ID) toLocDelProt(loc) else toLocAddChangeProt(loc)
 
-    public fun toLocAddChangeProt(loc: LocInfo): ZoneProt {
-        val zoneGrid = ZoneGrid.from(loc.coords)
-        return LocAddChangeV2(
-            loc.id,
-            zoneGrid.x,
-            zoneGrid.z,
-            loc.shapeId,
-            loc.angleId,
-            OpFlags.ALL_SHOWN,
-        )
-    }
+    public fun toLocAddChangeProt(loc: LocInfo): ZoneProt =
+        locAddChangePacket(loc.coords, loc.id, loc.shapeId, loc.angleId)
 
     public fun toLocDelProt(loc: LocInfo): ZoneProt {
         val zoneGrid = ZoneGrid.from(loc.coords)
@@ -60,22 +38,18 @@ public object ZoneUpdateTransformer {
         return LocAnim(seq, zoneGrid.x, zoneGrid.z, loc.shapeId, loc.angleId)
     }
 
-    public fun toPersistentObjAdd(obj: Obj, observerId: Long?): ZoneProt? =
+    public fun toPersistentObjAdd(obj: Obj, observerId: Long?, cycle: Int): ZoneProt? =
         if (obj.isVisibleTo(observerId)) {
-            val zoneGrid = ZoneGrid.from(obj.coords)
-            ObjAdd(obj.type, obj.count, zoneGrid.x, zoneGrid.z, OpFlags.ALL_SHOWN)
+            obj.toObjAdd(cycle)
         } else {
             null
         }
 
-    public fun toPublicObjAddProt(obj: Obj): ZoneProt {
-        val zoneGrid = ZoneGrid.from(obj.coords)
-        return ObjAdd(obj.type, obj.count, zoneGrid.x, zoneGrid.z, OpFlags.ALL_SHOWN)
-    }
+    public fun toPublicObjAddProt(obj: Obj): ZoneProt =
+        obj.toObjAdd(obj.timerCycle)
 
     public fun toPrivateObjAddProt(obj: Obj): ZoneProt {
-        val zoneGrid = ZoneGrid.from(obj.coords)
-        val prot = ObjAdd(obj.type, obj.count, zoneGrid.x, zoneGrid.z, OpFlags.ALL_SHOWN)
+        val prot = obj.toObjAdd(obj.timerCycle)
         return ObjAddPrivate(obj.copy(), prot)
     }
 
@@ -96,11 +70,32 @@ public object ZoneUpdateTransformer {
         return ObjCountPrivate(obj.copy(), prot)
     }
 
-    public fun toObjRevealProt(obj: Obj): ZoneProt {
-        val zoneGrid = ZoneGrid.from(obj.coords)
-        val prot = ObjAdd(obj.type, obj.count, zoneGrid.x, zoneGrid.z, OpFlags.ALL_SHOWN)
+    public fun toObjRevealProt(obj: Obj, cycle: Int): ZoneProt {
+        val prot = obj.toObjAdd(cycle)
         return ObjReveal(obj.copy(), prot)
     }
+
+    private fun Obj.toObjAdd(cycle: Int): ObjAdd {
+        val zoneGrid = ZoneGrid.from(coords)
+        return ObjAdd(
+            id = type,
+            quantity = count,
+            xInZone = zoneGrid.x,
+            zInZone = zoneGrid.z,
+            opFlags = OpFlags.ALL_SHOWN,
+            timeUntilPublic = timeUntilPublic(cycle),
+            timeUntilDespawn = timeUntilDespawn(cycle),
+            ownershipType = ownership(),
+            neverBecomesPublic = neverBecomesPublic,
+        )
+    }
+
+    private fun Obj.ownership(): Int =
+        when {
+            nullableReceiverId == null -> OWNERSHIP_NONE
+            isPrivate -> OWNERSHIP_SELF
+            else -> OWNERSHIP_OTHER
+        }
 
     public fun toSoundAreaProt(
         source: CoordGrid,
@@ -138,7 +133,12 @@ public object ZoneUpdateTransformer {
         )
     }
 
-    private fun Obj.copy(): Obj = Obj(coords, entity, creationCycle, receiverId)
+    private fun Obj.copy(): Obj =
+        Obj(coords, entity, creationCycle, receiverId, ownerId).also { it.copyTimers(this) }
+
+    private const val OWNERSHIP_NONE = 0
+    private const val OWNERSHIP_SELF = 1
+    private const val OWNERSHIP_OTHER = 2
 
     public interface PartialFollowsZoneProt : ZoneProt {
         public val backing: ZoneProt

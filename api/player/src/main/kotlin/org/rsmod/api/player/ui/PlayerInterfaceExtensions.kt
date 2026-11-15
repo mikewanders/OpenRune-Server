@@ -13,6 +13,7 @@ import net.rsprot.protocol.game.outgoing.interfaces.IfCloseSub
 import net.rsprot.protocol.game.outgoing.interfaces.IfMoveSub
 import net.rsprot.protocol.game.outgoing.interfaces.IfOpenSub
 import net.rsprot.protocol.game.outgoing.interfaces.IfOpenTop
+import net.rsprot.protocol.game.outgoing.interfaces.IfResyncV2
 import net.rsprot.protocol.game.outgoing.interfaces.IfSetAnim
 import net.rsprot.protocol.game.outgoing.interfaces.IfSetColour
 import net.rsprot.protocol.game.outgoing.interfaces.IfSetEventsV2
@@ -27,6 +28,7 @@ import net.rsprot.protocol.game.outgoing.misc.player.TriggerOnDialogAbort
 import org.rsmod.annotations.InternalApi
 import org.rsmod.api.config.constants
 import org.rsmod.api.player.input.ResumePCountDialogInput
+import org.rsmod.api.player.input.ResumePLongDialogInput
 import org.rsmod.api.player.input.ResumePNameDialogInput
 import org.rsmod.api.player.input.ResumePObjDialogInput
 import org.rsmod.api.player.input.ResumePStringDialogInput
@@ -192,6 +194,7 @@ private fun GameCoroutine.requiresPauseDialogAbort(): Boolean =
 private fun GameCoroutine.requiresInputDialogAbort(): Boolean {
     return isAwaitingAny(
         ResumePCountDialogInput::class,
+        ResumePLongDialogInput::class,
         ResumePNameDialogInput::class,
         ResumePStringDialogInput::class,
         ResumePObjDialogInput::class,
@@ -214,18 +217,37 @@ public fun Player.ifCloseModals(eventBus: EventBus) {
     }
 }
 
+/**
+ * Resends the server's current interface layout and event masks to this client.
+ *
+ * The caller supplies a snapshot of the tracked UI state. This sends a packet and leaves
+ * the server's modal, overlay, and event registrations intact.
+ *
+ * @param topLevelInterface ID of the top-level interface currently open.
+ * @param subInterfaces Open interfaces and their client-side attachment component IDs.
+ * @param events V2 event masks for client-side components and slot ranges.
+ */
+public fun Player.ifResync(
+    topLevelInterface: Int,
+    subInterfaces: List<IfResyncV2.SubInterfaceMessage>,
+    events: List<IfResyncV2.InterfaceEventsMessage>,
+) {
+    client.write(IfResyncV2(topLevelInterface, subInterfaces.toList(), events.toList()))
+}
+
 public fun Player.ifSetEvents(internal: String, range: IntRange, vararg event: IfEvent) {
     val packed = event.fold(0L) { sum, element -> sum or element.bitmask }
+    // Permissions use the same canonical component as button handlers, not the wire target.
     ui.events.add(internal, range, packed)
 
-    val target = ServerCacheManager.fromComponent(internal.asRSCM(RSCMType.COMPONENT))
+    val target = ui.translate(Component(internal.asRSCM(RSCMType.COMPONENT)))
 
     val packedHigh = (packed shr 32).toInt()
     val packedLow = packed.toInt()
     val prot =
         IfSetEventsV2(
-            interfaceId = target.interfaceId,
-            componentId = target.component,
+            interfaceId = target.parent,
+            componentId = target.child,
             start = range.first,
             end = range.last,
             events1 = packedLow,
@@ -489,7 +511,7 @@ private fun UserInterfaceMap.translate(component: Component): Component =
  */
 
 internal fun Player.ifMesbox(text: String, pauseText: String, lineHeight: Int, eventBus: EventBus) {
-    mes(text, ChatType.Mesbox)
+    mes(chatLogText(text), ChatType.Mesbox)
     openModal("interface.messagebox", "component.chatbox:chatmodal", eventBus)
     ifSetText("component.messagebox:text", text)
     ifSetTextAlign(this, "component.messagebox:text", alignH = 1, alignV = 1, lineHeight)
@@ -505,7 +527,7 @@ internal fun Player.ifObjbox(
     pauseText: String,
     eventBus: EventBus,
 ) {
-    mes(text, ChatType.Mesbox)
+    mes(chatLogText(text), ChatType.Mesbox)
     ifOpenChat("interface.objectbox", constants.modal_fixedwidthandheight, eventBus)
     objboxSetButtons(this, pauseText)
     if (pauseText.isNotBlank()) {
@@ -543,8 +565,8 @@ internal fun Player.ifDoubleobjbox(
     pauseText: String,
     eventBus: EventBus,
 ) {
-    mes(text, ChatType.Mesbox)
-    ifOpenChat("interface.objectbox_double", constants.modal_infinitewidthandheight, eventBus)
+    mes(chatLogText(text), ChatType.Mesbox)
+    ifOpenChat("interface.objectbox_double", constants.modal_fixedwidthandheight, eventBus)
     ifSetPauseText("component.objectbox_double:pausebutton", pauseText)
     ifSetObj("component.objectbox_double:model1", obj1, zoom1)
     ifSetObj("component.objectbox_double:model2", obj2, zoom2)
@@ -609,7 +631,7 @@ internal fun Player.ifChatPlayer(
     lineHeight: Int,
     eventBus: EventBus,
 ) {
-    mes("$title|$text", ChatType.Dialogue)
+    mes(chatLogText("$title|$text"), ChatType.Dialogue)
     ifOpenChat("interface.chat_right", constants.modal_infinitewidthandheight, eventBus)
     ifSetPlayerHead("component.chat_right:head")
     ifSetAnim("component.chat_right:head", expression)
@@ -628,7 +650,7 @@ internal fun Player.ifChatNpcActive(
     lineHeight: Int,
     eventBus: EventBus,
 ) {
-    mes("$title|$text", ChatType.Dialogue)
+    mes(chatLogText("$title|$text"), ChatType.Dialogue)
     ifOpenChat("interface.chat_left", constants.modal_infinitewidthandheight, eventBus)
     ifSetNpcHeadActive("component.chat_left:head", npcSlotId)
     ifSetAnim("component.chat_left:head", chatanim)
@@ -647,7 +669,7 @@ internal fun Player.ifChatNpcSpecific(
     lineHeight: Int,
     eventBus: EventBus,
 ) {
-    mes("$title|$text", ChatType.Dialogue)
+    mes(chatLogText("$title|$text"), ChatType.Dialogue)
     ifOpenChat("interface.chat_left", constants.modal_infinitewidthandheight, eventBus)
     ifSetNpcHead("component.chat_left:head", type)
     ifSetAnim("component.chat_left:head", chatanim)
@@ -656,6 +678,9 @@ internal fun Player.ifChatNpcSpecific(
     ifSetTextAlign(this, "component.chat_left:text", alignH = 1, alignV = 1, lineHeight)
     ifSetPauseText("component.chat_left:continue", pauseText)
 }
+
+// Live logs dialogue text unwrapped and cut at 200 chars, tags included.
+private fun chatLogText(text: String): String = text.replace("<br>", " ").take(200)
 
 internal fun Player.ifOpenChat(interf: String, widthAndHeightMode: Int, eventBus: EventBus) {
     chatModalUnclamp = widthAndHeightMode

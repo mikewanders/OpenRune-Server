@@ -62,6 +62,7 @@ import org.rsmod.api.player.hit.queueImpactHit
 import org.rsmod.api.player.hit.takeInstantHit
 import org.rsmod.api.player.hook.TeleportType
 import org.rsmod.api.player.input.ResumePCountDialogInput
+import org.rsmod.api.player.input.ResumePLongDialogInput
 import org.rsmod.api.player.input.ResumePObjDialogInput
 import org.rsmod.api.player.input.ResumePStringDialogInput
 import org.rsmod.api.player.input.ResumePauseButtonInput
@@ -133,6 +134,7 @@ import org.rsmod.api.player.ui.ifSetObj
 import org.rsmod.api.player.ui.ifSetPlayerHead
 import org.rsmod.api.player.ui.ifSetText
 import org.rsmod.api.player.vars.VarPlayerIntMapDelegate
+import org.rsmod.api.player.vars.disarmRunAutoEnable
 import org.rsmod.api.player.vars.resyncVar
 import org.rsmod.api.player.vars.setActiveMoveSpeed
 import org.rsmod.api.player.vars.varMoveSpeed
@@ -307,6 +309,7 @@ public class ProtectedAccess(
             return
         }
         val speed = if (player.varMoveSpeed == MoveSpeed.Run) MoveSpeed.Walk else MoveSpeed.Run
+        player.disarmRunAutoEnable()
         player.setActiveMoveSpeed(speed)
     }
 
@@ -412,11 +415,25 @@ public class ProtectedAccess(
     }
 
     public fun spotanim(spot: String?, delay: Int = 0, height: Int = 0, slot: Int = 0) {
+        spotanim(spot, delay, height, slot, loop = false)
+    }
+
+    /**
+     * Plays a spot animation on the player, or sends a reset for [slot] if [spot] is null.
+     * [delay] is in client cycles. [loop] applies when the sequence supports looping.
+     */
+    public fun spotanim(
+        spot: String?,
+        delay: Int = 0,
+        height: Int = 0,
+        slot: Int = 0,
+        loop: Boolean,
+    ) {
         if (spot == null) {
             player.resetSpotanim(height = height, slot = slot)
             return
         }
-        player.spotanim(spot, delay, height, slot)
+        player.spotanim(spot, delay, height, slot, loop)
     }
 
     public fun say(text: String) {
@@ -1804,8 +1821,8 @@ public class ProtectedAccess(
         player.clearTimer(timerType)
     }
 
-    public fun softTimer(timerType: String, cycles: Int) {
-        player.softTimer(timerType, cycles)
+    public fun softTimer(timerType: String, cycles: Int, afterInteractions: Boolean = false) {
+        player.softTimer(timerType, cycles, afterInteractions)
     }
 
     public fun clearSoftTimer(timerType: String) {
@@ -2628,6 +2645,28 @@ public class ProtectedAccess(
         }
     }
 
+    /**
+     * Shows a single page of player chat with no "Click here to continue" and returns at once; the
+     * caller decides how long it stays up.
+     */
+    public fun chatPlayerNoContinue(
+        mesanim: MesAnimType,
+        text: String,
+        title: String = player.displayName,
+    ) {
+        val alignment = context.alignment
+        val page = alignment.generateChatPageList(text).single()
+        val (pgText, lineCount) = page
+        player.ifChatPlayer(
+            title = title,
+            text = pgText,
+            expression = ServerCacheManager.getAnim(mesanim.splitGetAnim(lineCount)),
+            pauseText = "",
+            lineHeight = alignment.chatLineHeight(lineCount),
+            eventBus = context.eventBus,
+        )
+    }
+
     private suspend fun chatPlayerPage(
         text: String,
         chatanim: SequenceServerType?,
@@ -2673,12 +2712,12 @@ public class ProtectedAccess(
         for (page in pages) {
             val (pgText, lineCount) = page
             val lineHeight = alignment.chatLineHeight(lineCount)
-            val chatanim = mesanim?.splitGetAnim(lineCount) ?: return
+            val chatanim = mesanim?.splitGetAnim(lineCount)
             chatNpcPage(
                 title = title,
                 npc = npc,
                 text = pgText,
-                chatanim = ServerCacheManager.getAnim(chatanim),
+                chatanim = chatanim?.let { ServerCacheManager.getAnim(it) },
                 lineHeight = lineHeight,
                 faceFar = faceFar,
                 pauseText = constants.cm_pausebutton,
@@ -2872,6 +2911,21 @@ public class ProtectedAccess(
         mesLayerMode7(player, title)
         val modal = player.ui.getModalOrNull("component.toplevel_osrs_stretch:mainmodal")
         val input = coroutine.pause(ResumePCountDialogInput::class)
+        return resumeWithMainModalProtectedAccess(input.count, modal)
+    }
+
+    /**
+     * Suspends the current script until the player submits a signed 64-bit value.
+     *
+     * Open the long input dialog through a clientscript before calling this method. The
+     * response resumes this coroutine only while it is awaiting long input.
+     *
+     * @return The submitted value, including its sign.
+     * @throws ProtectedAccessLostException If protected access was lost while waiting.
+     */
+    public suspend fun awaitLongDialog(): Long {
+        val modal = player.ui.getModalOrNull("component.toplevel_osrs_stretch:mainmodal")
+        val input = coroutine.pause(ResumePLongDialogInput::class)
         return resumeWithMainModalProtectedAccess(input.count, modal)
     }
 
@@ -3664,10 +3718,6 @@ public class ProtectedAccess(
     }
 
     public fun soundSynth(synth: SynthType, loops: Int = 1, delay: Int = 0) {
-        player.soundSynth(synth, loops, delay)
-    }
-
-    public fun soundSynth(synth: Int, loops: Int = 1, delay: Int = 0) {
         player.soundSynth(synth, loops, delay)
     }
 

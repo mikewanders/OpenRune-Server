@@ -51,11 +51,35 @@ public data class GameplayConfig(
     val questRequirements: QuestRequirementsYaml = QuestRequirementsYaml(),
     @JsonProperty("drop-rates")
     val dropRates: DropRatesYaml = DropRatesYaml(),
+    @JsonProperty("level-up-popups")
+    val levelUpPopups: Boolean = false,
+    @JsonProperty("idle-logout")
+    val idleLogout: Boolean = true,
+    @JsonProperty("home-teleport-cooldown")
+    val homeTeleportCooldown: Int = 30,
+    @JsonProperty("random-events")
+    val randomEvents: Boolean = true,
+    val gravestones: GravestonesYaml = GravestonesYaml(),
+    @JsonProperty("bots-enabled")
+    val botsEnabled: Boolean = true,
+    @JsonProperty("run-energy") val runEnergy: RunEnergyYaml = RunEnergyYaml(),
+    @JsonProperty("farming-growth-rate") val farmingGrowthRate: Int = 1,
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public data class GravestonesYaml(
+    val enabled: Boolean = true,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public data class DropRatesYaml(
     val multiplier: Double = 1.0,
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public data class RunEnergyYaml(
+    @JsonProperty("drain-denominator") val drainDenominator: Int = 1,
+    val infinite: Boolean = false,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -12,7 +12,20 @@ touching.
   `org.rsmod.server.app.GameServerKt`). Success prints "OpenRune Server Successfully initialized".
 - Tests: JUnit 5, parallel by default. Run with `gradlew test` or per-module.
 - Cache tasks (or-cache module): `buildCache`, `freshCache`, `cleanCs2`,
-  `mergePluginGamevals`. Cache data comes from OpenRS2 `.data/`.
+  `mergePluginGamevals`, `dumpLocs`, `dumpSeqs`. Cache data comes from OpenRS2 `.data/`.
+- `gradlew :or-cache:dumpLocs -Plocs=loc.bob,12345` prints every tile a loc is placed on - plane,
+  angle, shape, cache name and ops. `-Plocs=x1:z1:x2:z2` dumps a box instead. This is how you find
+  where scenery actually stands without logging in; obstacle landings and map edits both need it.
+- `gradlew :or-cache:dumpSeqs -Pseqs=seq.name,1234` prints how many ticks an animation runs for.
+  Anything that carries a player has to last as long as its animation, or they arrive ahead of their
+  own feet.
+- `gradlew travelReport` boots the server, writes `build/reports/travel-coverage/` (every ladder,
+  stair, door and entrance op nothing answers, plus regenerated `auto_*` tag configs) and exits.
+- `gradlew :or-cache:downloadTransports` imports the latest Shortest Path tables into
+  `content/travel/map-transports/src/main/resources/transports/` using the existing gameval
+  names and exports the loc IDs it used to
+  `or-cache/build/reports/transports/shortest-path-locs.rscm`.
+  Revision sync runs the same import.
 - Typical content loop: edit Kotlin in `content/` → `gradlew run` and test. If you
   touched a `-pack` module's resources or a `gamevals.toml`, rebuild the cache
   (`buildCache`) before running.
@@ -83,6 +96,12 @@ hardcode raw numeric ids in content code.
   `gamevals_components.dat`, `max-ids.toml`), produced from the cache.
 - Reference format in scripts: `"<table>.<name>"`, e.g. `onOpNpc1("npc.bob")`,
   `onOpLoc1("loc.winch")`, and the same symbols in drop tables and TOML configs.
+- Gamevals are stated explicitly and in full. Never build one from a base plus a suffix,
+  a template (`"obj.watering_can_$n"`) or a `startsWith` prefix. List every full symbol
+  (a `listOf`/`setOf` of the real names), so `checkGamevals` can verify each one against
+  the cache. `gradlew :or-cache:checkGamevals` it reports every
+  `"<table>.<name>"` literal that no gamevals table defines, and
+  `-PfailOnMissing` makes it exit non-zero for CI.
 - Custom symbols for new content: add a `gamevals.toml` in the content module's
   `src/main/resources` with `[gamevals.<table>]` sections:
 
@@ -117,6 +136,12 @@ data is already there.
   - enums: `[[enum]]` TOML under `pack/configs/` — see
     `content/skills/crafting/pack/.../crafting_enums.toml`.
   - Register the symbols in `gamevals.toml`, then `buildCache`.
+- Pick the shape by how much data there is — a dbtable is not the default:
+  - Two fields per entry (a key → value pair): use an enum.
+  - More than two fields per entry across a real set of entries: use a dbtable.
+  - Data that gets looked up a lot (by column value, reverse lookups, filtering) favours
+    a dbtable.
+  - Don't create a dbtable for a pair or a tiny set just to avoid a hardcoded map.
 - Read it through the generated code in `api/generated` (gitignored, rebuilt by
   `buildCache`): `org.rsmod.api.table.<Name>Row` (`all()`, `getRow(...)`, typed
   column properties) and `org.rsmod.api.enums.<Group>Enums.<enum_name>`. Use these
