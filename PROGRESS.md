@@ -40,7 +40,7 @@ the module table at the bottom before reading a 0 as "nothing exists".
 | 🟢 | <img src="https://oldschool.runescape.wiki/images/Crafting_icon.png?a1f71" height="20" alt=""> [Crafting](content/skills/crafting) | 6,057 loc | [wiki](https://oldschool.runescape.wiki/w/Crafting) |
 | 🔴 | <img src="https://oldschool.runescape.wiki/images/Fletching_icon.png?15cda" height="20" alt=""> Fletching | nothing yet | [wiki](https://oldschool.runescape.wiki/w/Fletching) |
 | 🟢 | <img src="https://oldschool.runescape.wiki/images/Construction_icon.png?f9bf7" height="20" alt=""> Construction | no module, code in content/areas/city | [wiki](https://oldschool.runescape.wiki/w/Construction) |
-| 🟢 | <img src="https://oldschool.runescape.wiki/images/Farming_icon.png?558fa" height="20" alt=""> [Farming](content/skills/farming) | 346 loc | [wiki](https://oldschool.runescape.wiki/w/Farming) |
+| 🟢 | <img src="https://oldschool.runescape.wiki/images/Farming_icon.png?558fa" height="20" alt=""> [Farming](content/skills/farming) | 2,271 loc | [wiki](https://oldschool.runescape.wiki/w/Farming) |
 | 🔴 | <img src="https://oldschool.runescape.wiki/images/Hunter_icon.png?8762f" height="20" alt=""> Hunter | nothing yet | [wiki](https://oldschool.runescape.wiki/w/Hunter) |
 
 ### Bosses <sup>30/179</sup>
@@ -301,7 +301,7 @@ Found the same way `settings.gradle.kts` finds them: any dir with a `build.gradl
 | `events/shooting-stars/pack` | 2 | 440 | 0 | 0 | 2026-08-21 |
 | `generic/generic-items` | 2 | 150 | 2 | 0 | 2026-10-31 |
 | `generic/generic-items/pack` | 2 | 140 | 0 | 0 | 2026-10-31 |
-| `generic/generic-locs` | 44 | 2,362 | 9 | 1 | 2026-11-11 |
+| `generic/generic-locs` | 44 | 2,377 | 9 | 1 | 2026-11-15 |
 | `generic/generic-locs/pack` | 2 | 73 | 0 | 0 | 2026-11-10 |
 | `generic/generic-npcs` | 10 | 1,669 | 3 | 3 | 2026-11-10 |
 | `generic/generic-npcs/pack` | 1 | 6 | 0 | 0 | 2026-11-10 |
@@ -327,7 +327,7 @@ Found the same way `settings.gradle.kts` finds them: any dir with a `build.gradl
 | `interfaces/worldmap` | 1 | 104 | 0 | 0 | 2026-11-09 |
 | `interfaces/xp-drops` | 1 | 44 | 0 | 0 | 2026-09-28 |
 | `minigames/gauntlet` | 35 | 3,514 | 2 | 0 | 2026-10-09 |
-| `minigames/giants-foundry` | 17 | 4,125 | 5 | 2 | 2026-11-09 |
+| `minigames/giants-foundry` | 17 | 4,125 | 5 | 2 | 2026-11-15 |
 | `minigames/giants-foundry/pack` | 2 | 345 | 0 | 0 | 2026-11-09 |
 | `other/bots` | 9 | 1,237 | 1 | 0 | 2026-11-10 |
 | `other/bots/pack` | 3 | 686 | 0 | 0 | 2026-11-10 |
@@ -363,8 +363,8 @@ Found the same way `settings.gradle.kts` finds them: any dir with a `build.gradl
 | `skills/cooking/pack` | 1 | 6 | 0 | 0 | 2026-11-05 |
 | `skills/crafting` | 29 | 3,373 | 1 | 0 | 2026-11-11 |
 | `skills/crafting/pack` | 2 | 2,684 | 0 | 0 | 2026-11-11 |
-| `skills/farming` | 5 | 296 | 2 | 0 | 2026-11-11 |
-| `skills/farming/pack` | 2 | 50 | 0 | 0 | 2026-11-11 |
+| `skills/farming` | 15 | 1,573 | 8 | 0 | 2026-11-15 |
+| `skills/farming/pack` | 6 | 698 | 0 | 0 | 2026-11-15 |
 | `skills/firemaking` | 6 | 589 | 0 | 0 | 2026-08-08 |
 | `skills/fishing` | 15 | 1,493 | 2 | 0 | 2026-10-25 |
 | `skills/fishing/pack` | 3 | 206 | 0 | 0 | 2026-09-25 |
