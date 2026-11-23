@@ -4,51 +4,48 @@ import jakarta.inject.Inject
 import org.rsmod.api.invtx.invAddOrDrop
 import org.rsmod.api.invtx.invTakeFee
 import org.rsmod.api.player.dialogue.Dialogue
-import org.rsmod.api.player.output.spam
-import org.rsmod.api.player.protect.ProtectedAccess
+import org.rsmod.api.player.output.mes
 import org.rsmod.api.repo.obj.ObjRepository
-import org.rsmod.api.script.onApNpc1
 import org.rsmod.api.script.onOpNpc1
-import org.rsmod.game.entity.Npc
+import org.rsmod.content.quest.manager.menu
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
-class BlueMoonBartender @Inject constructor(private val objRepo: ObjRepository) :
-    PluginScript() {
+class BlueMoonBartender @Inject constructor(private val objRepo: ObjRepository) : PluginScript() {
     override fun ScriptContext.startup() {
-        onOpNpc1(BARTENDER) { talk(it.npc) }
-        onApNpc1(BARTENDER) {
-            if (isWithinDistance(it.npc, ACROSS_BAR)) talk(it.npc) else apRange(ACROSS_BAR)
+        onOpNpc1("npc.bluemoon_bartender") { startDialogue(it.npc) { bartender() } }
+    }
+
+    private suspend fun Dialogue.bartender() {
+        chatNpc(neutral, "What can I do yer for?")
+        when (
+            menu(
+                "A glass of your finest ale please." to Topic.Ale,
+                "Can you recommend where an adventurer might make his fortune?" to Topic.Fortune,
+                "Do you know where I can get some good equipment?" to Topic.Equipment,
+            )
+        ) {
+            Topic.Ale -> ale()
+            Topic.Fortune -> fortune()
+            Topic.Equipment -> {
+                chatPlayer(quiz, "Do you know where I can get some good equipment?")
+                chatNpc(
+                    neutral,
+                    "Well, there's the sword shop across the road, or there's also all sorts of " +
+                        "shops up around the market.",
+                )
+            }
         }
     }
 
-    private suspend fun ProtectedAccess.talk(npc: Npc) =
-        startDialogue(npc) {
-            chatNpc(quiz, "What can I do yer for?")
-            when (
-                choice3(
-                    "A glass of your finest ale please.",
-                    1,
-                    "Can you recommend where an adventurer might make his fortune?",
-                    2,
-                    "Do you know where I can get some good equipment?",
-                    3,
-                )
-            ) {
-                1 -> buyBeer()
-                2 -> fortune()
-                else -> equipment()
-            }
-        }
-
-    private suspend fun Dialogue.buyBeer() {
+    private suspend fun Dialogue.ale() {
         chatPlayer(happy, "A glass of your finest ale please.")
-        chatNpc(happy, "No problemo. That'll be $BEER_PRICE coins.")
+        chatNpc(happy, "No problemo. That'll be 2 coins.")
         if (!player.invTakeFee(fee = BEER_PRICE)) {
             chatPlayer(sad, "Oh dear. I don't seem to have enough money.")
             return
         }
-        player.spam("You buy a pint of beer.")
+        player.mes("You buy a pint of beer.")
         player.invAddOrDrop(objRepo, "obj.beer")
     }
 
@@ -59,13 +56,10 @@ class BlueMoonBartender @Inject constructor(private val objRepo: ObjRepository) 
             "Ooh I don't know if I should be giving away information, makes the game too easy.",
         )
         when (
-            choice3(
-                "Oh ah well...",
-                1,
-                "Game? What are you talking about?",
-                2,
-                "Just a small clue?",
-                3,
+            menu(
+                "Oh ah well..." to 1,
+                "Game? What are you talking about?" to 2,
+                "Just a small clue?" to 3,
             )
         ) {
             1 -> chatPlayer(sad, "Oh ah well...")
@@ -99,18 +93,13 @@ class BlueMoonBartender @Inject constructor(private val objRepo: ObjRepository) 
         }
     }
 
-    private suspend fun Dialogue.equipment() {
-        chatPlayer(quiz, "Do you know where I can get some good equipment?")
-        chatNpc(
-            neutral,
-            "Well, there's the sword shop across the road, or there's also all sorts of shops up " +
-                "around the market.",
-        )
+    private enum class Topic {
+        Ale,
+        Fortune,
+        Equipment,
     }
 
     private companion object {
-        const val BARTENDER = "npc.bluemoon_bartender"
         const val BEER_PRICE = 2
-        const val ACROSS_BAR = 2
     }
 }

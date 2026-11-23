@@ -14,8 +14,6 @@ import org.rsmod.plugin.scripts.ScriptContext
 
 class VarrockSquareNpcs @Inject constructor(private val random: GameRandom) : PluginScript() {
     override fun ScriptContext.startup() {
-        onOpNpc1("npc.aris") { startDialogue(it.npc) { aris() } }
-
         for (eliza in listOf("npc.speedrunning_shop_1op", "npc.speedrunning_shop_3op")) {
             onOpNpc1(eliza) { startDialogue(it.npc) { eliza() } }
         }
@@ -31,69 +29,6 @@ class VarrockSquareNpcs @Inject constructor(private val random: GameRandom) : Pl
         onAiTimer("npc.qip_soa_newspaperseller") { npc.say(random.pick(BENNY_SHOUTS)) }
 
         onOpNpc1("npc.baraek") { startDialogue(it.npc) { baraek() } }
-    }
-
-    private suspend fun Dialogue.aris() {
-        val demonSlayer =
-            choice2(
-                "The Demon Slayer Quest",
-                true,
-                "The Recipe For Disaster Quest",
-                false,
-                title = "What do you wish to ask about?",
-            )
-        if (!demonSlayer) {
-            chatPlayer(happy, "Fancy seeing you here again.")
-            chatNpc(angry, "Don't talk to me!<br>It might cause a time paradox!")
-            chatPlayer(confused, "Huh?<br>But how can it when you're...")
-            chatNpc(bored, "LA-LA-LA I'M NOT TALKING TO YOU LA-LA-LA<br>TIME PARADOX LA-LA-LA")
-            chatPlayer(confused, "Uh...<br>Okay then.")
-            return
-        }
-        chatNpc(neutral, "Greetings young one.")
-        chatNpc(happy, "You're a hero now. That was a good bit of demonslaying.")
-        val option =
-            choice3(
-                "How do you know I killed it?",
-                1,
-                "Thanks.",
-                2,
-                "Stop calling me that!",
-                3,
-                title = "What would you like to say?",
-            )
-        when (option) {
-            1 -> {
-                chatPlayer(confused, "How do you know I killed it?")
-                chatNpc(neutral, "You forget. I'm good at knowing things.")
-            }
-            2 -> chatPlayer(happy, "Thanks.")
-            3 -> arisSchemeOfThings()
-        }
-    }
-
-    private suspend fun Dialogue.arisSchemeOfThings() {
-        chatPlayer(angry, "Stop calling me that!")
-        chatNpc(neutral, "In the scheme of things you are very young.")
-        val askAge =
-            choice2(
-                "Ok but how old are you?",
-                true,
-                "Oh if it's in the scheme of things that's ok.",
-                false,
-            )
-        if (askAge) {
-            chatPlayer(quiz, "Ok, but how old are you?")
-            chatNpc(
-                neutral,
-                "Count the number of legs on the stools in the Blue Moon inn, and multiply that " +
-                    "number by seven.",
-            )
-            chatPlayer(confused, "Er, yeah, whatever.")
-        } else {
-            chatPlayer(neutral, "Oh if it's in the scheme of things that's ok.")
-            chatNpc(happy, "You show wisdom for one so young.")
-        }
     }
 
     private suspend fun Dialogue.eliza() {

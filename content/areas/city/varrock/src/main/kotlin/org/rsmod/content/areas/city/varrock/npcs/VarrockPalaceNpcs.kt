@@ -22,8 +22,6 @@ constructor(
 ) : PluginScript() {
     override fun ScriptContext.startup() {
         onOpNpc1("npc.king_roald") { startDialogue(it.npc) { kingRoald() } }
-        onOpNpc1("npc.sir_prysin") { startDialogue(it.npc) { sirPrysin() } }
-        onOpNpc1("npc.captain_rovin") { startDialogue(it.npc) { captainRovin() } }
         onOpNpc1("npc.aluft_gnome_diplomat_varrock") { startDialogue(it.npc) { ferrnook() } }
         onOpNpc1("npc.surok_surok_type1") { startDialogue(it.npc) { surok() } }
         onOpNpc1("npc.postie_pete") {
@@ -45,25 +43,6 @@ constructor(
         chatNpc(
             neutral,
             "You will have to excuse me then. I am very busy as I have a kingdom to run!",
-        )
-    }
-
-    private suspend fun Dialogue.sirPrysin() {
-        chatNpc(happy, "Hello. I've heard you stopped the demon, well done.")
-        chatPlayer(happy, "Yes, that's right.")
-        chatNpc(happy, "A good job well done then.")
-        chatPlayer(happy, "Thank you.")
-    }
-
-    private suspend fun Dialogue.captainRovin() {
-        chatNpc(
-            neutral,
-            "I heard you actually managed to kill that demon. I wasn't sure you had it in you.",
-        )
-        chatPlayer(
-            happy,
-            "Well, he's not been killed, so much as sent back to the dark domain from which he " +
-                "came. But, yes, I won.",
         )
     }
 

@@ -15,18 +15,24 @@ import org.rsmod.content.interfaces.omnishop.openOmnishop
 import org.rsmod.content.quest.area.alkharid.PrinceAliHelpers.aggieSkinPaste
 import org.rsmod.content.quest.area.alkharid.PrinceAliHelpers.nedOtherThings
 import org.rsmod.content.quest.area.alkharid.PrinceAliRescue
+import org.rsmod.content.quest.area.draynor.vampyreslayer.VampyreSlayerQuest
 import org.rsmod.content.quest.manager.QuestRequirements
 import org.rsmod.content.quest.manager.menu
 import org.rsmod.game.entity.Player
 import org.rsmod.plugin.scripts.PluginScript
 import org.rsmod.plugin.scripts.ScriptContext
 
-class DraynorVillageNpcs @Inject constructor(private val shops: Shops) : PluginScript() {
+class DraynorVillageNpcs
+@Inject
+constructor(private val shops: Shops, private val vampyreSlayer: VampyreSlayerQuest) :
+    PluginScript() {
+    private var Player.morganThanked by intVarBit("varbit.morgan_postquest_dialogue")
     private var Player.metAggie by intVarBit("varbit.gobdip_met_aggie")
     private var Player.bankJob by intVarBit("varbit.wom_bankjob")
     private var Player.metForester by intVarBit("varbit.forestry_forester_met")
 
     override fun ScriptContext.startup() {
+        onOpNpc1("npc.morgan") { startDialogue(it.npc) { morgan() } }
         onOpNpc1("npc.wgs_lucien_spy") { startDialogue(it.npc) { shadyStranger() } }
         onOpNpc1("npc.wgs_spy2") { startDialogue(it.npc) { suspiciousOutsider() } }
         onOpNpc1("npc.aggie") { startDialogue(it.npc) { aggie() } }
@@ -46,6 +52,26 @@ class DraynorVillageNpcs @Inject constructor(private val shops: Shops) : PluginS
         onOpNpc1("npc.aprilfoolshorsesalesman") { startDialogue(it.npc) { diango() } }
         onOpNpc3("npc.aprilfoolshorsesalesman") { openToyShop() }
         onOpNpc1("npc.martin_the_master_farmer") { startDialogue(it.npc) { martin() } }
+    }
+
+    private suspend fun Dialogue.morgan() {
+        if (!vampyreSlayer.isComplete(player)) {
+            with(vampyreSlayer) { morgan() }
+            return
+        }
+        if (player.morganThanked == 0) {
+            chatPlayer(happy, "I have some good news. Count Draynor is no more!")
+            player.morganThanked = 1
+            chatNpc(
+                happy,
+                "He's really gone? Finally, we can live without fear! Thank you, thank you! " +
+                    "You're a true hero!",
+            )
+            chatPlayer(happy, "I'm happy to have helped.")
+            return
+        }
+        chatNpc(happy, "Once again, thank you for slaying that vampyre! You will always be a hero!")
+        chatPlayer(happy, "Don't mention it.")
     }
 
     private suspend fun Dialogue.shadyStranger() {

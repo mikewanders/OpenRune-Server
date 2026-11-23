@@ -51,11 +51,6 @@ constructor(
         onOpNpc1("npc.vm_natural_historian_south") {
             startDialogue(it.npc) { historian(SOUTH_LECTURES, naturalHistory = true) }
         }
-        onOpNpc1("npc.vm_nathis_apprentice") {
-            startDialogue(it.npc) {
-                chatNpc(happy, "Thanks for all your help, mate. Hope you enjoy the museum!")
-            }
-        }
     }
 
     private suspend fun Dialogue.historian(lectures: List<Lecture>, naturalHistory: Boolean) {

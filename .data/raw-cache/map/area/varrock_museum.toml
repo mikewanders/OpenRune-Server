@@ -5,11 +5,16 @@ levels = [0, 1, 2]
 
 [[area.polygons]]
 vertices = [
-    [3252, 3441],
-    [3268, 3441],
-    [3268, 3457],
-    [3252, 3457],
+    [3251, 3440],
+    [3267, 3440],
+    [3267, 3456],
+    [3251, 3456],
 ]
+
+[[area]]
+name = "Varrock Museum Basement"
+area_id = "area.varrock_museum"
+levels = [0]
 
 [[area.polygons]]
 vertices = [
