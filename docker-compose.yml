@@ -1,0 +1,16 @@
+services:
+  openrune:
+    build: .
+    container_name: openrune
+    restart: unless-stopped
+    # Host networking: the game port (43594) and Central's internal ports bind straight onto the
+    # server, the same as running it outside Docker.
+    network_mode: host
+    stop_grace_period: 30s
+    volumes:
+      - state:/srv/openrune/state   # RSA keys + Postgres (accounts and characters)
+
+volumes:
+  state:
+    # Fixed name so the OpenRune-LAN-Client host container can read client.key from it.
+    name: openrune-state
